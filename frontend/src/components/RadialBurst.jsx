@@ -9,7 +9,6 @@ const GREEN = [85, 210, 141];
 const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${Math.max(0, Math.min(1, a)).toFixed(3)})`;
 const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
 
-// Deterministic rays so the composition is the same on every load.
 function makeRng(seed) {
   let s = seed >>> 0;
   return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
@@ -28,11 +27,6 @@ function makeRays(count) {
   }));
 }
 
-/**
- * Radial burst hero background. Rays radiate from a point below the viewport centre.
- * Pointer proximity brightens and extends nearby rays; clicks send a green shockwave.
- * Pauses when off-screen and draws a single still frame for reduced motion.
- */
 export default function RadialBurst({ rayCount = 240 }) {
   const wrapRef = React.useRef(null);
   const canvasRef = React.useRef(null);
@@ -65,7 +59,7 @@ export default function RadialBurst({ rayCount = 240 }) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
 
-      // Mist: blue at the edges, gold warmth at the origin.
+
       const mist = ctx.createRadialGradient(ox, oy, 0, ox, oy, R * 1.15);
       mist.addColorStop(0, rgba(GOLD, 0.6));
       mist.addColorStop(0.3, rgba(GOLD, 0.24));
@@ -121,7 +115,7 @@ export default function RadialBurst({ rayCount = 240 }) {
         }
       }
 
-      // Shockwaves from clicks.
+
       state.shocks = state.shocks.filter((s) => now - s.at < 1600);
       for (const shock of state.shocks) {
         const p = (now - shock.at) / 1600;
@@ -161,7 +155,6 @@ export default function RadialBurst({ rayCount = 240 }) {
     });
     io.observe(wrap);
 
-    // Listen on the hero section so pointer input works over the text as well as the burst.
     const target = wrap.parentElement;
     target.addEventListener('pointermove', onMove);
     target.addEventListener('pointerleave', onLeave);
@@ -179,6 +172,6 @@ export default function RadialBurst({ rayCount = 240 }) {
   }, [rayCount]);
 
   return <div ref={wrapRef} className="burst" aria-hidden="true">
-    <canvas ref={canvasRef} className="burst-canvas"/>
+    <canvas ref={canvasRef} className="burst-canvas" />
   </div>;
 }

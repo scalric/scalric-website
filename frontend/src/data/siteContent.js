@@ -67,18 +67,13 @@ export const pagesForSearch = [
   ['Impact', '/impact'], ['Company', '/company'], ['Careers', '/careers'], ['Contact', '/contact'],
 ];
 
-/**
- * Proof points. `verified: false` renders a visible "placeholder" tag — figures below come from the PRD's
- * illustrative example (Section 9.4) and must be replaced with confirmed numbers before launch.
- * Turn On Digital's public site publishes no company-level totals, so none are carried over.
- */
+
 export const proofStats = [
   { value: 500, suffix: '+', label: 'Businesses supported', sub: 'Discounted digital and SaaS support', verified: false },
   { value: 100, suffix: '+', label: 'NGOs supported', sub: 'Technology and digital support, pro bono', verified: false },
   { value: 1000, suffix: '+', label: 'Impact target', sub: 'Long-term goal for the initiative', verified: false },
 ];
 
-/** Engagement dashboard sample data (Showcase). Illustrative only; the page labels it as such. */
 export const dashboardKpis = [
   ['Outcomes tracked', '24', 'Six added this quarter'],
   ['Stakeholders aligned', '8', 'Across three workstreams'],
@@ -93,12 +88,10 @@ export const dashboardMilestones = [
 export const dashboardTrend = [12, 18, 16, 24, 22, 31, 29, 38, 41, 39, 47, 55];
 export const dashboardNav = ['Overview', 'Roadmap', 'Outcomes', 'Reports'];
 
-/** Workstream progress (Showcase). Percentages are illustrative. */
 export const workstreams = [
   ['Product direction', 82], ['Data foundations', 64], ['AI use-case design', 47], ['Operating model', 33],
 ];
 
-/** Operating principles carried over from Turn On Digital's "why work with us" content, reworded for Scalric. */
 export const workingPrinciples = [
   ['Outcome-first', 'Every engagement is framed around a measurable goal, not generic activity metrics.'],
   ['Full transparency', 'Regular reporting, live visibility and open conversations throughout.'],
@@ -106,7 +99,6 @@ export const workingPrinciples = [
   ['One point of contact', 'A dedicated lead for continuity, consistency and quality.'],
 ];
 
-/** Delivery process adapted from Turn On Digital's six-step process. */
 export const processSteps = [
   ['Discovery', 'Understand the business, context, competition and goals.'],
   ['Audit & research', 'Assess what works today and where the real opportunities are.'],
@@ -116,7 +108,6 @@ export const processSteps = [
   ['Report & scale', 'Regular reviews and a clear plan to scale what works.'],
 ];
 
-/** Sectors previously served under Turn On Digital (to be confirmed for Scalric positioning). */
 export const sectorsServed = [
   'Real estate', 'E-commerce', 'Healthcare & clinics', 'Education & coaching', 'B2B & manufacturing',
   'Travel & hospitality', 'Legal & consulting', 'Retail', 'Fitness & wellness', 'Home services',

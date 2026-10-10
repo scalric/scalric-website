@@ -49,7 +49,7 @@ export function PageIntro({ eyebrow, title, text, dark = false }) {
 
 const prefersReducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/** Fires once when the element first enters the viewport. */
+
 export function useInView(options = { threshold: 0.3 }) {
   const ref = React.useRef(null);
   const [seen, setSeen] = React.useState(false);
@@ -62,11 +62,9 @@ export function useInView(options = { threshold: 0.3 }) {
     }, options);
     observer.observe(element);
     return () => observer.disconnect();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
   return [ref, seen];
 }
-
-/** Animated number: 0 -> value when scrolled into view. Shows the final value immediately if motion is reduced. */
 export function CountUp({ value, suffix = '', prefix = '', duration = 1800 }) {
   const [ref, seen] = useInView();
   const [display, setDisplay] = React.useState(0);
@@ -86,7 +84,6 @@ export function CountUp({ value, suffix = '', prefix = '', duration = 1800 }) {
   return <span ref={ref} className="count-up" aria-label={`${prefix}${value.toLocaleString()}${suffix}`}><span aria-hidden="true">{prefix}{display.toLocaleString()}{suffix}</span></span>;
 }
 
-/** Staggered word-by-word headline reveal. `lines` is an array of strings; use `accent` for the index of a line to tint. */
 export function SplitHeading({ as: Tag = 'h2', lines, accent, className = '', startDelay = 0 }) {
   let n = 0;
   return <Tag className={`split-heading ${className}`}>
@@ -96,7 +93,6 @@ export function SplitHeading({ as: Tag = 'h2', lines, accent, className = '', st
   </Tag>;
 }
 
-/** Subtle vertical parallax for decorative layers. Disabled when motion is reduced. */
 export function Parallax({ children, speed = 0.12, className = '' }) {
   const ref = React.useRef(null);
   React.useEffect(() => {
@@ -118,15 +114,14 @@ export function Parallax({ children, speed = 0.12, className = '' }) {
   return <div ref={ref} className={`parallax ${className}`}>{children}</div>;
 }
 
-/** Image slot with a branded abstract fallback — pass `src` once approved imagery exists. */
 export function Visual({ src, alt = '', variant = 1, className = '', children }) {
   return <div className={`visual ${className}`}>
-    {src ? <img src={src} alt={alt} loading="lazy" decoding="async" /> : <div className={`abstract-art abstract-${variant}`} aria-hidden="true"><i/><i/><i/></div>}
+    {src ? <img src={src} alt={alt} loading="lazy" decoding="async" /> : <div className={`abstract-art abstract-${variant}`} aria-hidden="true"><i /><i /><i /></div>}
     {children}
   </div>;
 }
 
-/** True once the page has scrolled past `offset` px. */
+
 export function useScrolled(offset = 40) {
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
