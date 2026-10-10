@@ -15,7 +15,7 @@ const GREEN = '#55d28d';
 const DEEP = '#13754a';
 const MINT = '#b6f7cf';
 const BLUE = '#2f6be6';
-const GOLD = '#ffba49';
+const GOLD = '#fffc49ff';
 const INK = '#0e2a1c';
 const PANE = '#ffffff';
 const SOFT = '#f3faf6';
@@ -59,7 +59,6 @@ function ellipseRing(cx, cy, rx, ry, rot, color = GREEN, opacity = 0.4) {
   return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${rot} ${cx} ${cy})" fill="none" stroke="${color}" stroke-opacity="${opacity}" stroke-width="1.2"/>`;
 }
 
-// 1. AI — layered neural network
 function ai() {
   const id = 'ai';
   const r = rng(11);
@@ -84,7 +83,6 @@ function ai() {
   return frame(id, `${edges}${glows}${dots}`, { glowX: 75, glowY: 40, glow: GOLD });
 }
 
-// 2. SaaS & software — stacked product panes
 function saas() {
   const id = 'saas';
   const panes = [
@@ -105,7 +103,6 @@ ${bars}</g>`;
   return frame(id, body, { glowX: 20, glowY: 80 });
 }
 
-// 3. Data & automation — flow field, grid and particles
 function data() {
   const id = 'data';
   const r = rng(29);
@@ -125,7 +122,6 @@ function data() {
   return frame(id, `${cells}${flow}${particles}`, { glowX: 50, glowY: 100, glow: BLUE });
 }
 
-// 4. Consulting — orbit and roadmap
 function consulting() {
   const id = 'consulting';
   const rings = [ellipseRing(400, 250, 300, 110, -18, GREEN, 0.5), ellipseRing(400, 250, 220, 80, 22, BLUE, 0.3), ellipseRing(400, 250, 140, 140, 0, GREEN, 0.25)].join('');
@@ -134,7 +130,7 @@ function consulting() {
   return frame(id, `${rings}${road}${stops}${orb(id, 400, 250, 58)}`, { glowX: 50, glowY: 50, glow: GOLD });
 }
 
-// Insight covers
+
 function insight1() {
   const id = 'insight1';
   const lines = [];
@@ -180,7 +176,6 @@ function impact() {
   return frame(id, `${dots}${orb(id, 540, 240, 120)}${ellipseRing(540, 240, 230, 90, -20, BLUE, 0.35)}`, { glowX: 65, glowY: 45, glow: GOLD });
 }
 
-// Orb — company / manifesto / careers
 function orbart() {
   const id = 'orb';
   return frame(id, `${ellipseRing(400, 250, 260, 110, -24, GREEN, 0.4)}${ellipseRing(400, 250, 260, 110, 36, BLUE, 0.25)}${orb(id, 400, 250, 96)}`, { glowX: 50, glowY: 50, glow: GOLD });
