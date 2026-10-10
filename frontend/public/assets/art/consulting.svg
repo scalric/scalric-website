@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+<defs>
+<radialGradient id="consulting-glow" cx="50%" cy="50%" r="65%"><stop offset="0" stop-color="#ffba49" stop-opacity=".38"/><stop offset=".45" stop-color="#2f6be6" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<radialGradient id="consulting-orb" cx="35%" cy="32%" r="70%"><stop offset="0" stop-color="#b6f7cf"/><stop offset=".35" stop-color="#55d28d"/><stop offset=".75" stop-color="#13754a" stop-opacity=".7"/><stop offset="1" stop-color="#13754a" stop-opacity="0"/></radialGradient>
+<linearGradient id="consulting-line" x1="0" x2="1"><stop offset="0" stop-color="#55d28d" stop-opacity="0"/><stop offset=".5" stop-color="#2f6be6" stop-opacity=".8"/><stop offset="1" stop-color="#55d28d" stop-opacity="0"/></linearGradient>
+<filter id="consulting-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="800" height="500" fill="#f3faf6"/>
+<rect width="800" height="500" fill="url(#consulting-glow)"/>
+<path d="M0 0V500M50 0V500M100 0V500M150 0V500M200 0V500M250 0V500M300 0V500M350 0V500M400 0V500M450 0V500M500 0V500M550 0V500M600 0V500M650 0V500M700 0V500M750 0V500M800 0V500M0 0H800M0 50H800M0 100H800M0 150H800M0 200H800M0 250H800M0 300H800M0 350H800M0 400H800M0 450H800M0 500H800" stroke="#0e2a1c" stroke-opacity=".05" fill="none"/>
+<ellipse cx="400" cy="250" rx="300" ry="110" transform="rotate(-18 400 250)" fill="none" stroke="#55d28d" stroke-opacity="0.5" stroke-width="1.2"/><ellipse cx="400" cy="250" rx="220" ry="80" transform="rotate(22 400 250)" fill="none" stroke="#2f6be6" stroke-opacity="0.3" stroke-width="1.2"/><ellipse cx="400" cy="250" rx="140" ry="140" transform="rotate(0 400 250)" fill="none" stroke="#55d28d" stroke-opacity="0.25" stroke-width="1.2"/><path d="M120 380C250 330 300 300 400 250S600 150 700 120" stroke="#2f6be6" stroke-width="2" fill="none" stroke-dasharray="6 8" stroke-opacity=".6"/><circle cx="120" cy="380" r="7" fill="#ffffff" stroke="#55d28d" stroke-width="2"/><circle cx="120" cy="380" r="16" fill="#ffba49" opacity=".2"/><circle cx="400" cy="250" r="7" fill="#ffffff" stroke="#55d28d" stroke-width="2"/><circle cx="400" cy="250" r="16" fill="#ffba49" opacity=".2"/><circle cx="700" cy="120" r="7" fill="#ffffff" stroke="#55d28d" stroke-width="2"/><circle cx="700" cy="120" r="16" fill="#ffba49" opacity=".2"/><circle cx="400" cy="250" r="110.19999999999999" fill="#55d28d" opacity=".25" filter="url(#consulting-blur)"/>
+<circle cx="400" cy="250" r="58" fill="url(#consulting-orb)"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+<defs>
+<radialGradient id="insight2-glow" cx="10%" cy="90%" r="65%"><stop offset="0" stop-color="#2f6be6" stop-opacity=".38"/><stop offset=".45" stop-color="#2f6be6" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<radialGradient id="insight2-orb" cx="35%" cy="32%" r="70%"><stop offset="0" stop-color="#b6f7cf"/><stop offset=".35" stop-color="#55d28d"/><stop offset=".75" stop-color="#13754a" stop-opacity=".7"/><stop offset="1" stop-color="#13754a" stop-opacity="0"/></radialGradient>
+<linearGradient id="insight2-line" x1="0" x2="1"><stop offset="0" stop-color="#55d28d" stop-opacity="0"/><stop offset=".5" stop-color="#2f6be6" stop-opacity=".8"/><stop offset="1" stop-color="#55d28d" stop-opacity="0"/></linearGradient>
+<filter id="insight2-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="800" height="500" fill="#f3faf6"/>
+<rect width="800" height="500" fill="url(#insight2-glow)"/>
+<path d="M0 0V500M50 0V500M100 0V500M150 0V500M200 0V500M250 0V500M300 0V500M350 0V500M400 0V500M450 0V500M500 0V500M550 0V500M600 0V500M650 0V500M700 0V500M750 0V500M800 0V500M0 0H800M0 50H800M0 100H800M0 150H800M0 200H800M0 250H800M0 300H800M0 350H800M0 400H800M0 450H800M0 500H800" stroke="#0e2a1c" stroke-opacity=".05" fill="none"/>
+<circle cx="560" cy="250" r="34" fill="none" stroke="#55d28d" stroke-opacity="0.5" stroke-width="1"/><circle cx="560" cy="250" r="68" fill="none" stroke="#55d28d" stroke-opacity="0.5" stroke-width="1"/><circle cx="560" cy="250" r="102" fill="none" stroke="#ffba49" stroke-opacity="0.4" stroke-width="1"/><circle cx="560" cy="250" r="136" fill="none" stroke="#55d28d" stroke-opacity="0.4" stroke-width="1"/><circle cx="560" cy="250" r="170" fill="none" stroke="#55d28d" stroke-opacity="0.3" stroke-width="1"/><circle cx="560" cy="250" r="204" fill="none" stroke="#ffba49" stroke-opacity="0.3" stroke-width="1"/><circle cx="560" cy="250" r="238" fill="none" stroke="#55d28d" stroke-opacity="0.2" stroke-width="1"/><circle cx="560" cy="250" r="272" fill="none" stroke="#55d28d" stroke-opacity="0.2" stroke-width="1"/><circle cx="560" cy="250" r="306" fill="none" stroke="#ffba49" stroke-opacity="0.1" stroke-width="1"/><circle cx="560" cy="250" r="133" fill="#55d28d" opacity=".25" filter="url(#insight2-blur)"/>
+<circle cx="560" cy="250" r="70" fill="url(#insight2-orb)"/>
+</svg>

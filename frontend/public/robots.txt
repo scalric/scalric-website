@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://scalric.com/sitemap.xml
