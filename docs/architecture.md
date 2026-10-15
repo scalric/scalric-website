@@ -20,7 +20,7 @@
 - `frontend/src/App.jsx` resolves routes and updates titles/descriptions.
 - `frontend/src/components/Header.jsx` owns the six-item navigation, desktop mega menus, mobile accordion navigation, search and persistent contact CTA.
 - `frontend/src/components/Forms.jsx` owns contact and Impact form behavior; `frontend/src/lib/api.js` sends requests to the API.
-- `frontend/src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy, editorial previews and roles.
+- `frontend/src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy and roles.
 - `backend/server.js` exposes health and form endpoints, applies field validation and a per-IP request limit.
 - `database/schema.sql` stores contact and Impact application records in PostgreSQL; `database/index.js` owns the pooled connection, schema initialization, and shutdown.
 - `compose.yaml` provides an isolated local PostgreSQL service and persistent named volume; `.env.example` documents API-to-database configuration.

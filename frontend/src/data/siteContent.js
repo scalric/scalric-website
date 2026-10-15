@@ -1,15 +1,12 @@
 export const capabilities = [
-  { number: '01', title: 'SaaS & software', text: 'Digital products designed around the business outcomes that matter.', icon: '◒', href: '/what-we-do#saas' },
-  { number: '02', title: 'Artificial intelligence', text: 'AI applied to decisions, services and operations with purpose.', icon: '✳', href: '/what-we-do#ai' },
-  { number: '03', title: 'Data & automation', text: 'Turn fragmented processes and information into forward motion.', icon: '⌘', href: '/what-we-do#data-automation' },
-  { number: '04', title: 'Consulting', text: 'Connect market understanding, strategy and technology delivery.', icon: '↗', href: '/what-we-do#consulting' },
+  { number: '01', title: 'SaaS & software', text: 'Digital products designed around the business outcomes that matter.', icon: '◒', href: '/what-we-do#saas', image: '/assets/cards/cap-saas.svg' },
+  { number: '02', title: 'Artificial intelligence', text: 'AI applied to decisions, services and operations with purpose.', icon: '✳', href: '/what-we-do#ai', image: '/assets/cards/cap-ai.svg' },
+  { number: '03', title: 'Data & automation', text: 'Turn fragmented processes and information into forward motion.', icon: '⌘', href: '/what-we-do#data-automation', image: '/assets/cards/cap-data.svg' },
+  { number: '04', title: 'Consulting', text: 'Connect market understanding, strategy and technology delivery.', icon: '↗', href: '/what-we-do#consulting', image: '/assets/cards/cap-consulting.svg' },
 ];
 
 export const topics = [
-  'Artificial Intelligence', 'SaaS & Software', 'Data & Analytics', 'Automation', 'Cyber Security',
-  'Cloud & Infrastructure', 'Digital Transformation', 'Economy & Growth', 'ESG & Sustainability',
-  'Financial Services', 'Healthcare & Life Sciences', 'Manufacturing', 'Retail & Consumer',
-  'Public Sector', 'Startups & Emerging Business', 'Workforce & Talent', 'Risk & Regulation',
+  'Artificial Intelligence', 'SaaS & Software', 'Data & Analytics', 'Automation', 'Cloud & Infrastructure',
 ];
 
 export const insights = [
@@ -18,7 +15,7 @@ export const insights = [
     tags: ['Data & Analytics'], status: 'editorial-preview', publishDate: null,
     title: 'From data to decisions: making information work harder',
     dek: 'A practical perspective on bringing data, people and business priorities into one decision system.',
-    author: 'Scalric Editorial', heroImage: null, featured: true, source: null,
+    author: 'Scalric Editorial', heroImage: '/assets/photos/data-analytics.webp', featured: true, source: null,
     body: [
       { heading: 'A better question to start with', text: 'The value of data is measured in the decisions it helps people make. Begin with the decision, then work backwards to the information, ownership and process it needs.' },
       { heading: 'Connect the operating model', text: 'Technology choices matter, but so do trusted definitions, clear accountability and the routines that turn insight into action.' },
@@ -30,7 +27,7 @@ export const insights = [
     tags: ['Artificial Intelligence'], status: 'editorial-preview', publishDate: null,
     title: 'AI with purpose: moving from possibility to operating value',
     dek: 'How organizations can frame AI around a meaningful business problem and a responsible path to scale.',
-    author: 'Scalric Editorial', heroImage: null, featured: true, source: null,
+    author: 'Scalric Editorial', heroImage: '/assets/photos/home-insight-ai.webp', featured: true, source: null,
     body: [
       { heading: 'Start with the work', text: 'A useful AI opportunity starts with a task, decision or service that can be made clearer, faster or more helpful.' },
       { heading: 'Design the conditions', text: 'Data access, human oversight, security and adoption need to be considered alongside model selection.' },
@@ -42,22 +39,106 @@ export const insights = [
     tags: ['Automation'], status: 'editorial-preview', publishDate: null,
     title: 'Automation that makes the whole journey simpler',
     dek: 'A systems view of automation can reduce friction for customers and the teams who support them.',
-    author: 'Scalric Editorial', heroImage: null, featured: true, source: null,
+    author: 'Scalric Editorial', heroImage: '/assets/photos/automation-robotics.webp', featured: true, source: null,
     body: [
       { heading: 'Look across the journey', text: 'Automating one step can move effort somewhere else. Map the end-to-end experience before deciding where technology can help.' },
       { heading: 'Keep people in the loop', text: 'Design clear ways to review exceptions and improve the process as conditions change.' },
       { heading: 'Make improvement visible', text: 'Pair workflow measures with the experience they are meant to improve, then adjust the design with the people closest to the work.' },
     ],
   },
+  {
+    slug: 'saas-products-built-around-the-task', category: 'SaaS & Software',
+    tags: ['SaaS & Software'], status: 'editorial-preview', publishDate: null,
+    title: 'Software people keep using: building around the task',
+    dek: 'What separates a SaaS product people rely on from one they tolerate, and how to design for it from the start.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/detail-saas-cloud.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Start from the task', text: 'A useful product makes one valuable task easier to understand, complete and improve. Map that task in detail before deciding which features it needs.' },
+      { heading: 'Design for the whole lifecycle', text: 'Onboarding, daily use, support and upgrades shape retention as much as the core functionality. Plan each stage deliberately.' },
+      { heading: 'Measure what customers feel', text: 'Adoption, time to first value and repeat use reveal more than feature counts. Review them with the team at every release.' },
+    ],
+  },
+  {
+    slug: 'cloud-foundations-that-grow', category: 'Cloud & Infrastructure',
+    tags: ['Cloud & Infrastructure'], status: 'editorial-preview', publishDate: null,
+    title: 'Cloud foundations that can grow with the business',
+    dek: 'Practical choices about architecture, cost and reliability, made before scale makes them expensive to change.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/detail-consulting-platform.png', featured: false, source: null,
+    body: [
+      { heading: 'Design for change', text: 'Modular services, clear interfaces and infrastructure defined as code make systems easier to evolve without disruption.' },
+      { heading: 'Balance cost and resilience', text: 'Right-size capacity, track spend by workload, and decide deliberately which services need high availability.' },
+      { heading: 'Secure by default', text: 'Identity controls, encryption and regular access reviews belong in the foundation, not added after launch.' },
+    ],
+  },
+  {
+    slug: 'responsible-ai-in-daily-operations', category: 'Artificial Intelligence',
+    tags: ['Artificial Intelligence'], status: 'editorial-preview', publishDate: null,
+    title: 'Responsible AI in everyday operations',
+    dek: 'How teams can bring AI into routine work with clear ownership, human review and measurable results.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/ai-lightbulb.webp', featured: false, source: null,
+    body: [
+      { heading: 'Pick a task, not a technology', text: 'Start with a repeated task where speed, accuracy or consistency matters, and define what success looks like before testing any tool.' },
+      { heading: 'Keep a human in the loop', text: 'Decide where people review, approve or override AI output, and make those points visible in the workflow.' },
+      { heading: 'Monitor quality over time', text: 'Track errors, drift and user feedback. Models and data change, so the review process must keep running after launch.' },
+    ],
+  },
+  {
+    slug: 'trusted-data-before-dashboards', category: 'Data & Analytics',
+    tags: ['Data & Analytics'], status: 'editorial-preview', publishDate: null,
+    title: 'Trusted data before dashboards',
+    dek: 'Agreed definitions and clear ownership matter more than the next chart. Here is where to start.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/detail-data-code.webp', featured: false, source: null,
+    body: [
+      { heading: 'Agree on definitions', text: 'When two teams report the same metric differently, decisions slow down. Write down what each key measure means and how it is calculated.' },
+      { heading: 'Assign data ownership', text: 'Every critical dataset needs a named owner who is accountable for quality, access and updates.' },
+      { heading: 'Design for the decision', text: 'Start from the question a leader needs to answer, then work backwards to the data and visuals that answer it.' },
+    ],
+  },
+  {
+    slug: 'pricing-as-product-design', category: 'SaaS & Software',
+    tags: ['SaaS & Software'], status: 'editorial-preview', publishDate: null,
+    title: 'Pricing as part of product design',
+    dek: 'Packaging and pricing shape what customers value and how the product grows. Treat them as design decisions.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/insight-ai.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Price the value, not the features', text: 'Customers buy outcomes. Group capabilities around the results they deliver, so each tier has a clear purpose.' },
+      { heading: 'Keep the path to upgrade clear', text: 'Users should understand when and why to move up a tier, without surprises or artificial limits.' },
+      { heading: 'Test with real usage', text: 'Use usage data and customer conversations to refine packaging. Pricing changes deserve the same care as feature changes.' },
+    ],
+  },
+  {
+    slug: 'automating-the-exceptions', category: 'Automation',
+    tags: ['Automation'], status: 'editorial-preview', publishDate: null,
+    title: 'Automate the exceptions, not just the rules',
+    dek: 'Routine cases are the easy part. Designing for the exceptions is where automation earns trust.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/home-insight-agents.webp', featured: false, source: null,
+    body: [
+      { heading: 'Map the edge cases first', text: 'Before automating a process, list the unusual cases that break the standard path and decide how each should be handled.' },
+      { heading: 'Route exceptions to people', text: 'Build clear handoffs, with context attached, so a person can resolve the case without starting again.' },
+      { heading: 'Learn from what gets escalated', text: 'Escalations show where the process needs redesign. Review them regularly and simplify the rules that cause the most friction.' },
+    ],
+  },
+  {
+    slug: 'observability-knowing-what-your-systems-do', category: 'Cloud & Infrastructure',
+    tags: ['Cloud & Infrastructure'], status: 'editorial-preview', publishDate: null,
+    title: 'Observability: knowing what your systems are doing',
+    dek: 'You cannot improve systems you cannot see. Good monitoring turns incidents into learning.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/cloud-inf.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Measure what users experience', text: 'Track response times, errors and completed tasks from the user’s point of view, not only server health.' },
+      { heading: 'Make logs and traces useful', text: 'Structured logs and traces tied to a single request make it faster to find the cause of a problem.' },
+      { heading: 'Plan for incidents', text: 'Agree on alert thresholds, owners and a review routine, so each incident leads to a specific improvement.' },
+    ],
+  },
 ];
 
 export const proposedIndustries = [
-  { title: 'Financial services', text: 'Explore opportunities across digital services, data and operations.' },
-  { title: 'Healthcare & life sciences', text: 'Consider how connected information can support better experiences.' },
-  { title: 'Manufacturing', text: 'Examine the role of intelligence and automation in complex operations.' },
-  { title: 'Retail & consumer', text: 'Connect customer insight with the systems that serve demand.' },
-  { title: 'Public sector', text: 'Design technology around accessible, dependable services.' },
-  { title: 'Emerging businesses', text: 'Build the digital foundations that support a changing market.' },
+  { title: 'Financial services', image: '/assets/photos/finance-trading.webp', text: 'Explore opportunities across digital services, data and operations.' },
+  { title: 'Healthcare & life sciences', image: '/assets/photos/ind2-healthcare.webp', text: 'Consider how connected information can support better experiences.' },
+  { title: 'Manufacturing', image: '/assets/photos/ind2-manufacturing.webp', text: 'Examine the role of intelligence and automation in complex operations.' },
+  { title: 'Retail & consumer', image: '/assets/photos/ind2-retail.webp', text: 'Connect customer insight with the systems that serve demand.' },
+  { title: 'Public sector', image: '/assets/photos/ind2-public.webp', text: 'Design technology around accessible, dependable services.' },
+  { title: 'Emerging businesses', image: '/assets/photos/ind2-emerging.webp', text: 'Build the digital foundations that support a changing market.' },
 ];
 
 export const openRoles = [];
@@ -100,15 +181,25 @@ export const workingPrinciples = [
 ];
 
 export const processSteps = [
-  ['Discovery', 'Understand the business, context, competition and goals.'],
-  ['Audit & research', 'Assess what works today and where the real opportunities are.'],
+  ['Discovery', 'We start with your business, your users and the goals behind the request. No assumptions.'],
+  ['Audit & research', 'We examine what exists today: systems, customers, competitors and where the real opportunities sit.'],
   ['Custom strategy', 'A prioritised roadmap with realistic timelines and measurable targets.'],
-  ['Execution', 'Specialist teams implement with attention to detail.'],
-  ['Monitor & optimise', 'Track performance continuously and refine from real data.'],
-  ['Report & scale', 'Regular reviews and a clear plan to scale what works.'],
+  ['Execution', 'Specialist teams build in tested, iterative releases, with attention to detail at every step.'],
+  ['Monitor & optimise', 'We track results, learn from real data and refine the approach as we go.'],
+  ['Report & scale', 'Clear reviews, and a plan to scale what is working.'],
 ];
 
 export const sectorsServed = [
   'Real estate', 'E-commerce', 'Healthcare & clinics', 'Education & coaching', 'B2B & manufacturing',
   'Travel & hospitality', 'Legal & consulting', 'Retail', 'Fitness & wellness', 'Home services',
+];
+
+/** Delivery journey shown on the home page. Each step: kicker, title, summary and key deliverables. */
+export const journeySteps = [
+  { kicker: 'Understand', title: 'Discovery', text: 'We learn how your business, customers, competitors and goals fit together before any solution is shaped.', points: ['Stakeholder interviews', 'Market and competitor review', 'Success criteria agreed'] },
+  { kicker: 'Direct', title: 'Strategy', text: 'Insight becomes a prioritised plan, with clear options, trade-offs and measurable targets.', points: ['Opportunity assessment', 'Prioritised roadmap', 'Measurable outcomes'] },
+  { kicker: 'Define', title: 'Requirements', text: 'Working sessions turn ambitions into a clear, agreed scope: what the product must do, for whom, and why.', points: ['Workshops with decision-makers', 'User journeys and scope', 'Agreed requirements document'] },
+  { kicker: 'Collaborate', title: 'Client interaction', text: 'You stay close to the work through shared workspaces, regular reviews and one accountable lead.', points: ['Shared project workspace', 'Regular review sessions', 'One accountable point of contact'] },
+  { kicker: 'Build', title: 'Development', text: 'Design and engineering move in short, tested iterations, so progress is visible and feedback is built in.', points: ['Architecture and UX design', 'Iterative, tested releases', 'Quality and security checks'] },
+  { kicker: 'Deliver', title: 'The perfect product', text: 'We validate with real users, launch in phases and keep refining until the product delivers the outcome you set out to achieve.', points: ['User validation', 'Phased launch', 'Outcome tracking and refinement'] },
 ];

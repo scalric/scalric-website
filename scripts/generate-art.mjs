@@ -11,14 +11,14 @@ mkdirSync(out, { recursive: true });
 
 const W = 800;
 const H = 500;
-const GREEN = '#55d28d';
-const DEEP = '#13754a';
-const MINT = '#b6f7cf';
-const BLUE = '#2f6be6';
+const GREEN = '#2950ad';
+const DEEP = '#133075';
+const MINT = '#6e94ed';
+const BLUE = '#1543ae';
 const GOLD = '#fffc49ff';
-const INK = '#0e2a1c';
+const INK = '#0e162a';
 const PANE = '#ffffff';
-const SOFT = '#f3faf6';
+const SOFT = '#f3f5fa';
 
 function rng(seed) {
   let s = seed >>> 0;

@@ -1,10 +1,10 @@
 import React from 'react';
 
-// Palette for the burst: warm gold at the origin, blue toward the tips, Scalric green for travelling sparks.
+// Palette for the burst: warm gold at the origin, blue toward the tips, brand blue for travelling sparks.
 const GOLD = [255, 186, 73];
-const BLUE = [47, 107, 230];
+const BLUE = [17, 85, 217];
 const SKY = [191, 219, 254];
-const GREEN = [85, 210, 141];
+const GREEN = [41, 80, 173];
 
 const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${Math.max(0, Math.min(1, a)).toFixed(3)})`;
 const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
@@ -88,7 +88,7 @@ export default function RadialBurst({ rayCount = 240 }) {
 
         const grad = ctx.createLinearGradient(x0, y0, x1, y1);
         grad.addColorStop(0, rgba(GOLD, alpha * 0.95));
-        grad.addColorStop(0.45, rgba(mix(GOLD, BLUE, 0.5), alpha * 0.75));
+        grad.addColorStop(0.45, rgba(BLUE, alpha * 0.75));
         grad.addColorStop(1, rgba(BLUE, alpha));
         ctx.strokeStyle = grad;
         ctx.lineWidth = ray.width * (1 + boost * 0.7);

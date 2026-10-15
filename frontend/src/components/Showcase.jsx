@@ -30,9 +30,9 @@ export function Sparkline({ values, width = 640, height = 160 }) {
   const step = width / (values.length - 1);
   const points = values.map((value, i) => `${(i * step).toFixed(1)},${(height - 10 - ((value - min) / (max - min || 1)) * (height - 20)).toFixed(1)}`);
   return <svg className="sparkline" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" aria-hidden="true">
-    <defs><linearGradient id={gid} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#55d28d" stopOpacity=".32" /><stop offset="1" stopColor="#55d28d" stopOpacity="0" /></linearGradient></defs>
+    <defs><linearGradient id={gid} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#1155d9" stopOpacity=".32" /><stop offset="1" stopColor="#1155d9" stopOpacity="0" /></linearGradient></defs>
     <path d={`M0,${height} L${points.join(' L')} L${width},${height} Z`} fill={`url(#${gid})`} />
-    <polyline points={points.join(' ')} fill="none" stroke="#55d28d" strokeWidth="2.5" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+    <polyline points={points.join(' ')} fill="none" stroke="#1155d9" strokeWidth="2.5" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
   </svg>;
 }
 

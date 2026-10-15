@@ -73,7 +73,7 @@ export default function Header({ currentPath }) {
     <header className={`site-header${overlay ? ' is-overlay' : ''}${scrolled ? ' is-scrolled' : ''}`} onMouseLeave={() => { clearTimeout(hoverTimer.current); setOpenMenu(null); }}>
       <div className="header-utility"><div className="container utility-inner"><span className="region-label">India <span>(EN)</span></span><span className="utility-note">Technology · Consulting · Innovation</span></div></div>
       <div className="container header-main">
-        <Link href="/" className="brand" aria-label="Scalric home" onClick={close}><img className="logo-green" src="/assets/scalric-wordmark-green.png" alt="Scalric" width="135" height="34" /><img className="logo-white" src="/assets/scalric-wordmark-white.png" alt="" width="135" height="34" aria-hidden="true" /></Link>
+        <Link href="/" className="brand" aria-label="Scalric home" onClick={close}><img className="logo-green" src="/assets/scalric-wordmark-blue.png" alt="Scalric" width="135" height="34" /></Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {navItems.map((item) => item === 'Impact' ? <Link key={item} href="/impact" className={`nav-link${currentPath.startsWith('/impact') ? ' active' : ''}`}>Impact</Link> :
             <button key={item} className={`nav-link nav-menu-trigger${openMenu === item ? ' active' : ''}`} aria-expanded={openMenu === item} aria-controls="mega-menu" onMouseEnter={() => queueMenu(item)} onFocus={() => setOpenMenu(item)} onClick={() => setOpenMenu(openMenu === item ? null : item)}>{item}<span className="nav-chevron">⌄</span></button>)}
