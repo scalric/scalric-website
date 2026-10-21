@@ -1,0 +1,40 @@
+/* Closing banner: blue gradient, glassy angled shapes, giant white words. */
+.imp-cta{position:relative;isolation:isolate;display:grid;min-height:clamp(560px,92vh,880px);overflow:hidden;background:linear-gradient(135deg,#7fa8ff 0%,#2f6bf0 30%,#1155d9 58%,#0a3aa6 100%);color:#fff}
+.imp-cta-glass{position:absolute;z-index:-1;background:linear-gradient(160deg,#ffffff40 0%,#ffffff0d 70%);border:1px solid #ffffff3d;backdrop-filter:blur(2px);transform:translate3d(calc(var(--shift,0) * -70px),0,0)}
+.imp-cta-glass.one{top:-8%;left:-6%;width:62%;height:78%;clip-path:polygon(0 0,86% 0,100% 34%,64% 100%,0 100%)}
+.imp-cta-glass.two{top:12%;left:34%;width:46%;height:96%;clip-path:polygon(34% 0,100% 0,100% 100%,0 100%,16% 38%);transform:translate3d(calc(var(--shift,0) * 90px),0,0)}
+.imp-cta-glass.three{bottom:-12%;right:-8%;width:42%;height:70%;clip-path:polygon(40% 0,100% 0,100% 100%,0 100%);opacity:.8;transform:translate3d(calc(var(--shift,0) * -40px),0,0)}
+
+.imp-cta-words{display:grid;align-content:center;margin:0;padding:clamp(48px,7vw,96px) clamp(20px,4vw,64px);color:#fff;font-size:clamp(76px,16vw,260px);line-height:.92;letter-spacing:-.06em;font-weight:500}
+.imp-cta-words span{display:block;color:#fff;will-change:transform}
+.imp-cta-words .w1{transform:translate3d(calc(var(--shift,0) * 90px),0,0)}
+.imp-cta-words .w2{text-align:right;transform:translate3d(calc(var(--shift,0) * -120px),0,0)}
+.imp-cta-words .w3{transform:translate3d(calc(var(--shift,0) * 60px),0,0)}
+
+.imp-cta-pill{position:absolute;left:clamp(20px,4vw,64px);top:clamp(28px,5vw,64px);z-index:2}
+
+@media(max-width:700px){
+  .imp-cta{min-height:620px}
+  .imp-cta-words{padding-top:150px;font-size:clamp(64px,22vw,130px)}
+  .imp-cta-pill{top:28px}
+}
+@media(prefers-reduced-motion:reduce){.imp-cta-glass,.imp-cta-words span{transform:none!important}}
+
+/* button sits in the open space to the left of the middle word, like the reference */
+.imp-cta-pill{top:50%;transform:translateY(-50%)}
+.imp-cta-pill:hover,.imp-cta-pill:focus-visible{transform:translateY(calc(-50% - 1px))}
+@media(max-width:700px){.imp-cta-pill{top:auto;bottom:28px;transform:none}}
+
+/* compact banner: the blue box hugs the three words */
+.imp-cta{min-height:0}
+.imp-cta-words{padding:clamp(28px,4vw,52px) clamp(20px,4vw,64px);font-size:clamp(56px,11vw,168px);line-height:.88}
+@media(max-width:700px){.imp-cta{min-height:0}.imp-cta-words{padding:28px 20px 96px;font-size:clamp(48px,17vw,100px)}}
+.imp-cta-words{padding:clamp(24px,3vw,40px) clamp(20px,4vw,64px);font-size:clamp(44px,7.4vw,112px);line-height:.9}
+@media(max-width:700px){.imp-cta-words{padding:24px 20px 88px;font-size:clamp(40px,14vw,80px)}}
+.imp-cta-words{padding:clamp(40px,5vw,72px) clamp(20px,4vw,64px);font-size:clamp(48px,8.6vw,132px)}
+@media(max-width:700px){.imp-cta-words{padding:36px 20px 96px;font-size:clamp(44px,16vw,92px)}}
+.imp-cta-words{padding:clamp(52px,6.5vw,96px) clamp(20px,4vw,64px);font-size:clamp(52px,10vw,152px)}
+@media(max-width:700px){.imp-cta-words{padding:44px 20px 104px;font-size:clamp(46px,18vw,104px)}}
+
+/* breathing room between the banner and the footer */
+.imp-cta{margin-bottom:clamp(56px,8vw,112px)}

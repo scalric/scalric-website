@@ -22,8 +22,7 @@
 - `frontend/src/components/Forms.jsx` owns contact and Impact form behavior; `frontend/src/lib/api.js` sends requests to the API.
 - `frontend/src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy and roles.
 - `backend/server.js` exposes health and form endpoints, applies field validation and a per-IP request limit.
-- `database/schema.sql` stores contact and Impact application records in PostgreSQL; `database/index.js` owns the pooled connection, schema initialization, and shutdown.
-- `compose.yaml` provides an isolated local PostgreSQL service and persistent named volume; `.env.example` documents API-to-database configuration.
+- `database/schema.sql` stores contact and Impact application records in a local SQLite file; `database/index.js` owns the connection, schema migrations, and shutdown.
 
 ## PRD event names
 
@@ -32,3 +31,4 @@ The frontend emits `contact_form_submit`, `impact_teaser_click`, `impact_to_home
 ## Design and accessibility
 
 Single-family Manrope typography, white/green/charcoal palette, responsive layouts, focus-visible controls, keyboard-operable navigation, semantic form labels and reduced-motion support. The supplied 8-second video is used on desktop with a generated still poster; mobile uses a CSS abstract fallback to limit video loading.
+- `frontend/src/admin/` and `backend/admin.js` implement the `/admin` site (signed-cookie login, enquiry inbox, status, notes, CSV export).

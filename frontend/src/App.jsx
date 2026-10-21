@@ -8,7 +8,9 @@ import InsightsPage, { InsightArticlePage } from './pages/InsightsPage.jsx';
 import ImpactPage from './pages/ImpactPage.jsx';
 import CompanyPage from './pages/CompanyPage.jsx';
 import { CareersPage, RoleDetailPage } from './pages/CompanyCareersPages.jsx';
+import OpeningsPage from './pages/OpeningsPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import AdminApp from './admin/AdminApp.jsx';
 import { usePathname } from './lib/router.js';
 import { Eyebrow, Link, Arrow } from './components/UI.jsx';
 
@@ -20,6 +22,7 @@ const pages = {
   '/impact': { title: 'Impact — Scalric', component: <ImpactPage/> },
   '/company': { title: 'Company — Scalric', component: <CompanyPage/> },
   '/careers': { title: 'Careers — Scalric', component: <CareersPage/> },
+  '/careers/openings': { title: 'Open roles — Careers at Scalric', component: <OpeningsPage/> },
   '/contact': { title: 'Contact — Scalric', component: <ContactPage/> },
 };
 
@@ -37,8 +40,7 @@ function resolveRoute(pathname) {
   return { title: 'Page not found — Scalric', component: <NotFoundPage/> };
 }
 
-export default function App() {
-  const pathname = usePathname();
+function SiteApp({ pathname }) {
   const route = resolveRoute(pathname);
   React.useEffect(() => {
     document.title = route.title;
@@ -75,4 +77,9 @@ export default function App() {
     return () => window.removeEventListener('scroll', reportDepth);
   }, [pathname]);
   return <div className="app-shell" id="top"><Header currentPath={pathname}/>{route.component}<Footer/></div>;
+}
+
+export default function App() {
+  const pathname = usePathname();
+  return pathname === '/admin' || pathname.startsWith('/admin/') ? <AdminApp/> : <SiteApp pathname={pathname}/>;
 }

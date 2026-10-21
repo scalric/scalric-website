@@ -1,52 +1,71 @@
 import 'dotenv/config';
-import { readFile } from 'node:fs/promises';
+import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import pg from 'pg';
+import { DatabaseSync } from 'node:sqlite';
+import { sampleRoles } from './sampleRoles.js';
 
-const { Pool } = pg;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const file = resolve(root, process.env.DATABASE_PATH || 'database/scalric.sqlite');
+mkdirSync(dirname(file), { recursive: true });
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is required. Copy .env.example to .env and configure PostgreSQL.');
-}
+const sqlite = new DatabaseSync(file);
+sqlite.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;');
 
-export const database = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  max: Number(process.env.DB_POOL_SIZE || 10),
-  idleTimeoutMillis: 30_000,
-  connectionTimeoutMillis: 5_000,
-  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : undefined,
-});
+// Columns added after the first release; applied to existing databases on startup.
+const addedColumns = {
+  contact_submissions: [
+    ['role', "TEXT NOT NULL DEFAULT ''"],
+    ['link', "TEXT NOT NULL DEFAULT ''"],
+    ['phone', "TEXT NOT NULL DEFAULT ''"],
+    ['experience_years', "TEXT NOT NULL DEFAULT ''"],
+    ['experience', "TEXT NOT NULL DEFAULT ''"],
+    ['resume_name', "TEXT NOT NULL DEFAULT ''"],
+    ['resume_file', "TEXT NOT NULL DEFAULT ''"],
+    ["status", "TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'read', 'replied', 'archived'))"],
+    ['notes', "TEXT NOT NULL DEFAULT ''"],
+    ['updated_at', "TEXT NOT NULL DEFAULT ''"],
+  ],
+  impact_applications: [
+    ["status", "TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'read', 'replied', 'archived'))"],
+    ['notes', "TEXT NOT NULL DEFAULT ''"],
+    ['updated_at', "TEXT NOT NULL DEFAULT ''"],
+  ],
+};
 
-export async function waitForDatabase() {
-  const maxAttempts = Number(process.env.DB_CONNECT_RETRIES || 30);
-  const delayMs = Number(process.env.DB_RETRY_DELAY_MS || 1_000);
-  let lastError;
-
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    try {
-      await database.query('SELECT 1');
-      return;
-    } catch (error) {
-      lastError = error;
-      const retryable = error.code?.startsWith('ECONN') || ['57P03', '08001', '08006'].includes(error.code) || error.message?.includes('Connection terminated unexpectedly');
-      if (!retryable) throw error;
-      if (attempt === maxAttempts) break;
-      console.log(`Waiting for PostgreSQL (${attempt}/${maxAttempts})...`);
-      await new Promise((resolveDelay) => setTimeout(resolveDelay, delayMs));
+/** Small async wrapper so callers use `query(sql, params)` with `$1`-style placeholders and get `{ rows, rowCount }`. */
+export const database = {
+  async query(sql, params = []) {
+    const statement = sqlite.prepare(sql.replace(/\$(\d+)/g, '?$1'));
+    if (/^\s*(SELECT|WITH)/i.test(sql) || /\bRETURNING\b/i.test(sql)) {
+      const rows = statement.all(...params);
+      return { rows, rowCount: rows.length };
     }
-  }
+    const result = statement.run(...params);
+    return { rows: [], rowCount: Number(result.changes) };
+  },
+};
 
-  throw new Error(`Could not connect to PostgreSQL after ${maxAttempts} attempts: ${lastError?.message || 'connection failed'}`);
+function seedSampleRoles() {
+  // One-time: only on a database that has never been seeded, so roles deleted in the admin stay deleted.
+  if (sqlite.prepare('PRAGMA user_version').get().user_version >= 1) return;
+  const insert = sqlite.prepare('INSERT OR IGNORE INTO roles (slug, title, team, location, work_mode, description, published) VALUES (?, ?, ?, ?, ?, ?, 1)');
+  for (const role of sampleRoles) insert.run(...role);
+  sqlite.exec('PRAGMA user_version = 1');
 }
 
 export async function initializeDatabase() {
-  await waitForDatabase();
-  const schema = await readFile(resolve(root, 'database/schema.sql'), 'utf8');
-  await database.query(schema);
+  sqlite.exec(readFileSync(resolve(root, 'database/schema.sql'), 'utf8'));
+  for (const [table, columns] of Object.entries(addedColumns)) {
+    const existing = new Set(sqlite.prepare(`PRAGMA table_info(${table})`).all().map((column) => column.name));
+    for (const [name, definition] of columns) {
+      if (!existing.has(name)) sqlite.exec(`ALTER TABLE ${table} ADD COLUMN ${name} ${definition}`);
+    }
+  }
+  seedSampleRoles();
+  sqlite.exec('CREATE INDEX IF NOT EXISTS idx_contact_submissions_status ON contact_submissions(status); CREATE INDEX IF NOT EXISTS idx_impact_applications_status ON impact_applications(status);');
 }
 
 export async function closeDatabase() {
-  await database.end();
+  sqlite.close();
 }

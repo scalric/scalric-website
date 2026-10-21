@@ -4,13 +4,11 @@ Scalric’s responsive corporate website, built from the approved PRD structure 
 
 ## Run locally
 
-Use Node.js 22 or later, PostgreSQL 17, and Docker Compose for the included local database setup. Vite is the root build tool; React and the application code belong to the `frontend` workspace.
+Use Node.js 22 or later (24 recommended). The database is a local SQLite file, so no Docker or database server is needed.
 
 ```powershell
 npm install
-Copy-Item .env.example .env
-npm run db:up
-npm run db:import-sqlite
+Copy-Item .env.example .env   # then set ADMIN_PASSWORD in .env
 npm run dev
 ```
 
@@ -20,7 +18,11 @@ In a second terminal, run the API:
 npm run dev:api
 ```
 
-Open the Vite address (normally `http://localhost:5173`). Vite proxies `/api` requests to `http://127.0.0.1:3001`. The supplied `.env.example` connection matches the local PostgreSQL container in `compose.yaml`. Docker stores its data in the persistent `scalric-postgres-data` volume.
+Open the Vite address (normally `http://localhost:5173`). Vite proxies `/api` requests to `http://127.0.0.1:3001`.
+
+## Admin site
+
+Open `http://localhost:5173/admin` and sign in with `ADMIN_USERNAME` / `ADMIN_PASSWORD` from `.env`. It lists everything submitted through the contact form ("Talk to us", "Start a conversation" and the Careers page links all use it, with Careers tagged as the *Careers* reason). For each entry you can search and filter, open the full message, reply by email, set a status (new, read, replied, archived), keep internal notes, delete, and export to CSV. Sessions last 8 hours and are stored in a signed HttpOnly cookie; set `ADMIN_SESSION_SECRET` to keep sessions valid across API restarts. If `ADMIN_PASSWORD` is empty the admin is disabled.
 
 ## Project map
 
@@ -35,9 +37,8 @@ frontend/
 backend/
   server.js             JSON API, validation and request throttling
 database/
-  schema.sql            PostgreSQL schema for inquiry submissions
+  schema.sql            SQLite schema for inquiry submissions
   index.js              Pooled connection, schema setup and shutdown
-compose.yaml            Local PostgreSQL service and persistent volume
 docs/
   architecture.md       Route, component and data-flow map
 ```
@@ -48,11 +49,7 @@ docs/
 
 ## Backend and data
 
-`POST /api/contact` and `POST /api/impact/applications` validate and save form submissions to PostgreSQL using parameterized queries. Schema setup runs automatically when the API starts. Configuration comes from `DATABASE_URL`, `DB_POOL_SIZE`, `DATABASE_SSL`, `API_HOST` and `API_PORT` in `.env`.
-
-`npm run db:import-sqlite` optionally imports existing records from `database/scalric.sqlite`; it skips IDs already present, so it is safe to rerun. Keep the original SQLite file as a backup until you have confirmed the imported rows. To inspect the database with DBeaver, create a PostgreSQL connection using host `localhost`, port `5432`, database `scalric`, user `scalric`, and password `scalric_local_dev` for the local development container. The tables are `contact_submissions` and `impact_applications`. The API does not expose stored submissions and does not send email or connect to a CRM. Configure an approved delivery and retention policy before production. For production, use a managed PostgreSQL service, configure its connection string and SSL options, and use a deployment-specific reverse proxy for `/api`.
-
-Stop the local container while preserving its data with `npm run db:down`. To permanently delete local data, run `docker compose down -v`.
+`POST /api/contact` and `POST /api/impact/applications` validate and save form submissions to a local SQLite database (`database/scalric.sqlite`, override with `DATABASE_PATH`) using parameterized queries. Schema setup and column migrations run automatically when the API starts. The `/api/admin/*` routes require the admin session. The file is git-ignored; back it up before moving machines. The API does not send email or connect to a CRM, so configure an approved delivery and retention policy before production, and move to a hosted database before deploying to a serverless host such as Vercel.
 
 ## Content to confirm before launch
 

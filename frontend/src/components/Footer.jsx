@@ -28,7 +28,7 @@ export default function Footer() {
     <div className="container ft-top">
       <div className="ft-brand">
         <Link href="/" className="ft-logo" aria-label="Scalric home"><img src="/assets/scalric-wordmark-white.png" alt="Scalric" width="150" height="37" loading="lazy" /></Link>
-        <p>We study complex problems and build technology and consulting solutions for meaningful impact.</p>
+        <p>We study complex problems and build technology and consulting solutions for meaningful impact</p>
         <Link href="/contact" className="button header-cta ft-cta-btn">Start a conversation</Link>
         <ul className="ft-social" aria-label="Scalric on social media">{socials.map((s) => <li key={s.name}><a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Scalric on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} fill="currentColor"/></svg></a></li>)}</ul>
       </div>
