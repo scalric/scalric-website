@@ -26,7 +26,7 @@ const menus = {
     ['Our approach', '/company#approach', 'From discovery to measurable outcomes.'],
   ],
   Careers: [
-    ['Open roles', '/careers#roles', 'Explore opportunities at Scalric.'],
+    ['Open roles', '/careers/openings', 'Explore opportunities at Scalric.'],
     ['Life at Scalric', '/careers#life', 'Build meaningful work with thoughtful teams.'],
     ['How we hire', '/careers#how-we-hire', 'A clear view of the hiring process.'],
   ],

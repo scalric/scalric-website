@@ -4,7 +4,7 @@ import { usePathname } from '../lib/router.js';
 
 const footerGroups = [
   ['What we do', ['Overview', '/what-we-do'], ['SaaS & software', '/what-we-do#saas'], ['Artificial intelligence', '/what-we-do#ai'], ['Data & automation', '/what-we-do#data-automation'], ['Consulting', '/what-we-do#consulting']],
-  ['Company', ['About Scalric', '/company'], ['Our approach', '/company#approach'], ['Impact', '/impact'], ['Careers', '/careers'], ['Open roles', '/careers#roles']],
+  ['Company', ['About Scalric', '/company'], ['Our approach', '/company#approach'], ['Impact', '/impact'], ['Careers', '/careers'], ['Open roles', '/careers/openings']],
   ['Explore', ['Industries', '/industries'], ['Insights', '/insights'], ['Talk to us', '/contact'], ['Life at Scalric', '/careers#life']],
 ];
 

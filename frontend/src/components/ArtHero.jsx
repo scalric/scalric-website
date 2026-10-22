@@ -10,8 +10,8 @@ const ART = {
   stripes: { src: '/assets/photos/art-stripes.png', eyebrow: 'INSIGHTS', chips: topics.slice(0, 4).map((topic) => [topic, `/insights?topic=${encodeURIComponent(topic)}`]) },
   glass: { src: '/assets/photos/art-glass.png', eyebrow: 'COMPANY', tone: 'light', chips: [['Our approach', '/company#approach'], ['Impact', '/impact'], ['Careers', '/careers']] },
   peach: { src: '/assets/photos/art-peach.png', eyebrow: 'COMPANY', tone: 'light', chips: [['Our approach', '/company#approach'], ['Impact', '/impact'], ['Careers', '/careers']] },
-  arcs: { src: '/assets/photos/art-arcs.png', eyebrow: 'CAREERS', chips: [['Life at Scalric', '/careers#life'], ['How we hire', '/careers#how-we-hire'], ['Open roles', '/careers#roles']] },
-  ribbon: { src: '/assets/photos/art-ribbon.png', eyebrow: 'CAREERS', tone: 'light', chips: [['Life at Scalric', '/careers#life'], ['How we hire', '/careers#how-we-hire'], ['Open roles', '/careers#roles']] },
+  arcs: { src: '/assets/photos/art-arcs.png', eyebrow: 'CAREERS', chips: [['Life at Scalric', '/careers#life'], ['How we hire', '/careers#how-we-hire'], ['Open roles', '/careers/openings']] },
+  ribbon: { src: '/assets/photos/art-ribbon.png', eyebrow: 'CAREERS', tone: 'light', chips: [['Life at Scalric', '/careers#life'], ['How we hire', '/careers#how-we-hire'], ['Open roles', '/careers/openings']] },
   orbit: { src: '/assets/photos/art-orbit.png', eyebrow: 'THE IMPACT INITIATIVE', tone: 'light', chips: [['How the programme works', '#how'], ['Talk to us', '/contact']] },
   wave2: { src: '/assets/photos/art-wave.png', eyebrow: 'THE IMPACT INITIATIVE', chips: [['How the programme works', '#how'], ['Talk to us', '/contact']] },
 };
