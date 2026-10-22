@@ -27,7 +27,7 @@ const menus = {
     ['Our approach', '/company#approach', 'From discovery to measurable outcomes.'],
   ],
   Careers: [
-    ['Open roles', '/careers', 'Explore opportunities at Scalric.'],
+    ['Open roles', '/careers#roles', 'Explore opportunities at Scalric.'],
     ['Life at Scalric', '/careers#life', 'Build meaningful work with thoughtful teams.'],
     ['How we hire', '/careers#how-we-hire', 'A clear view of the hiring process.'],
   ],
@@ -58,11 +58,33 @@ export default function Header({ currentPath }) {
   const [expanded, setExpanded] = React.useState(null);
   const hoverTimer = React.useRef(null);
   const scrolled = useScrolled(24);
+  const [hidden, setHidden] = React.useState(false);
   const overlay = currentPath === '/' && !scrolled && !openMenu && !mobileOpen;
   const close = React.useCallback(() => { clearTimeout(hoverTimer.current); setOpenMenu(null); setMobileOpen(false); setExpanded(null); }, []);
   const queueMenu = (item) => { clearTimeout(hoverTimer.current); hoverTimer.current = window.setTimeout(() => setOpenMenu(item), 150); };
 
   React.useEffect(() => { close(); }, [currentPath, close]);
+  React.useEffect(() => {
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (Math.abs(y - last) < 6) return;
+      setHidden(y > 480 && y > last);
+      last = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  React.useEffect(() => {
+    if (!openMenu) return undefined;
+    const onDown = (event) => { if (!event.target.closest('.site-header')) setOpenMenu(null); };
+    const startY = window.scrollY;
+    const onScroll = () => { if (Math.abs(window.scrollY - startY) > 60) setOpenMenu(null); };
+    document.addEventListener('pointerdown', onDown);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { document.removeEventListener('pointerdown', onDown); window.removeEventListener('scroll', onScroll); };
+  }, [openMenu]);
+  const isHidden = hidden && scrolled && !openMenu && !mobileOpen && !searchOpen;
   React.useEffect(() => {
     const onKey = (event) => { if (event.key === 'Escape') { close(); setSearchOpen(false); } };
     window.addEventListener('keydown', onKey);
@@ -70,13 +92,13 @@ export default function Header({ currentPath }) {
   }, [close]);
 
   return <>
-    <header className={`site-header${overlay ? ' is-overlay' : ''}${scrolled ? ' is-scrolled' : ''}`} onMouseLeave={() => { clearTimeout(hoverTimer.current); setOpenMenu(null); }}>
+    <header className={`site-header${overlay ? ' is-overlay' : ''}${scrolled ? ' is-scrolled' : ''}${isHidden ? ' is-hidden' : ''}`} onMouseLeave={() => { clearTimeout(hoverTimer.current); setOpenMenu(null); }}>
       <div className="header-utility"><div className="container utility-inner"><span className="region-label">India <span>(EN)</span></span><span className="utility-note">Technology · Consulting · Innovation</span></div></div>
       <div className="container header-main">
         <Link href="/" className="brand" aria-label="Scalric home" onClick={close}><img className="logo-green" src="/assets/scalric-wordmark-blue.png" alt="Scalric" width="135" height="34" /></Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {navItems.map((item) => item === 'Impact' ? <Link key={item} href="/impact" className={`nav-link${currentPath.startsWith('/impact') ? ' active' : ''}`}>Impact</Link> :
-            <button key={item} className={`nav-link nav-menu-trigger${openMenu === item ? ' active' : ''}`} aria-expanded={openMenu === item} aria-controls="mega-menu" onMouseEnter={() => queueMenu(item)} onFocus={() => setOpenMenu(item)} onClick={() => setOpenMenu(openMenu === item ? null : item)}>{item}<span className="nav-chevron">⌄</span></button>)}
+            <Link key={item} href={`/${item.toLowerCase().replaceAll(' ', '-')}`} className={`nav-link nav-menu-trigger${openMenu === item || currentPath.startsWith(`/${item.toLowerCase().replaceAll(' ', '-')}`) ? ' active' : ''}`} aria-haspopup="true" aria-expanded={openMenu === item} aria-controls="mega-menu" onMouseEnter={() => queueMenu(item)} onFocus={() => setOpenMenu(item)} onClick={close}>{item}</Link>)}
         </nav>
         <div className="header-actions"><button className="search-trigger" aria-label="Open search" onClick={() => setSearchOpen(true)}><span className="search-glass">⌕</span></button><Link href="/contact" className="button button-dark header-cta">Talk to us <Arrow diagonal /></Link><button className={`mobile-menu-trigger${mobileOpen ? ' is-open' : ''}`} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}><i /><i /></button></div>
       </div>

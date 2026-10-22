@@ -55,7 +55,7 @@ export default function OpeningsPage() {
     <section className="opn-hero"><div className="container">
       <div className="breadcrumbs"><Link href="/">Home</Link><span>/</span><Link href="/careers">Careers</Link><span>/</span><span>Open roles</span></div>
       <Eyebrow>OPEN OPPORTUNITIES</Eyebrow>
-      <h1>Find your role.</h1>
+      <h1>Find your role</h1>
       <p>Search every current opening at Scalric. Filter by location, team or how you like to work, then apply in a few minutes.</p>
       <form className="opn-filters" role="search" onSubmit={(event) => event.preventDefault()}>
         <label className="opn-search"><span>Job title or keyword</span><input type="search" value={state.q} onChange={(event) => update({ q: event.target.value })} placeholder="Search roles" /></label>
@@ -66,7 +66,7 @@ export default function OpeningsPage() {
     </div></section>
 
     <section className="opn-results"><div className="container">
-      {!loaded ? <p className="opn-note">Loading roles…</p> : !roles.length ? <div className="opn-empty"><h2>No open roles right now.</h2><p>We’re growing with intention. Tell us what you’d bring and we’ll be in touch.</p><Link href="/contact?intent=careers" className="button button-green">Express your interest</Link></div> : <>
+      {!loaded ? <p className="opn-note">Loading roles…</p> : !roles.length ? <div className="opn-empty"><h2>No open roles right now</h2><p>We’re growing with intention. Tell us what you’d bring and we’ll be in touch.</p><Link href="/contact?intent=careers" className="button button-green">Express your interest</Link></div> : <>
         <div className="opn-bar" aria-live="polite">
           <p>{results.length ? <>Showing <b>{start + 1}–{start + visible.length}</b> of <b>{results.length}</b> {results.length === 1 ? 'role' : 'roles'}</> : 'No roles match your search'}</p>
           <div className="opn-controls">
@@ -85,7 +85,7 @@ export default function OpeningsPage() {
             <span data-label="Work mode" role="cell">{role.workMode || '—'}</span>
             <span className="opn-apply" role="cell"><Link href={`/careers/${role.slug}#apply`} className="button button-green" onClick={() => track(role.slug)}>Apply</Link></span>
           </div>)}
-        </div> : <div className="opn-empty"><h2>No roles match your search.</h2><p>Try removing a filter or searching for something broader.</p><button type="button" className="button button-green" onClick={clear}>Clear all filters</button></div>}
+        </div> : <div className="opn-empty"><h2>No roles match your search</h2><p>Try removing a filter or searching for something broader.</p><button type="button" className="button button-green" onClick={clear}>Clear all filters</button></div>}
         {pages > 1 && <nav className="opn-pager" aria-label="Pagination">
           <button className="button" disabled={page <= 1} onClick={() => setState({ ...state, page: page - 1 })}>Previous</button>
           {Array.from({ length: pages }, (_, index) => index + 1).map((number) => <button key={number} className={`opn-page ${number === page ? 'on' : ''}`} aria-current={number === page ? 'page' : undefined} onClick={() => setState({ ...state, page: number })}>{number}</button>)}

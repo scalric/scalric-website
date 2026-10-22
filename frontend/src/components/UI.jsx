@@ -134,34 +134,7 @@ export function useScrolled(offset = 40) {
   return scrolled;
 }
 
-/**
- * Typewriter headline line: types a phrase, holds, erases, then moves to the next.
- * Hidden sizer copies reserve the tallest phrase's height so the layout never jumps.
- * Shows the first phrase statically for reduced-motion users; screen readers get the first phrase only.
- */
-export function TypedText({ phrases, className = '', typeMs = 62, eraseMs = 30, holdMs = 2200 }) {
-  const [text, setText] = React.useState(phrases[0]);
-  React.useEffect(() => {
-    if (prefersReducedMotion() || phrases.length < 2) return undefined;
-    let index = 0; let length = phrases[0].length; let phase = 'hold'; let timer;
-    const step = () => {
-      const current = phrases[index];
-      if (phase === 'hold') { phase = 'erase'; timer = setTimeout(step, holdMs); return; }
-      if (phase === 'erase') {
-        length -= 1; setText(current.slice(0, Math.max(length, 0)));
-        if (length <= 0) { index = (index + 1) % phrases.length; phase = 'type'; timer = setTimeout(step, 320); return; }
-        timer = setTimeout(step, eraseMs); return;
-      }
-      length += 1; setText(current.slice(0, length));
-      if (length >= current.length) { phase = 'hold'; timer = setTimeout(step, 0); return; }
-      timer = setTimeout(step, typeMs);
-    };
-    timer = setTimeout(step, holdMs);
-    return () => clearTimeout(timer);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  return <span className={`typed ${className}`}>
-    <span className="sr-only">{phrases[0]}</span>
-    {phrases.map((phrase) => <span className="typed-sizer" aria-hidden="true" key={phrase}>{phrase}</span>)}
-    <span className="typed-live" aria-hidden="true">{text}<i className="typed-caret"/></span>
-  </span>;
+/** Static headline line: renders the first phrase, with no typing animation. */
+export function TypedText({ phrases, className = '' }) {
+  return <span className={`typed ${className}`}>{phrases[0]}</span>;
 }

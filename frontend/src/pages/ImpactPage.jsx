@@ -1,4 +1,5 @@
 import React from 'react';
+import ArtHero from '../components/ArtHero.jsx';
 import NicheSpotlight from '../components/NicheSpotlight.jsx';
 import CtaBand from '../components/CtaBand.jsx';
 import { sampleFeedback } from '../components/FeedbackCarousel.jsx';
@@ -152,16 +153,9 @@ const steps = [
 
 export default function ImpactPage() {
   return <main className="imp">
-    <section className="imp-hero">
-      <video className="imp-hero-video" src="/assets/videos/impact-ai.mp4" autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
-      <div className="imp-hero-wash" />
-      <div className="container imp-hero-inner">
-        <Eyebrow>THE IMPACT INITIATIVE</Eyebrow>
-        <h1>Technology that<br />reaches further</h1>
-        <p>Discounted digital and SaaS support for local businesses, and pro-bono technology work for NGOs</p>
-        <a href="#get-involved" className="imp-pill" onClick={() => track('impact_hero_cta_click')}><span>Get involved</span><i aria-hidden="true">→</i></a>
-      </div>
-    </section>
+    <ArtHero art="orbit" title={<>Technology that<br />reaches further</>} text="Discounted digital and SaaS support for local businesses, and pro-bono technology work for NGOs">
+      <a href="#get-involved" className="imp-pill" onClick={() => track('impact_hero_cta_click')}><span>Get involved</span><i aria-hidden="true">→</i></a>
+    </ArtHero>
 
     <section className="imp-intro"><div className="container">
       <p className="imp-kicker">Scalric Impact</p>
