@@ -1850,8 +1850,8 @@ main>section:has(.principles-grid,.process-track,.hiring-steps){background:#eef3
 /* Home hero video as a rounded card */
 .home-hero.hero-city{margin:14px clamp(12px,1.6vw,28px) 0;border-radius:clamp(24px,3vw,44px);overflow:hidden;isolation:isolate}
 .home-hero.hero-city .hero-city-video,.home-hero.hero-city .hero-city-shade{border-radius:inherit}
-/* Hero video: flush with the navbar, rounded only at the bottom corners, full width */
-.home-hero.hero-city{margin:0;border-radius:0 0 clamp(28px,3.4vw,52px) clamp(28px,3.4vw,52px)}
+/* Hero video: flush with the navbar, square corners, full width */
+.home-hero.hero-city{margin:0;border-radius:0}
 
 /* Mobile: how-we-work steps beside the yellow rule */
 @media (max-width:900px){
