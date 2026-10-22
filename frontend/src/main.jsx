@@ -4,6 +4,10 @@ import App from './App.jsx';
 import './styles.css';
 import './premium.css';
 import './theme.css';
+import './impact.css';
+import './ngo.css';
+import './cta.css';
+import './admin/admin.css';
 
 window.dataLayer = window.dataLayer || [];
 window.addEventListener('scalric:analytics', (event) => {

@@ -130,6 +130,66 @@ export const insights = [
       { heading: 'Plan for incidents', text: 'Agree on alert thresholds, owners and a review routine, so each incident leads to a specific improvement.' },
     ],
   },
+  {
+    slug: 'metrics-people-actually-use', category: 'Data & Analytics',
+    tags: ['Data & Analytics'], status: 'editorial-preview', publishDate: null,
+    title: 'Metrics people actually use: measuring what matters to the decision',
+    dek: 'A good measure answers a question someone is already asking. Start there and keep the set small.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/insight-data.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Start from the decision', text: 'List the decisions a team makes each week, then choose the few numbers that would change what they do.' },
+      { heading: 'Agree on one definition', text: 'When two teams define the same metric differently, trust drops. Write the definition once and share it.' },
+      { heading: 'Review and retire', text: 'Revisit measures regularly. Remove the ones nobody acts on so the important ones stay visible.' },
+    ],
+  },
+  {
+    slug: 'choosing-the-first-ai-use-case', category: 'Artificial Intelligence',
+    tags: ['Artificial Intelligence'], status: 'editorial-preview', publishDate: null,
+    title: 'Choosing the first AI use case: start where the work is repeatable',
+    dek: 'The best first project is a clear, bounded task where better speed or consistency is easy to recognise.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/detail-ai-chip.webp', featured: false, source: null,
+    body: [
+      { heading: 'Look for repeatable work', text: 'Tasks that follow a pattern, use available information and have a clear definition of done are good candidates.' },
+      { heading: 'Keep people in charge', text: 'Design the first release so a person reviews the output, and capture where they correct it.' },
+      { heading: 'Decide how you will know', text: 'Agree on what success looks like before building, so the result can be judged on evidence.' },
+    ],
+  },
+  {
+    slug: 'people-in-the-loop-automation', category: 'Automation',
+    tags: ['Automation'], status: 'editorial-preview', publishDate: null,
+    title: 'Automation with people in the loop: knowing when to hand over',
+    dek: 'Automation works best when it handles the routine and hands the unusual to a person with the right context.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/team-whiteboard.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Map the routine and the exception', text: 'Separate the steps that always follow the same rules from those that need judgement.' },
+      { heading: 'Make the handover clear', text: 'When work moves to a person, include what has been done, what is uncertain and what is needed next.' },
+      { heading: 'Learn from the exceptions', text: 'Each exception shows where the process or the rules can improve. Review them on a regular rhythm.' },
+    ],
+  },
+  {
+    slug: 'shipping-small-learning-fast', category: 'SaaS & Software',
+    tags: ['SaaS & Software'], status: 'editorial-preview', publishDate: null,
+    title: 'Shipping small and learning fast: how software earns its place',
+    dek: 'Small, frequent releases keep a product close to what people need and make each change easier to judge.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/code-screen.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Release in thin slices', text: 'A narrow, working version in front of real users teaches more than a long build behind closed doors.' },
+      { heading: 'Watch how it is used', text: 'Pair what people say with what they do in the product, and let the pattern guide the next change.' },
+      { heading: 'Keep the foundations healthy', text: 'Time spent on tests, tooling and tidy code is what keeps frequent releases safe over the long run.' },
+    ],
+  },
+  {
+    slug: 'cost-aware-cloud-design', category: 'Cloud & Infrastructure',
+    tags: ['Cloud & Infrastructure'], status: 'editorial-preview', publishDate: null,
+    title: 'Cost-aware cloud design: building for growth without waste',
+    dek: 'Cloud costs follow design decisions. Making them visible early helps a platform grow in a predictable way.',
+    author: 'Scalric Editorial', heroImage: '/assets/photos/tech-network.jpg', featured: false, source: null,
+    body: [
+      { heading: 'Make usage visible', text: 'Tag resources by team and purpose so it is clear what each part of the platform costs to run.' },
+      { heading: 'Match capacity to demand', text: 'Scale up for busy periods and back down afterwards, rather than sizing everything for the peak.' },
+      { heading: 'Review on a schedule', text: 'A regular look at the largest items finds unused resources and opportunities to simplify.' },
+    ],
+  },
 ];
 
 export const proposedIndustries = [

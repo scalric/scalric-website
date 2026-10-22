@@ -7,3 +7,9 @@ dist/
 .npm-cache/
 .vercel
 .env*
+!.env.example
+
+/database/*.sqlite-shm
+/database/*.sqlite-wal
+/database/scalric.sqlite
+/database/uploads/

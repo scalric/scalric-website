@@ -1,25 +1,187 @@
 import React from 'react';
-import PageHero from '../components/PageHero.jsx';
-import { ImpactForm } from '../components/Forms.jsx';
-import FeedbackCarousel from '../components/FeedbackCarousel.jsx';
-import { Link, Arrow, Eyebrow, PageIntro, Reveal, CountUp, TypedText } from '../components/UI.jsx';
-import { proofStats } from '../data/siteContent.js';
+import ArtHero from '../components/ArtHero.jsx';
+import NicheSpotlight from '../components/NicheSpotlight.jsx';
+import CtaBand from '../components/CtaBand.jsx';
+import { sampleFeedback } from '../components/FeedbackCarousel.jsx';
+import { Eyebrow, Reveal } from '../components/UI.jsx';
 
-const measures = [
-  { label: 'Businesses supported', sub: 'Discounted digital and SaaS support' },
-  { label: 'NGOs supported', sub: 'Pro-bono technology work' },
-  { label: 'Technology deployed', sub: 'Practical tools designed around need' },
+const track = (event) => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event } }));
+
+const statement = [
+  ['We build with local businesses and NGOs, ', false],
+  ['listening first', true],
+  [', creating ', false],
+  ['practical technology', true],
+  [' together and learning as things change', false],
 ];
 
-const metricArt = ['/assets/photos/metric-businesses.png', '/assets/photos/metric-ngos.webp', '/assets/photos/metric-tech.webp'];
+/** Words fill in from grey as the block scrolls through the viewport. */
+function ScrollStatement() {
+  const ref = React.useRef(null);
+  const [progress, setProgress] = React.useState(0);
+  const words = statement.flatMap(([text, accent]) => text.split(/(\s+)/).filter(Boolean).map((word) => ({ word, accent })));
+  const total = words.filter((item) => item.word.trim()).length;
+
+  React.useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setProgress(1); return undefined; }
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const box = ref.current?.getBoundingClientRect();
+      if (!box) return;
+      const start = window.innerHeight * 0.85;
+      const end = window.innerHeight * 0.35;
+      setProgress(Math.min(1, Math.max(0, (start - box.top) / (start - end + box.height * 0.4))));
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(frame); };
+  }, []);
+
+  let seen = 0;
+  return <p className="imp-statement" ref={ref}>{words.map((item, index) => {
+    if (!item.word.trim()) return item.word;
+    const lit = seen / total < progress;
+    seen += 1;
+    return <span key={index} className={`${lit ? 'lit' : ''} ${item.accent ? 'accent' : ''}`}>{item.word}</span>;
+  })}</p>;
+}
+
+const audiences = [
+  { title: 'Local businesses', text: 'Discounted digital and SaaS support, so growing businesses can use good technology without the usual cost', image: '/assets/photos/metric-businesses.png', video: '/assets/videos/local-businesses.mp4', tag: 'Discounted support' },
+  { title: 'Practical technology', text: 'Tools designed around a real need, shaped with the people who will use them every day', image: '/assets/photos/metric-tech.webp', video: '/assets/videos/practical-technology.mp4', tag: 'Built around need' },
+  { title: 'Artists & creators', text: 'Simple digital tools so artists can show their work, take bookings and reach buyers', image: '/assets/photos/impact-artists.jpg', video: '/assets/videos/impact-artists.mp4', tag: 'Creative' },
+  { title: 'Photography studios', text: 'Online booking, galleries and client delivery that save studios hours every week', image: '/assets/photos/impact-photo-studios.jpg', video: '/assets/videos/impact-photo-studios.mp4', tag: 'Creative' },
+  { title: 'Event & wedding photographers', text: 'Packages, proofing and payments handled in one place, from first enquiry to final album', image: '/assets/photos/impact-event-photographers.jpg', video: '/assets/videos/impact-event-photographers.mp4', tag: 'Creative' },
+  { title: 'Yoga studios', text: 'Class schedules, memberships and reminders that keep students coming back', image: '/assets/photos/impact-yoga.jpg', video: '/assets/videos/impact-yoga.mp4', tag: 'Health & wellness' },
+  { title: 'Dental clinics', text: 'Appointment booking and patient follow-ups that cut missed visits', image: '/assets/photos/impact-dental.jpg', video: '/assets/videos/impact-dental.mp4', tag: 'Health & wellness' },
+  { title: 'Hair transplant clinics', text: 'Consultation flows and secure patient records that build trust before the first visit', image: '/assets/photos/impact-hair-clinics.jpg', video: '/assets/videos/impact-hair-clinics.mp4', tag: 'Health & wellness' },
+  { title: 'Interior designers', text: 'Project portfolios, quotes and client approvals brought together in one clear workspace', image: '/assets/photos/impact-interiors.jpg', video: '/assets/videos/impact-interiors.mp4', tag: 'Home & design' },
+  { title: 'Electrical services', text: 'Job requests, scheduling and invoicing that keep small crews organised and paid on time', image: '/assets/photos/impact-electrical.jpg', video: '/assets/videos/impact-electrical.mp4', tag: 'Home services' },
+  { title: 'Cafés & casual dining', text: 'Online ordering, menus and reservations that turn local regulars into steady revenue', image: '/assets/photos/impact-cafes.jpg', video: '/assets/videos/impact-cafes.mp4', tag: 'Hospitality' },
+  { title: 'Restaurants', text: 'Table management and guest insights that make every service run smoother', image: '/assets/photos/impact-fine-dining.jpg', video: '/assets/videos/impact-fine-dining.mp4', tag: 'Hospitality' },
+  { title: 'Football clubs', text: 'Team rosters, fixtures and fee collection without the spreadsheets', image: '/assets/photos/impact-football.jpg', video: '/assets/videos/impact-football.mp4', tag: 'Sports' },
+  { title: 'Tennis academies', text: 'Court bookings, coaching schedules and memberships in a single easy system', image: '/assets/photos/impact-tennis.jpg', video: '/assets/videos/impact-tennis.mp4', tag: 'Sports' },
+  { title: 'Dance studios', text: 'Class sign-ups, recital planning and parent updates handled with less effort', image: '/assets/photos/impact-dance.jpg', video: '/assets/videos/impact-dance.mp4', tag: 'Creative' },
+  { title: 'Music schools', text: 'Lesson scheduling, practice tracking and payments that let teachers focus on teaching', image: '/assets/photos/impact-music.jpg', video: '/assets/videos/impact-music.mp4', tag: 'Creative' },
+  { title: 'Gyms & fitness centres', text: 'Memberships, check-ins and progress tracking that help members stay on course', image: '/assets/photos/impact-gyms.jpg', video: '/assets/videos/impact-gyms.mp4', tag: 'Health & wellness' },
+  { title: 'Salons & beauty', text: 'Online booking, stylist calendars and loyalty rewards that fill the diary', image: '/assets/photos/impact-salons.jpg', video: '/assets/videos/impact-salons.mp4', tag: 'Beauty' },
+];
+
+/** Loads and plays a card video only while it is near the viewport, so 19 clips don't all download and decode at once. */
+function CardVideo({ src, poster }) {
+  const ref = React.useRef(null);
+  const [near, setNear] = React.useState(false);
+  React.useEffect(() => {
+    const video = ref.current;
+    if (!video || !('IntersectionObserver' in window)) { setNear(true); return undefined; }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setNear(true); video.play?.().catch(() => {}); } else video.pause?.();
+    }, { rootMargin: '0px 320px' });
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+  return <video ref={ref} src={near ? src : undefined} poster={poster} autoPlay muted loop playsInline preload="none" aria-hidden="true" />;
+}
+
+function Showcase() {
+  const scroller = React.useRef(null);
+  const [ratio, setRatio] = React.useState(0.33);
+  const [edge, setEdge] = React.useState({ start: true, end: false });
+
+  const measure = React.useCallback(() => {
+    const el = scroller.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setRatio(el.scrollWidth ? Math.min(1, el.clientWidth / el.scrollWidth) : 1);
+    setEdge({ start: el.scrollLeft <= 4, end: el.scrollLeft >= max - 4 });
+    el.parentElement.style.setProperty('--imp-progress', max > 0 ? el.scrollLeft / max : 0);
+  }, []);
+  React.useEffect(() => { measure(); window.addEventListener('resize', measure); return () => window.removeEventListener('resize', measure); }, [measure]);
+  const move = (direction) => { const el = scroller.current; el.scrollBy({ left: direction * el.clientWidth * 0.7, behavior: 'smooth' }); };
+
+  return <section className="imp-showcase" aria-label="Who the initiative supports">
+    <div className="imp-showcase-track" ref={scroller} onScroll={measure} tabIndex="0">
+      {audiences.map((item) => <article key={item.title} className="imp-card">
+        {item.video
+          ? <CardVideo src={item.video} poster={item.image} />
+          : <img src={item.image} alt="" loading="lazy" decoding="async" />}
+        <div className="imp-card-shade" />
+        <span className="imp-card-tag">{item.tag}</span>
+        <div className="imp-card-body"><h3>{item.title}</h3><p>{item.text}</p></div>
+      </article>)}
+    </div>
+    <div className="imp-showcase-bar">
+      <div className="imp-progress" aria-hidden="true"><i style={{ width: `${ratio * 100}%`, left: `calc((100% - ${ratio * 100}%) * var(--imp-progress, 0))` }} /></div>
+      <div className="imp-arrows"><button type="button" onClick={() => move(-1)} disabled={edge.start} aria-label="Previous">←</button><button type="button" onClick={() => move(1)} disabled={edge.end} aria-label="Next">→</button></div>
+    </div>
+  </section>;
+}
+
+/** Expanding panels: the active story opens wide, the rest fold down to a name strip. Hover, focus or tap to switch. */
+function StoryPanels() {
+  const [active, setActive] = React.useState(0);
+  return <div className="imp-panels" role="list">
+    {sampleFeedback.map((item, index) => {
+      const open = index === active;
+      return <article key={item.company} role="listitem" className={`imp-panel ${open ? 'open' : ''}`} style={{ '--tone': item.tone }}
+        onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setActive(index)}>
+        <button type="button" className="imp-panel-head" aria-expanded={open} onClick={() => setActive(index)} onFocus={() => setActive(index)}>
+          <span className="imp-panel-name">{item.company}</span>
+          <span className="imp-panel-plus" aria-hidden="true">{open ? '−' : '+'}</span>
+        </button>
+        <div className="imp-panel-body">
+          <div>
+            <h3>{item.company}</h3>
+            <span className="fb-stars" aria-label="Five stars">★★★★★</span>
+            <p className="imp-panel-quote">“{item.quote}”</p>
+            <p className="imp-panel-person"><b>{item.name}</b><span>{item.role}</span></p>
+          </div>
+        </div>
+      </article>;
+    })}
+  </div>;
+}
+
+const steps = [
+  ['01', 'Listen closely', 'Understand the people, goals and constraints behind the challenge', '/assets/photos/impact-listen.png'],
+  ['02', 'Build together', 'Shape an appropriate technology response with the organisation', '/assets/photos/impact-build.png'],
+  ['03', 'Learn and improve', 'Review what is working and identify what should happen next', '/assets/photos/impact-learn.png'],
+];
 
 export default function ImpactPage() {
-  return <><PageHero variant="impact" visual={<figure className="wwd-video"><video src="/assets/videos/impact-ai.mp4" autoPlay muted loop playsInline preload="metadata" aria-label="Looping animated visual of artificial intelligence technology" /></figure>} eyebrow="THE IMPACT INITIATIVE" title={<>Technology can<TypedText phrases={["open new paths.","reach further.","empower communities.","build what lasts."]}/></>} text="We’re shaping a program to make useful technology more accessible—offering discounted digital and SaaS support to local businesses and pro-bono technology work for NGOs." />
-    <main><section className="impact-mission section"><div className="container impact-mission-grid"><Reveal><Eyebrow>OUR MISSION</Eyebrow><h2>Useful technology<br />should reach further.</h2></Reveal><Reveal delay={90}><p>Impact is an ongoing commitment, built around listening to the people closest to a challenge, creating practical technology together and learning from what changes.</p><p>The initiative is being developed with local businesses and NGOs in mind. Program details, eligibility and verified outcomes will be published as they are confirmed.</p></Reveal></div></section>
+  return <main className="imp">
+    <ArtHero art="orbit" chips={[]} title={<>Technology that<br />reaches further</>} text="Discounted digital and SaaS support for local businesses, and pro-bono technology work for NGOs">
+      <a href="#get-involved" className="imp-pill" onClick={() => track('impact_hero_cta_click')}><span>Get involved</span><i aria-hidden="true">→</i></a>
+    </ArtHero>
 
-      <section className="impact-metrics"><div className="container"><div className="impact-metrics-head"><Eyebrow light>MEASURE WHAT MATTERS</Eyebrow><span></span></div><div className="impact-metric-grid">{proofStats.map((item, index) => <Reveal key={item.label} delay={index * 70}><article className="impact-metric"><div className="impact-metric-art"><img src={metricArt[index]} alt="" loading="lazy" decoding="async" /></div><span className="metric-value"><CountUp value={item.value} suffix={item.suffix} immediate duration={2200} /></span><h3>{item.label}</h3><p>{item.sub}</p>{!item.verified && <em className="stat-flag"></em>}</article></Reveal>)}</div><p className="metric-note"></p></div></section>
-      <section className="section impact-journey"><div className="container"><div className="section-heading"><div><Eyebrow>AN ONGOING MISSION</Eyebrow><h2>Listen. Build. Learn.</h2></div><p className="section-lead">A thoughtful path from a real need to technology that can keep making a difference.</p></div><div className="journey-grid">{[['01', 'Listen closely', 'Understand the people, goals and constraints behind the challenge.', '/assets/photos/impact-listen.png'], ['02', 'Build together', 'Shape an appropriate technology response with the organization.', '/assets/photos/impact-build.png'], ['03', 'Learn and improve', 'Review what is working and identify what should happen next.', '/assets/photos/impact-learn.png']].map(([num, title, text, image], index) => <Reveal key={num} delay={index * 80}><article className="journey-card"><div className="journey-photo"><img src={image} alt="" loading="lazy" decoding="async" /></div><span>{num}</span><i className="journey-line" /><h3>{title}</h3><p>{text}</p></article></Reveal>)}</div></div></section>
-      <section className="impact-stories"><div className="container impact-stories-inner"><div><Eyebrow>STORIES OF PROGRESS</Eyebrow><h2>Real stories.<br />Verified outcomes.</h2><p>Case studies will be shared as partner work and outcomes are approved for publication.</p></div><FeedbackCarousel /></div></section>
-      <section className="section get-involved" id="get-involved"><div className="container get-involved-grid"><div><Eyebrow>GET INVOLVED</Eyebrow><h2>Bring us the<br />challenge.</h2><p>Tell us about your business or NGO and the technology support you’re looking for. The program team can follow up as details are confirmed.</p><div className="eligibility-note"><span>↗</span><p>Businesses and NGOs may share a request. Program eligibility and availability are confirmed individually.</p></div></div><div className="impact-form-card"><div className="form-card-head"><span>START HERE</span><span>01 / 01</span></div><ImpactForm /></div></div></section>
-      <div className="impact-return"><div className="container"><Link href="/" className="text-link" onClick={() => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'impact_to_home_click' } }))}><Arrow /> Back to Scalric home</Link></div></div></main></>;
+    <section className="imp-intro"><div className="container">
+      <p className="imp-kicker">Scalric Impact</p>
+      <ScrollStatement />
+      <a href="#how" className="imp-link">See how the program works <span aria-hidden="true">→</span></a>
+    </div></section>
+
+    <Showcase />
+
+    <NicheSpotlight />
+
+    <section className="imp-how" id="how"><div className="container">
+      <div className="imp-how-head"><Eyebrow>HOW IT WORKS</Eyebrow><h2>Listen, build, learn</h2><p>A thoughtful path from a real need to technology that can keep making a difference</p></div>
+      <div className="imp-steps">{steps.map(([number, title, text, image], index) => <Reveal key={number} delay={index * 80}><article className="imp-step">
+        <div className="imp-step-photo"><img src={image} alt="" loading="lazy" decoding="async" /></div>
+        <span>{number}</span><h3>{title}</h3><p>{text}</p>
+      </article></Reveal>)}</div>
+    </div></section>
+
+    <section className="imp-stories"><div className="container">
+      <div className="imp-stories-head">
+        <div><Eyebrow>STORIES OF PROGRESS</Eyebrow><h2>Real stories<br />and testimonials</h2></div>
+      </div>
+      <StoryPanels />
+    </div></section>
+
+    <CtaBand />
+  </main>;
 }

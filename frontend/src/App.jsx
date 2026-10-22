@@ -8,8 +8,11 @@ import InsightsPage, { InsightArticlePage } from './pages/InsightsPage.jsx';
 import ImpactPage from './pages/ImpactPage.jsx';
 import CompanyPage from './pages/CompanyPage.jsx';
 import { CareersPage, RoleDetailPage } from './pages/CompanyCareersPages.jsx';
+import OpeningsPage from './pages/OpeningsPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
-import { usePathname } from './lib/router.js';
+import AdminApp from './admin/AdminApp.jsx';
+import { usePathname, scrollToAnchor } from './lib/router.js';
+import { autoReveal } from './lib/autoReveal.js';
 import { Eyebrow, Link, Arrow } from './components/UI.jsx';
 
 const pages = {
@@ -20,11 +23,12 @@ const pages = {
   '/impact': { title: 'Impact — Scalric', component: <ImpactPage/> },
   '/company': { title: 'Company — Scalric', component: <CompanyPage/> },
   '/careers': { title: 'Careers — Scalric', component: <CareersPage/> },
+  '/careers/openings': { title: 'Open roles — Careers at Scalric', component: <OpeningsPage/> },
   '/contact': { title: 'Contact — Scalric', component: <ContactPage/> },
 };
 
 function NotFoundPage() {
-  return <main className="not-found"><Eyebrow>PAGE NOT FOUND</Eyebrow><h1>That path is still taking shape.</h1><p>The page may have moved or may not be available yet.</p><Link href="/" className="button button-green">Back to the homepage <Arrow/></Link></main>;
+  return <main className="not-found"><Eyebrow>PAGE NOT FOUND</Eyebrow><h1>That path is still taking shape</h1><p>The page may have moved or may not be available yet.</p><Link href="/" className="button button-green">Back to the homepage <Arrow/></Link></main>;
 }
 
 function resolveRoute(pathname) {
@@ -37,24 +41,23 @@ function resolveRoute(pathname) {
   return { title: 'Page not found — Scalric', component: <NotFoundPage/> };
 }
 
-export default function App() {
-  const pathname = usePathname();
+function SiteApp({ pathname }) {
   const route = resolveRoute(pathname);
   React.useEffect(() => {
     document.title = route.title;
-    document.documentElement.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'instant' });
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.content = route.title.startsWith('Scalric —')
       ? 'Scalric studies complex problems and builds technology and consulting solutions for measurable business and social impact.'
       : `${route.title.replace(' — Scalric', '')}. Explore Scalric’s technology, consulting, insights and impact.`;
   }, [pathname, route.title]);
   React.useEffect(() => {
-    const onHash = () => {
-      const anchor = window.location.hash.slice(1);
-      if (anchor) window.setTimeout(() => document.getElementById(decodeURIComponent(anchor))?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 90);
-    };
-    window.addEventListener('scalric:navigate', onHash);
-    return () => window.removeEventListener('scalric:navigate', onHash);
+    let stop = () => {};
+    const timer = window.setTimeout(() => { stop = autoReveal(); }, 250);
+    return () => { window.clearTimeout(timer); stop(); };
+  }, [pathname]);
+  React.useEffect(() => {
+    if (window.location.hash) scrollToAnchor(window.location.hash.slice(1));
   }, []);
   React.useEffect(() => {
     if (!pathname.startsWith('/insights/')) return undefined;
@@ -75,4 +78,9 @@ export default function App() {
     return () => window.removeEventListener('scroll', reportDepth);
   }, [pathname]);
   return <div className="app-shell" id="top"><Header currentPath={pathname}/>{route.component}<Footer/></div>;
+}
+
+export default function App() {
+  const pathname = usePathname();
+  return pathname === '/admin' || pathname.startsWith('/admin/') ? <AdminApp/> : <SiteApp pathname={pathname}/>;
 }
