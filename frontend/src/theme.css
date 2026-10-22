@@ -2125,3 +2125,16 @@ body main .article-content p.article-lead{color:#0b1220!important;font-weight:50
 
 /* Words ticker under the home hero: a single line, still when motion is reduced */
 @media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+
+/* Careers banners: handshake on the openings page, Scalric wave on a role's apply page */
+.opn-hero{position:relative;color:#fff;background:#0b1730 url(/assets/photos/banner-handshake.webp) center/cover no-repeat;isolation:isolate}
+.opn-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,16,36,.82),rgba(7,16,36,.45) 60%,rgba(7,16,36,.2))}
+.opn-hero h1,.opn-hero>.container>p,.opn-hero .breadcrumbs,.opn-hero .breadcrumbs a,.opn-hero .eyebrow{color:#fff}
+.opn-hero .opn-filters{background:#fff;color:var(--ink);padding:18px 20px}
+.role-detail{padding:0;min-height:0}
+.role-banner{padding:56px 0 72px;background:#eaf4ff url(/assets/photos/banner-icy-wave.webp) center/cover no-repeat;min-height:clamp(260px,32vw,420px);display:flex;align-items:center}
+.role-banner h1{margin:16px 0 0;max-width:15ch}
+.role-body{padding-top:48px;padding-bottom:60px}
+@media (max-width:700px){.role-banner{background-position:70% center;padding:40px 0 56px}}
+
+.opn .opn-hero .container>p{color:#fff!important}
