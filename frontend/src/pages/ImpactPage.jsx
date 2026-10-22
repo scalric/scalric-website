@@ -153,7 +153,7 @@ const steps = [
 
 export default function ImpactPage() {
   return <main className="imp">
-    <ArtHero art="orbit" title={<>Technology that<br />reaches further</>} text="Discounted digital and SaaS support for local businesses, and pro-bono technology work for NGOs">
+    <ArtHero art="orbit" chips={[]} title={<>Technology that<br />reaches further</>} text="Discounted digital and SaaS support for local businesses, and pro-bono technology work for NGOs">
       <a href="#get-involved" className="imp-pill" onClick={() => track('impact_hero_cta_click')}><span>Get involved</span><i aria-hidden="true">→</i></a>
     </ArtHero>
 

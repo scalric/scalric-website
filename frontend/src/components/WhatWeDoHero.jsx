@@ -12,6 +12,6 @@ export default function WhatWeDoHero() {
     chips={capabilities.map((item) => [item.title, item.href])}
   >
     <a href="#capability-overview" className="button button-green">Explore capabilities <Arrow diagonal /></a>
-    <Link href="/contact" className="button button-glass">Talk to us <Arrow diagonal /></Link>
+    <Link href="/contact" className="btn-talk"><span>Talk to us</span><i aria-hidden="true">→</i></Link>
   </ArtHero>;
 }

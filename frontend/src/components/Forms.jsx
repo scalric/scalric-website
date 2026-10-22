@@ -62,10 +62,38 @@ const contactRules = (values) => ({
   consent: values.consent ? '' : CONSENT_ERROR,
 });
 
-export function ContactForm({ initialInquiryType = 'business' }) {
+/** Reasons for getting in touch; the chosen one is sent as the inquiry type and tunes the form's wording. */
+export const contactIntents = [
+  { id: 'business', label: 'Business inquiry', hint: 'Tell us about the challenge or outcome you have in mind.', placeholder: 'What would you like to explore together?' },
+  { id: 'partnership', label: 'Partnership', hint: 'Tell us who you are and how you imagine working together.', placeholder: 'How could we work together?' },
+  { id: 'impact', label: 'Impact programme', hint: 'Tell us about your business or NGO and the support that would help most.', placeholder: 'Tell us about your organization and what would help' },
+  { id: 'careers', label: 'Careers', hint: 'Tell us what you would bring to Scalric.', placeholder: 'What would you bring to the team?' },
+];
+
+function FloatField({ label, optional, error, wide, children }) {
+  return <label className={`ct-field${wide ? ' form-wide' : ''}${error ? ' has-error' : ''}`}>
+    {children}
+    <span className="ct-label">{label}{optional && ' (optional)'}</span>
+    <i className="ct-line" aria-hidden="true" />
+    {error && <span className="field-error" role="alert">{error}</span>}
+  </label>;
+}
+
+export function ContactForm({ inquiryType = 'business', onTypeChange }) {
   const [status, setStatus] = React.useState({ kind: '', text: '' });
   const [sending, setSending] = React.useState(false);
+  const [done, setDone] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
+  const [count, setCount] = React.useState(0);
   const { errors, formRef, read, validateAll, events } = useValidation(contactRules);
+  const intent = contactIntents.find((item) => item.id === inquiryType) || contactIntents[0];
+
+  const recalc = () => {
+    const values = read();
+    const steps = [Boolean(values.name?.trim()), /\S+@\S+\.\S+/.test(values.email || ''), (values.message || '').trim().length >= 10, values.consent];
+    setProgress(steps.filter(Boolean).length / steps.length);
+    setCount((values.message || '').length);
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -75,20 +103,31 @@ export function ContactForm({ initialInquiryType = 'business' }) {
       const result = await submitForm('/api/contact', read());
       setStatus({ kind: 'success', text: result.message });
       ANALYTICS({ event: 'contact_form_submit' });
-      formRef.current.reset();
+      setDone(true);
     } catch (error) { setStatus({ kind: 'error', text: error.message }); }
     finally { setSending(false); }
   }
-  return <form className="contact-form" ref={formRef} onSubmit={handleSubmit} noValidate {...events}>
+
+  if (done) {
+    return <div className="ct-done" role="status">
+      <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" /><path d="M15 27l8 8 14-16" /></svg>
+      <h3>Thank you, your note is on its way</h3>
+      <p>{status.text || 'A member of the team will read it and reply to start the conversation.'}</p>
+      <button type="button" className="ct-again" onClick={() => { setDone(false); setProgress(0); setCount(0); setStatus({ kind: '', text: '' }); }}>Send another message</button>
+    </div>;
+  }
+
+  return <form className="contact-form ct-form" ref={formRef} onSubmit={handleSubmit} noValidate {...events} onChange={(event) => { events.onChange(event); recalc(); }} onInput={recalc}>
+    <p className="ct-hint" key={intent.id}>{intent.hint}</p>
     <div className="form-grid">
-      <Field label="Your name" error={errors.name}><input name="name" autoComplete="name" maxLength="120" placeholder="Name" aria-invalid={Boolean(errors.name)} /></Field>
-      <Field label="Work email" error={errors.email}><input name="email" type="email" autoComplete="email" maxLength="254" placeholder="you@company.com" aria-invalid={Boolean(errors.email)} /></Field>
-      <Field label="Organization" optional error={errors.organization}><input name="organization" autoComplete="organization" maxLength="160" placeholder="Company or organization" aria-invalid={Boolean(errors.organization)} /></Field>
-      <Field label="What are you reaching out about?"><select name="inquiryType" defaultValue={['business', 'partnership', 'impact', 'careers', 'other'].includes(initialInquiryType) ? initialInquiryType : 'business'}><option value="business">Business inquiry</option><option value="partnership">Partnership</option><option value="impact">Impact program</option><option value="careers">Careers</option><option value="other">Something else</option></select></Field>
-      <Field label="Tell us a little about it" wide error={errors.message}><textarea name="message" maxLength="5000" rows="5" placeholder="What would you like to explore together?" aria-invalid={Boolean(errors.message)} /></Field>
+      <FloatField label="Your name" error={errors.name}><input name="name" autoComplete="name" maxLength="120" placeholder=" " aria-invalid={Boolean(errors.name)} /></FloatField>
+      <FloatField label="Work email" error={errors.email}><input name="email" type="email" autoComplete="email" maxLength="254" placeholder=" " aria-invalid={Boolean(errors.email)} /></FloatField>
+      <label className="ct-field form-wide ct-select"><select name="inquiryType" value={inquiryType} onChange={(event) => onTypeChange?.(event.target.value)}>{contactIntents.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select><span className="ct-label">What are you reaching out about?</span><i className="ct-line" aria-hidden="true" /></label>
+      <FloatField label="Organization" optional wide error={errors.organization}><input name="organization" autoComplete="organization" maxLength="160" placeholder=" " aria-invalid={Boolean(errors.organization)} /></FloatField>
+      <FloatField label={intent.placeholder} wide error={errors.message}><textarea name="message" maxLength="5000" rows="5" placeholder=" " aria-invalid={Boolean(errors.message)} /><em className="ct-count">{count}/5000</em></FloatField>
     </div>
     <Consent error={errors.consent}>I agree that Scalric may contact me about this request.</Consent>
-    <button className="button button-green form-submit" disabled={sending}>{sending ? 'Sending…' : 'Send your message'} <span aria-hidden="true">↗</span></button>
+    <button className="btn-talk ct-send" disabled={sending}><span>{sending ? 'Sending…' : 'Send your message'}</span><i aria-hidden="true">{sending ? '' : '→'}</i></button>
     <Status status={status} />
   </form>;
 }
