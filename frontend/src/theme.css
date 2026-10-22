@@ -2122,3 +2122,6 @@ body main .article-content p.article-lead{color:#0b1220!important;font-weight:50
 /* What We Do banner chips: dark glass */
 .ah-wave .ah-chips a{background:#04103ad1;border-color:#ffffff2e;box-shadow:0 18px 40px -20px #01082acc,inset 0 1px 0 #ffffff1f;color:#fff;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .ah-wave .ah-chips a:hover{background:#020a2ee6;border-color:#ffffff66;box-shadow:0 22px 44px -18px #01082aeb,0 0 0 3px #ffffff14}
+
+/* Words ticker under the home hero: a single line, still when motion is reduced */
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}

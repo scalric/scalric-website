@@ -1,7 +1,7 @@
 import React from 'react';
 import { capabilities, insights, proofStats } from '../data/siteContent.js';
 import { Link, Arrow, Eyebrow, Reveal, CountUp, SplitHeading, Parallax } from '../components/UI.jsx';
-import { ArtImage, MiniBars } from '../components/Showcase.jsx';
+import { ArtImage, MiniBars, Ticker } from '../components/Showcase.jsx';
 import WorkSteps from '../components/WorkSteps.jsx';
 import ContactBand from '../components/ContactBand.jsx';
 import PurposePanel from '../components/PurposePanel.jsx';
@@ -65,4 +65,6 @@ function InsightsSection() {
 
 
 
-export default function HomePage() { return <><Hero /><main><Capabilities /><InsightsSection /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }
+const tickerWords = ['Artificial Intelligence', 'Data Analytics', 'Cloud Engineering', 'Software Development', 'Digital Transformation', 'Technology Consulting', 'Process Automation', 'Social Impact'];
+
+export default function HomePage() { return <><Hero /><Ticker items={tickerWords} /><main><Capabilities /><InsightsSection /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }
