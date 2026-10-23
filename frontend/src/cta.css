@@ -1,5 +1,5 @@
 /* Closing banner: blue gradient, glassy angled shapes, giant white words. */
-.imp-cta{position:relative;isolation:isolate;display:grid;min-height:clamp(560px,92vh,880px);overflow:hidden;background:linear-gradient(135deg,#7fa8ff 0%,#2f6bf0 30%,#1155d9 58%,#0a3aa6 100%);color:#fff}
+.imp-cta{position:relative;isolation:isolate;display:grid;min-height:clamp(560px,92vh,880px);overflow:hidden;background:linear-gradient(135deg,#7fa8ff 0%,#2f6bf0 30%,#0645E5 58%,#0a3aa6 100%);color:#fff}
 .imp-cta-glass{position:absolute;z-index:-1;background:linear-gradient(160deg,#ffffff40 0%,#ffffff0d 70%);border:1px solid #ffffff3d;backdrop-filter:blur(2px);transform:translate3d(calc(var(--shift,0) * -70px),0,0)}
 .imp-cta-glass.one{top:-8%;left:-6%;width:62%;height:78%;clip-path:polygon(0 0,86% 0,100% 34%,64% 100%,0 100%)}
 .imp-cta-glass.two{top:12%;left:34%;width:46%;height:96%;clip-path:polygon(34% 0,100% 0,100% 100%,0 100%,16% 38%);transform:translate3d(calc(var(--shift,0) * 90px),0,0)}

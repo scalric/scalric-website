@@ -2,7 +2,7 @@ import React from 'react';
 
 // Palette for the burst: warm gold at the origin, blue toward the tips, brand blue for travelling sparks.
 const GOLD = [255, 186, 73];
-const BLUE = [17, 85, 217];
+const BLUE = [6, 69, 229];
 const SKY = [191, 219, 254];
 const GREEN = [41, 80, 173];
 

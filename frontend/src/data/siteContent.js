@@ -263,3 +263,12 @@ export const journeySteps = [
   { kicker: 'Build', title: 'Development', text: 'Design and engineering move in short, tested iterations, so progress is visible and feedback is built in.', points: ['Architecture and UX design', 'Iterative, tested releases', 'Quality and security checks'] },
   { kicker: 'Deliver', title: 'The perfect product', text: 'We validate with real users, launch in phases and keep refining until the product delivers the outcome you set out to achieve.', points: ['User validation', 'Phased launch', 'Outcome tracking and refinement'] },
 ];
+
+/** Services shown in the home-page ticker. Update `href` here when dedicated service pages exist. */
+export const tickerServices = [
+  { id: 'ai', label: 'Artificial Intelligence', href: '/what-we-do#ai' },
+  { id: 'data', label: 'Data & Analytics', href: '/what-we-do#data-automation' },
+  { id: 'cloud', label: 'Cloud Engineering', href: '/what-we-do#saas' },
+  { id: 'software', label: 'Software Engineering', href: '/what-we-do#saas' },
+  { id: 'automation', label: 'Intelligent Automation', href: '/what-we-do#data-automation' },
+];

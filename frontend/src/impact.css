@@ -1,5 +1,5 @@
 /* Impact page: oversized type, a scroll-lit statement and image cards, in the Scalric blue-and-white theme. */
-.imp{--imp-blue:#1155d9;--imp-ink:#0b1220;--imp-grey:#c9cfdb;background:#fff;color:var(--imp-ink)}
+.imp{--imp-blue:#0645E5;--imp-ink:#0b1220;--imp-grey:#c9cfdb;background:#fff;color:var(--imp-ink)}
 .imp h1,.imp h2,.imp h3{color:var(--imp-ink)}
 
 /* hero */
@@ -85,7 +85,7 @@
 
 /* story panels */
 .imp-panels{display:flex;gap:12px;height:clamp(420px,46vw,520px)}
-.imp-panel{position:relative;display:flex;flex-direction:column;flex:1 1 0;min-width:0;overflow:hidden;border-radius:24px;background:var(--tone,#1155d9);color:#fff;transition:flex-grow .6s cubic-bezier(.2,.8,.2,1)}
+.imp-panel{position:relative;display:flex;flex-direction:column;flex:1 1 0;min-width:0;overflow:hidden;border-radius:24px;background:var(--tone,#0645E5);color:#fff;transition:flex-grow .6s cubic-bezier(.2,.8,.2,1)}
 .imp-panel:before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#ffffff1f 0%,#00000040 100%);pointer-events:none}
 .imp-panel.open{flex-grow:5.2}
 .imp-panel-head{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;flex:none;gap:16px;width:100%;height:100%;padding:22px 0;border:0;background:none;color:#fff;font:inherit;cursor:pointer}
@@ -143,8 +143,8 @@
 /* Hero "Get involved": white at rest, brand blue on hover, like the home page buttons */
 .imp-hero .imp-pill{background:#fff;color:#111;border:1px solid #cfd2d6;transition:background-color .25s ease,color .25s ease,border-color .25s ease,transform .25s ease}
 .imp-hero .imp-pill i{background:#eef2f9;color:#111;transition:background-color .25s ease,color .25s ease,transform .35s}
-.imp-hero .imp-pill:hover,.imp-hero .imp-pill:focus-visible,.imp-hero .imp-pill:active{background:#1155d9;border-color:#1155d9;color:#fff;transform:translateY(-1px)}
-.imp-hero .imp-pill:hover i,.imp-hero .imp-pill:focus-visible i,.imp-hero .imp-pill:active i{background:#fff;color:#1155d9}
+.imp-hero .imp-pill:hover,.imp-hero .imp-pill:focus-visible,.imp-hero .imp-pill:active{background:#0645E5;border-color:#0645E5;color:#fff;transform:translateY(-1px)}
+.imp-hero .imp-pill:hover i,.imp-hero .imp-pill:focus-visible i,.imp-hero .imp-pill:active i{background:#fff;color:#0645E5}
 
 /* Statement highlight in the brand yellow (#FCC015) instead of blue */
 .imp-statement span.lit.accent{color:#fcc015}

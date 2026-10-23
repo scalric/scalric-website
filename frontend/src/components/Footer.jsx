@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from './UI.jsx';
-import { usePathname } from '../lib/router.js';
 
 const footerGroups = [
-  ['What we do', ['Overview', '/what-we-do'], ['SaaS & software', '/what-we-do#saas'], ['Artificial intelligence', '/what-we-do#ai'], ['Data & automation', '/what-we-do#data-automation'], ['Consulting', '/what-we-do#consulting']],
-  ['Company', ['About Scalric', '/company'], ['Our approach', '/company#approach'], ['Impact', '/impact'], ['Careers', '/careers'], ['Open roles', '/careers/openings']],
-  ['Explore', ['Industries', '/industries'], ['Insights', '/insights'], ['Talk to us', '/contact'], ['Life at Scalric', '/careers#life']],
+  ['Contact', ['Contact us', '/contact'], ['Open roles', '/careers/openings']],
+  ['Explore', ['What we do', '/what-we-do'], ['Industries', '/industries'], ['Insights', '/insights']],
+  ['Company', ['About Scalric', '/company'], ['Impact', '/impact'], ['Careers', '/careers']],
 ];
 
 /** Placeholder profile URLs — replace with Scalric's confirmed accounts before launch. */
@@ -16,57 +15,32 @@ const socials = [
   { name: 'YouTube', href: 'https://www.youtube.com/@scalric', path: 'M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.77 2 12 2 12s0 3.23.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.23 22 12 22 12s0-3.23-.4-4.8ZM10 15V9l5.2 3-5.2 3Z' },
 ];
 
-/** Footer: a fade from pale blue to deep navy, brand and socials on the left, link columns on the right, and an oversized faint wordmark. */
-/** Reads the colour the page ends on so the footer can fade out of it instead of starting with a hard edge. */
-const COLOUR = /(rgba?([^)]*)|color([^)]*)|oklab([^)]*)|oklch([^)]*)|#[0-9a-f]{3,8})/i;
+/** Legal links. Replace each `href` with Scalric's own page before launch ('#' is only a placeholder). */
+const legalLinks = [
+  { label: 'Legal', href: '#' },
+  { label: 'Privacy', href: '#' },
+  { label: 'Accessibility', href: '#' },
+  { label: 'Help', href: '#' },
+];
 
-/** Normalises any CSS colour string (including modern syntaxes) to [r, g, b, a] using a 1x1 canvas. */
-function toRgba(css) {
-  const ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
-  ctx.canvas.width = 1; ctx.canvas.height = 1;
-  ctx.clearRect(0, 0, 1, 1);
-  ctx.fillStyle = css;
-  ctx.fillRect(0, 0, 1, 1);
-  const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
-  return [r, g, b, a / 255];
-}
-
-function colourAbove() {
-  const last = document.querySelector('main')?.lastElementChild;
-  for (const el of [last, last?.firstElementChild].filter(Boolean)) {
-    const style = getComputedStyle(el);
-    const solid = toRgba(style.backgroundColor);
-    if (solid[3] > 0.5) return solid.slice(0, 3);
-    const grad = [...style.backgroundImage.matchAll(new RegExp(COLOUR.source, "gi"))].pop();
-    if (grad) { const c = toRgba(grad[1]); if (c[3] > 0.5) return c.slice(0, 3); }
-  }
-  return [255, 255, 255];
-}
-
+/** Footer: solid deep blue, logo, three link columns; copyright on the left, social icons and legal links in the bottom-right corner. */
 export default function Footer() {
-  const pathname = usePathname();
-  const ref = React.useRef(null);
-  React.useEffect(() => {
-    const apply = () => {
-      const [r, g, b] = colourAbove();
-      const luma = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-      ref.current?.style.setProperty('--sf-from', `rgb(${r}, ${g}, ${b})`);
-      ref.current?.classList.toggle('sf-from-dark', luma < 0.6);
-    };
-    const timers = [60, 500, 1400].map((ms) => window.setTimeout(apply, ms));
-    return () => timers.forEach(window.clearTimeout);
-  }, [pathname]);
-  return <footer className="sf" ref={ref}>
-    <div className="container sf-top">
-      <div className="sf-brand">
-        <Link href="/" className="sf-logo" aria-label="Scalric home"><img src="/assets/scalric-wordmark-white.png" alt="Scalric" width="150" height="37" loading="lazy" /></Link>
-        <p>We study complex problems and build technology and consulting solutions for meaningful impact</p>
-        <ul className="sf-social" aria-label="Scalric on social media">{socials.map((s) => <li key={s.name}><a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Scalric on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} fill="currentColor" /></svg></a></li>)}</ul>
-        <span className="sf-copy">© {new Date().getFullYear()} Scalric. All rights reserved</span>
-      </div>
-      <nav className="sf-cols" aria-label="Footer">
-        {footerGroups.map(([title, ...links]) => <div className="sf-col" key={title}><h3>{title}</h3><ul>{links.map(([label, href]) => <li key={label}><Link href={href}>{label}</Link></li>)}</ul></div>)}
+  return <footer className="kp-footer">
+    <div className="kp-inner">
+      <Link href="/" className="kp-logo" aria-label="Scalric home"><img src="/assets/scalric-wordmark-white.png" alt="Scalric" width="170" height="42" loading="lazy" /></Link>
+      <nav className="kp-cols" aria-label="Footer">
+        {footerGroups.map(([title, ...links]) => <div className="kp-col" key={title}><h3>{title}</h3><ul>{links.map(([label, href]) => <li key={label}><Link href={href}>{label}</Link></li>)}</ul></div>)}
       </nav>
+      <div className="kp-bottom">
+        <div className="kp-legal">
+          <p>© {new Date().getFullYear()} Scalric. All rights reserved.</p>
+          <p>We study complex problems and build technology and consulting solutions for meaningful impact.</p>
+        </div>
+        <div className="kp-side">
+          <ul className="kp-social" aria-label="Scalric on social media">{socials.map((s) => <li key={s.name}><a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Scalric on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} fill="currentColor" /></svg></a></li>)}</ul>
+          <ul className="kp-legal-links" aria-label="Legal">{legalLinks.map((l) => <li key={l.label}><a href={l.href}>{l.label}</a></li>)}</ul>
+        </div>
+      </div>
     </div>
   </footer>;
 }

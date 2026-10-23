@@ -1,0 +1,73 @@
+/* Home services ticker + its transition into the next section.
+   Loaded last (see main.jsx) so it wins over the older .why-band / .ticker rules. */
+
+.svc-ticker{
+  --tk-blue:#0645E5;--tk-ink:#0b1020;--tk-h:84px;--tk-size:22px;--tk-icon:26px;--tk-sep:14px;
+  --tk-gap:clamp(18px,2.4vw,34px);--tk-duration:90s;
+  position:relative;z-index:2;background:#fff;color:var(--tk-ink);
+}
+.svc-viewport{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+}
+.svc-track{
+  display:flex;align-items:center;width:max-content;height:var(--tk-h);margin:0;padding:0;list-style:none;
+  animation:svc-marquee var(--tk-duration) linear infinite;will-change:transform;
+}
+.svc-item{display:flex;flex:none;align-items:center;padding-right:calc(var(--tk-gap)*2 + var(--tk-sep))}
+.svc-link{
+  display:inline-flex;align-items:center;gap:12px;padding:12px 18px;border-radius:999px;
+  color:var(--tk-ink)!important;font:500 var(--tk-size)/1.2 Manrope,Arial,sans-serif;letter-spacing:-.02em;white-space:nowrap;
+  transition:background-color .25s ease,color .25s ease;
+}
+.svc-icon{display:inline-flex;flex:none;color:var(--tk-blue);transition:transform .25s ease}
+.svc-icon svg{display:block;width:var(--tk-icon);height:var(--tk-icon)}
+.svc-link:hover,.svc-link:focus-visible{background:#0645E512;color:var(--tk-blue)!important}
+.svc-link:hover .svc-icon,.svc-link:focus-visible .svc-icon{transform:translateY(-1px)}
+.svc-link:focus-visible{outline:2px solid var(--tk-blue);outline-offset:-2px}
+
+/* Pause: hover or keyboard focus inside the strip, or the visible toggle */
+@media (hover:hover){.svc-ticker:hover .svc-track{animation-play-state:paused}}
+.svc-ticker:focus-within .svc-track,.svc-ticker.is-paused .svc-track{animation-play-state:paused}
+.svc-toggle{
+  position:absolute;top:50%;right:clamp(12px,2vw,32px);z-index:1;width:32px;height:32px;margin-top:-16px;padding:0;
+  display:grid;place-items:center;border:1px solid #d6def3;border-radius:50%;background:#fff!important;color:var(--tk-blue)!important;
+  box-shadow:none!important;cursor:pointer;transition:background-color .2s,border-color .2s;
+}
+.svc-toggle svg{width:12px;height:12px}
+.svc-toggle:hover{background:#0645E512!important;border-color:var(--tk-blue)!important;transform:none!important}
+.svc-toggle:focus-visible{outline:2px solid var(--tk-blue);outline-offset:2px}
+
+@keyframes svc-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+/* Transition: the blue section rises out of the white ticker as a softly rounded sheet */
+.svc-ticker + main .why-band{
+  position:relative;isolation:isolate;overflow:hidden;
+  border-radius:clamp(20px,3vw,44px) clamp(20px,3vw,44px) 0 0;
+  box-shadow:inset 0 1px 0 #ffffff2e;
+}
+.svc-ticker + main .why-band::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(70% 90% at 0% 0%,#ffffff1c,transparent 65%);
+}
+
+@media (max-width:1024px){
+  .svc-ticker{--tk-h:76px;--tk-size:20px;--tk-icon:24px;--tk-duration:75s}
+}
+@media (max-width:680px){
+  .svc-ticker{--tk-h:68px;--tk-size:17px;--tk-icon:21px;--tk-sep:12px;--tk-gap:12px;--tk-duration:60s}
+  .svc-link{gap:9px;padding:10px 12px}
+  .svc-toggle{display:none}
+  .svc-viewport{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%)}
+}
+
+/* Reduced motion: no animation. One static row, swipeable/scrollable if it doesn't fit. */
+@media (prefers-reduced-motion:reduce){
+  .svc-track{animation:none;transform:none;min-width:100%;justify-content:center;will-change:auto}
+  .svc-item[aria-hidden="true"]{display:none}
+  .svc-viewport{overflow-x:auto;scrollbar-width:none}
+  .svc-viewport::-webkit-scrollbar{display:none}
+  .svc-toggle{display:none}
+  .svc-link,.svc-icon{transition:none}
+}

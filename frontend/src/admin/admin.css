@@ -1,5 +1,5 @@
 /* Admin site (/admin). Scoped under .adm-root so it never affects the public website. */
-.adm-root{--a-blue:#1155d9;--a-blue-soft:#edf1fa;--a-ink:#0b1220;--a-muted:#5b6170;--a-line:#dde3ee;--a-bg:#f5f7fb;
+.adm-root{--a-blue:#0645E5;--a-blue-soft:#edf1fa;--a-ink:#0b1220;--a-muted:#5b6170;--a-line:#dde3ee;--a-bg:#f5f7fb;
   min-height:100vh;background:var(--a-bg);color:var(--a-ink);font:14px/1.5 Manrope,system-ui,sans-serif}
 .adm-root *{box-sizing:border-box}
 .adm-root h1,.adm-root h2,.adm-root h3,.adm-root p,.adm-root b,.adm-root span,.adm-root small,.adm-root td,.adm-root th,.adm-root dt,.adm-root dd,.adm-root label{color:inherit}
@@ -20,7 +20,7 @@
 
 /* login */
 .adm-login{display:grid;place-items:center;min-height:100vh;padding:24px}
-.adm-login-card{width:100%;max-width:380px;padding:36px;border-radius:20px;background:#fff;box-shadow:0 30px 70px -40px #1155d966;display:grid;gap:14px}
+.adm-login-card{width:100%;max-width:380px;padding:36px;border-radius:20px;background:#fff;box-shadow:0 30px 70px -40px #0645E566;display:grid;gap:14px}
 .adm-login-card h1{margin:0}.adm-login-card p{margin:0;color:var(--a-muted)}
 .adm-logo{height:28px;justify-self:start}
 .adm-login-card label{display:grid;gap:6px;font-weight:600}
