@@ -1,0 +1,49 @@
+import React from 'react';
+
+const slides = [
+  { src: '/assets/photos/industries-slide-1.jpg', title: 'Every sector has its own rhythm.', note: 'We start by learning how your industry really works.' },
+  { src: '/assets/photos/industries-slide-2.jpg', title: 'Learning from the people closest to it.', note: 'Good technology is shaped by the teams who use it.' },
+  { src: '/assets/photos/industries-slide-3.jpg', title: 'A clear view of what matters.', note: 'We bring focus to the questions worth answering.' },
+];
+
+/** Looping slideshow: tall photo panels glide left one at a time, forever; pauses on hover or focus. */
+export default function IndustrySlideshow() {
+  const [index, setIndex] = React.useState(0);
+  const [animate, setAnimate] = React.useState(true);
+  const paused = React.useRef(false);
+  const count = slides.length;
+  const loop = [...slides, ...slides];
+
+  const next = React.useCallback(() => { setAnimate(true); setIndex((value) => value + 1); }, []);
+  const prev = React.useCallback(() => {
+    setIndex((value) => {
+      if (value > 0) { setAnimate(true); return value - 1; }
+      setAnimate(false);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => { setAnimate(true); setIndex(count - 1); }));
+      return count;
+    });
+  }, [count]);
+
+  React.useEffect(() => {
+    const timer = window.setInterval(() => { if (!paused.current && !document.hidden) next(); }, 3500);
+    return () => window.clearInterval(timer);
+  }, [next]);
+
+  const onEnd = () => { if (index >= count) { setAnimate(false); setIndex(index - count); } };
+  const hold = (value) => () => { paused.current = value; };
+
+  return <section className="ind-slides" aria-roledescription="carousel" aria-label="Industry highlights" onMouseEnter={hold(true)} onMouseLeave={hold(false)} onFocus={hold(true)} onBlur={hold(false)}>
+    <div className="ind-slides-view">
+      <div className={`ind-slides-track${animate ? '' : ' is-still'}`} style={{ '--i': index }} onTransitionEnd={onEnd}>
+        {loop.map((slide, i) => <figure className="ind-slide" key={i} aria-hidden={i >= count}>
+          <img src={slide.src} alt="" loading="eager" decoding="async" />
+          <figcaption><h3>{slide.title}</h3><p>{slide.note}</p></figcaption>
+        </figure>)}
+      </div>
+    </div>
+    <div className="ind-slides-nav">
+      <button type="button" aria-label="Previous slide" onClick={prev}>←</button>
+      <button type="button" aria-label="Next slide" onClick={next}>→</button>
+    </div>
+  </section>;
+}

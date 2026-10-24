@@ -4,8 +4,8 @@ import { usePathname } from '../lib/router.js';
 
 const footerGroups = [
   ['What we do', ['Overview', '/what-we-do'], ['SaaS & software', '/what-we-do#saas'], ['Artificial intelligence', '/what-we-do#ai'], ['Data & automation', '/what-we-do#data-automation'], ['Consulting', '/what-we-do#consulting']],
-  ['Company', ['About Scalric', '/company'], ['Our approach', '/company#approach'], ['Impact', '/impact'], ['Careers', '/careers'], ['Open roles', '/careers/openings']],
-  ['Explore', ['Industries', '/industries'], ['Insights', '/insights'], ['Talk to us', '/contact'], ['Life at Scalric', '/careers#life']],
+  ['Company', ['About Scalric', '/company'], ['Impact', '/impact'], ['Careers', '/careers/openings'], ['Life at Scalric', '/careers/life']],
+  ['Explore', ['Industries', '/industries'], ['Insights', '/insights'], ['Talk to us', '/contact']],
 ];
 
 /** Placeholder profile URLs — replace with Scalric's confirmed accounts before launch. */
@@ -61,12 +61,12 @@ export default function Footer() {
       <div className="sf-brand">
         <Link href="/" className="sf-logo" aria-label="Scalric home"><img src="/assets/scalric-wordmark-white.png" alt="Scalric" width="150" height="37" loading="lazy" /></Link>
         <p>We study complex problems and build technology and consulting solutions for meaningful impact</p>
-        <ul className="sf-social" aria-label="Scalric on social media">{socials.map((s) => <li key={s.name}><a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Scalric on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} fill="currentColor" /></svg></a></li>)}</ul>
-        <span className="sf-copy">© {new Date().getFullYear()} Scalric. All rights reserved</span>
+        <ul className="sf-social" aria-label="Scalric on social media">{socials.map((s) => <li key={s.name}><a data-brand={s.name.toLowerCase()} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Scalric on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} fill="currentColor" /></svg></a></li>)}</ul>
       </div>
       <nav className="sf-cols" aria-label="Footer">
         {footerGroups.map(([title, ...links]) => <div className="sf-col" key={title}><h3>{title}</h3><ul>{links.map(([label, href]) => <li key={label}><Link href={href}>{label}</Link></li>)}</ul></div>)}
       </nav>
     </div>
+    <div className="container sf-bottom"><span className="sf-copy">© {new Date().getFullYear()} Scalric. All rights reserved</span><span className="sf-tag">Technology · Consulting · Innovation</span></div>
   </footer>;
 }

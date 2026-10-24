@@ -7,10 +7,11 @@ import IndustriesPage from './pages/IndustriesPage.jsx';
 import InsightsPage, { InsightArticlePage } from './pages/InsightsPage.jsx';
 import ImpactPage from './pages/ImpactPage.jsx';
 import CompanyPage from './pages/CompanyPage.jsx';
-import { CareersPage, RoleDetailPage } from './pages/CompanyCareersPages.jsx';
+import { RoleDetailPage } from './pages/CompanyCareersPages.jsx';
 import OpeningsPage from './pages/OpeningsPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import AdminApp from './admin/AdminApp.jsx';
+import LifePage from './pages/LifePage.jsx';
 import { usePathname, scrollToAnchor } from './lib/router.js';
 import { autoReveal } from './lib/autoReveal.js';
 import { Eyebrow, Link, Arrow } from './components/UI.jsx';
@@ -22,8 +23,9 @@ const pages = {
   '/insights': { title: 'Insights — Scalric', component: <InsightsPage/> },
   '/impact': { title: 'Impact — Scalric', component: <ImpactPage/> },
   '/company': { title: 'Company — Scalric', component: <CompanyPage/> },
-  '/careers': { title: 'Careers — Scalric', component: <CareersPage/> },
+  '/careers': { title: 'Open roles — Careers at Scalric', component: <OpeningsPage/> },
   '/careers/openings': { title: 'Open roles — Careers at Scalric', component: <OpeningsPage/> },
+  '/careers/life': { title: 'Life at Scalric — Careers', component: <LifePage/> },
   '/contact': { title: 'Contact — Scalric', component: <ContactPage/> },
 };
 

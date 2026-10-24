@@ -1,7 +1,8 @@
 import React from 'react';
 import { capabilities, insights, proofStats } from '../data/siteContent.js';
 import { Link, Arrow, Eyebrow, Reveal, CountUp, SplitHeading, Parallax } from '../components/UI.jsx';
-import { ArtImage, MiniBars, Ticker } from '../components/Showcase.jsx';
+import WhyChoose from '../components/WhyChoose.jsx';
+import { ArtImage, MiniBars } from '../components/Showcase.jsx';
 import WorkSteps from '../components/WorkSteps.jsx';
 import ContactBand from '../components/ContactBand.jsx';
 import PurposePanel from '../components/PurposePanel.jsx';
@@ -33,23 +34,6 @@ function Hero() {
   </section>;
 }
 
-function Capabilities() {
-  const [businesses, ngos] = proofStats;
-  return <section className="section why-section" id="why-choose-us"><div className="container">
-    <div className="why-grid">
-      <Reveal className="why-hero">
-        <img className="why-hero-bg" src="/assets/photos/why-wave-bg.png" alt="" loading="lazy" decoding="async" />
-        <span className="why-pill">Why choose Scalric</span>
-        <h2>Technology and strategy,<br />built around your outcome</h2>
-        <Link href="/what-we-do" className="why-link">Explore what we do <Arrow diagonal /></Link>
-      </Reveal>
-      <Reveal className="why-photo" delay={60}><img src="/assets/photos/consulting-office.webp" alt="" loading="lazy" decoding="async" /></Reveal>
-      <Reveal className="why-stat" delay={100}><small>{businesses.label}</small><div><span className="why-plus" aria-hidden="true">+</span><b><CountUp value={businesses.value} suffix="" prefix="+" /></b></div></Reveal>
-      <Reveal className="why-note" delay={140}><div><b><CountUp value={ngos.value} suffix={ngos.suffix} /></b><small>{ngos.label}</small></div><p>We connect the why with the how, bringing business understanding and technology together around a clear outcome.</p></Reveal>
-    </div>
-  </div></section>;
-}
-
 const thinkImages = ['/assets/cards/think-1.png', '/assets/cards/think-teal-fins.png', '/assets/cards/think-blue-stripes.png'];
 
 function InsightsSection() {
@@ -65,6 +49,5 @@ function InsightsSection() {
 
 
 
-const tickerWords = ['Artificial Intelligence', 'Data Analytics', 'Cloud Engineering', 'Software Development', 'Digital Transformation', 'Technology Consulting', 'Process Automation', 'Social Impact'];
 
-export default function HomePage() { return <><Hero /><Ticker items={tickerWords} /><main><Capabilities /><InsightsSection /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }
+export default function HomePage() { return <><Hero /><main><WhyChoose /><InsightsSection /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }

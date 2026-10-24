@@ -53,7 +53,7 @@ export default function OpeningsPage() {
 
   return <main className="opn">
     <section className="opn-hero"><div className="container">
-      <div className="breadcrumbs"><Link href="/">Home</Link><span>/</span><Link href="/careers">Careers</Link><span>/</span><span>Open roles</span></div>
+      <div className="breadcrumbs"><Link href="/">Home</Link><span>/</span><Link href="/careers/openings">Careers</Link><span>/</span><span>Open roles</span></div>
       <Eyebrow>OPEN OPPORTUNITIES</Eyebrow>
       <h1>Find your role</h1>
       <p>Search every current opening at Scalric. Filter by location, team or how you like to work, then apply in a few minutes.</p>

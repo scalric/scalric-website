@@ -1,6 +1,6 @@
 /* NGO spotlight: a big, rounded, blue box with a rotating focus panel. */
 .imp-ngo{padding:0 0 clamp(64px,8vw,110px)}
-.imp-ngo-box{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,64px);align-items:center;padding:clamp(28px,5vw,72px);border-radius:clamp(28px,4vw,52px);overflow:hidden;background:radial-gradient(120% 140% at 0% 0%,#2f6bf0 0%,#1155d9 45%,#0a3aa6 100%);color:#fff;box-shadow:0 40px 90px -50px #1155d9cc}
+.imp-ngo-box{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,64px);align-items:center;padding:clamp(28px,5vw,72px);border-radius:0;overflow:hidden;background:radial-gradient(120% 140% at 0% 0%,#2f6bf0 0%,#1155d9 45%,#0a3aa6 100%);color:#fff;box-shadow:0 40px 90px -50px #1155d9cc}
 .imp-ngo-blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none;animation:imp-float 14s ease-in-out infinite}
 .imp-ngo-blob.one{top:-120px;right:-80px;width:360px;height:360px;background:#5b94ff}
 .imp-ngo-blob.two{bottom:-140px;left:20%;width:320px;height:320px;background:#0b2d8c;animation-delay:-6s}
@@ -13,7 +13,7 @@
 .imp-ngo-goal{display:grid;line-height:1.1}
 .imp-ngo-goal b{color:var(--imp-yellow,#fcc015);font-size:40px;letter-spacing:-.04em}
 .imp-ngo-goal span{color:#cfe0ff;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.imp-ngo-panel{display:grid;gap:18px;padding:clamp(18px,2.4vw,30px);border:1px solid #ffffff2e;border-radius:28px;background:#ffffff14;backdrop-filter:blur(10px)}
+.imp-ngo-panel{display:grid;gap:18px;padding:clamp(18px,2.4vw,30px);border:1px solid #ffffff2e;border-radius:0;background:#ffffff14;backdrop-filter:blur(10px)}
 .imp-ngo-tabs{display:flex;flex-wrap:wrap;gap:8px}
 .imp-ngo-tabs button{padding:9px 16px;border:1px solid #ffffff4d;border-radius:99px;background:transparent;color:#fff;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
 .imp-ngo-tabs button:hover{background:#ffffff26}
