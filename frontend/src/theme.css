@@ -2595,3 +2595,8 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
 /* Two-option menus: stacked one below the other, same size */
 .site-header .mega-links:has(> :nth-child(2):last-child){grid-template-columns:1fr;gap:0}
 .site-header .mega-links:has(> :nth-child(2):last-child) > *{min-height:96px;height:96px;width:100%}
+
+/* Nav search button: no outline */
+.site-header .search-trigger{border:0;outline:0;box-shadow:none;background:transparent}
+.site-header .search-trigger:hover{background:#eef3ff;color:#1155d9}
+.site-header .search-trigger:focus,.site-header .search-trigger:focus-visible{outline:0;box-shadow:none}
