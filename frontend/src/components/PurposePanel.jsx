@@ -13,7 +13,7 @@ export default function PurposePanel() {
         <h2>Progress should<br />reach further</h2>
         <p className="pw-sub">An initiative bringing discounted digital support to local businesses and pro-bono technology work to NGOs.</p>
         <div className="pw-stats">{proofStats.map((stat) => <div key={stat.label}><b><CountUp value={stat.value} suffix={stat.suffix} /></b><span>{stat.label}</span></div>)}</div>
-        <Link href="/impact" className="pw-btn" onClick={() => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'impact_teaser_click' } }))}>Explore the Impact initiative</Link>
+        <Link href="/industries#impact" className="pw-btn" onClick={() => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'impact_teaser_click' } }))}>Explore the Impact initiative</Link>
       </Reveal>
     </div>
   </section>;

@@ -205,7 +205,7 @@ export const openRoles = [];
 
 export const pagesForSearch = [
   ['What We Do', '/what-we-do'], ['Industries', '/industries'], ['Insights', '/insights'],
-  ['Impact', '/impact'], ['Company', '/company'], ['Careers', '/careers'], ['Contact', '/contact'],
+  ['Company', '/company'], ['Careers', '/careers'], ['Contact', '/contact'],
 ];
 
 

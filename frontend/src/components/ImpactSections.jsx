@@ -1,11 +1,8 @@
 import React from 'react';
-import ArtHero from '../components/ArtHero.jsx';
-import NicheSpotlight from '../components/NicheSpotlight.jsx';
-import CtaBand from '../components/CtaBand.jsx';
-import { sampleFeedback } from '../components/FeedbackCarousel.jsx';
-import { Eyebrow, Reveal } from '../components/UI.jsx';
-
-const track = (event) => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event } }));
+import NicheSpotlight from './NicheSpotlight.jsx';
+import CtaBand from './CtaBand.jsx';
+import { sampleFeedback } from './FeedbackCarousel.jsx';
+import { Eyebrow, Reveal } from './UI.jsx';
 
 const statement = [
   ['We build with local businesses and NGOs, ', false],
@@ -151,12 +148,8 @@ const steps = [
   ['03', 'Learn and improve', 'Review what is working and identify what should happen next', '/assets/photos/impact-learn.png'],
 ];
 
-export default function ImpactPage() {
-  return <main className="imp">
-    <ArtHero art="impactshow" chips={[]} title={<>Technology that<br />reaches further</>} text="Discounted digital and SaaS support for local businesses, and pro-bono technology work for NGOs">
-      <a href="#get-involved" className="imp-pill" onClick={() => track('impact_hero_cta_click')}><span>Get involved</span><i aria-hidden="true">→</i></a>
-    </ArtHero>
-
+export default function ImpactSections({ children }) {
+  return <div className="imp" id="impact">
     <section className="imp-intro"><div className="container">
       <p className="imp-kicker">Scalric Impact</p>
       <ScrollStatement />
@@ -182,6 +175,8 @@ export default function ImpactPage() {
       <StoryPanels />
     </div></section>
 
+    {children}
+
     <CtaBand />
-  </main>;
+  </div>;
 }

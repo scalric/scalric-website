@@ -7,7 +7,6 @@ const pageEntries = [
   ['What We Do', '/what-we-do', 'Technology and consulting services built around your outcome.', 'Page'],
   ['Industries', '/industries', 'Sector-specific perspectives and starting points.', 'Page'],
   ['Insights', '/insights', 'Ideas on technology, business and transformation.', 'Page'],
-  ['Impact', '/impact', 'Discounted digital support for businesses and pro-bono work for NGOs.', 'Page'],
   ['Company', '/company', 'Why we exist and how we work.', 'Page'],
   ['Careers', '/careers/openings', 'Open roles and how to apply.', 'Page'],
   ['Life at Scalric', '/careers/life', 'What it is like to work at Scalric: culture, teams and what to expect.', 'Page'],

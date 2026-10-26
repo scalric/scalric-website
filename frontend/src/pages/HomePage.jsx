@@ -28,7 +28,7 @@ function Hero() {
     <div className="container hero-content">
       <Eyebrow>TECHNOLOGY · CONSULTING · INNOVATION</Eyebrow>
       <SplitHeading as="h1" lines={['Engineering', 'the difference']} accent={1} className="hero-title" startDelay={2} />
-      <div className="hero-actions"><Link href="/what-we-do" className="button button-green">Learn more</Link><Link href="/impact" className="button button-outline" onClick={() => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'impact_teaser_click' } }))}>See our impact</Link></div>
+      <div className="hero-actions"><Link href="/what-we-do" className="button button-green">Learn more</Link><Link href="/industries#impact" className="button button-outline" onClick={() => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'impact_teaser_click' } }))}>See our impact</Link></div>
     </div>
     <button type="button" className="hero-toggle hero-city-toggle" onClick={toggle} aria-pressed={!playing} aria-label={playing ? 'Pause background video' : 'Play background video'}>{playing ? '❚❚' : '▶'}</button>
   </section>;

@@ -9,7 +9,7 @@ const ART = {
   teal: { src: '/assets/photos/art-teal.png', eyebrow: 'INDUSTRIES', chips: [] },
   stripes: { src: '/assets/photos/art-stripes.png', eyebrow: 'INSIGHTS', chips: topics.slice(0, 4).map((topic) => [topic, `/insights?topic=${encodeURIComponent(topic)}`]) },
   insights: { src: '/assets/photos/insights-banner.jpg', eyebrow: 'INSIGHTS', chips: [] },
-  whatwedo: { src: '/assets/photos/whatwedo-sales.jpg', eyebrow: 'WHAT WE DO', chips: [] },
+  whatwedo: { src: '/assets/photos/whatwedo-team.png', eyebrow: 'WHAT WE DO', chips: [] },
   impactshow: { src: '/assets/photos/impact-slide-1.jpg', slides: ['/assets/photos/impact-slide-1.jpg', '/assets/photos/impact-slide-2.jpg', '/assets/photos/impact-slide-3.jpg'], eyebrow: 'THE IMPACT INITIATIVE', chips: [] },
   glass: { src: '/assets/photos/art-glass.png', eyebrow: 'COMPANY', tone: 'light', chips: [] },
   team: { src: '/assets/photos/company-banner.jpg', eyebrow: 'COMPANY', chips: [] },

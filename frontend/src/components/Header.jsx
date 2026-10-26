@@ -31,7 +31,7 @@ const menus = {
   ],
 };
 
-const navItems = ['What We Do', 'Industries', 'Insights', 'Impact', 'Company', 'Careers'];
+const navItems = ['What We Do', 'Industries', 'Insights', 'Company', 'Careers'];
 
 export default function Header({ currentPath }) {
   const [openMenu, setOpenMenu] = React.useState(null);
@@ -76,8 +76,7 @@ export default function Header({ currentPath }) {
       <div className="container header-main" onMouseOver={(event) => { if (!event.target.closest('.nav-menu-trigger')) { clearTimeout(hoverTimer.current); setOpenMenu(null); } }}>
         <Link href="/" className="brand" aria-label="Scalric home" onClick={close}><img className="logo-green" src="/assets/scalric-wordmark-blue.png" alt="Scalric" width="135" height="34" /></Link>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navItems.map((item) => item === 'Impact' ? <Link key={item} href="/impact" className={`nav-link${currentPath.startsWith('/impact') ? ' active' : ''}`}>{item}</Link> :
-            <Link key={item} href={`/${item.toLowerCase().replaceAll(' ', '-')}`} className={`nav-link nav-menu-trigger${openMenu === item || currentPath.startsWith(`/${item.toLowerCase().replaceAll(' ', '-')}`) ? ' active' : ''}`} aria-haspopup="true" aria-expanded={openMenu === item} aria-controls="mega-menu" onMouseEnter={() => queueMenu(item)} onFocus={() => setOpenMenu(item)} onClick={close}>{item}</Link>)}
+          {navItems.map((item) => <Link key={item} href={`/${item.toLowerCase().replaceAll(' ', '-')}`} className={`nav-link nav-menu-trigger${openMenu === item || currentPath.startsWith(`/${item.toLowerCase().replaceAll(' ', '-')}`) ? ' active' : ''}`} aria-haspopup="true" aria-expanded={openMenu === item} aria-controls="mega-menu" onMouseEnter={() => queueMenu(item)} onFocus={() => setOpenMenu(item)} onClick={close}>{item}</Link>)}
         </nav>
         <div className="header-actions"><Link href="/contact" className="button button-dark header-cta">Talk to us <Arrow diagonal /></Link><SiteSearch /><button className={`mobile-menu-trigger${mobileOpen ? ' is-open' : ''}`} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}><i /><i /></button></div>
       </div>
@@ -87,7 +86,7 @@ export default function Header({ currentPath }) {
         <button className="mega-close icon-button" onClick={() => setOpenMenu(null)} aria-label="Close menu">×</button>
       </section></div>}
     </header>
-    {mobileOpen && <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Main navigation"><div className="mobile-menu-head"><span>Explore Scalric</span><button className="icon-button" onClick={close} aria-label="Close menu">×</button></div><div className="mobile-menu-links">{navItems.map((item) => item === 'Impact' ? <Link key={item} href="/impact" onClick={close}>{item}<Arrow diagonal /></Link> : <section key={item} className="mobile-nav-group"><button className="mobile-nav-toggle" aria-expanded={expanded === item} onClick={() => setExpanded(expanded === item ? null : item)}>{item}<span>{expanded === item ? '−' : '+'}</span></button>{expanded === item && <div className="mobile-subnav">{menus[item].map(([label, href]) => <Link key={label} href={href} onClick={close}>{label}<Arrow diagonal /></Link>)}</div>}</section>)}</div><div className="mobile-menu-bottom"><Link href="/contact" className="btn-talk" onClick={close}><span>Talk to us</span><i aria-hidden="true">→</i></Link><span>India (EN)</span></div></div>}
+    {mobileOpen && <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Main navigation"><div className="mobile-menu-head"><span>Explore Scalric</span><button className="icon-button" onClick={close} aria-label="Close menu">×</button></div><div className="mobile-menu-links">{navItems.map((item) => <section key={item} className="mobile-nav-group"><button className="mobile-nav-toggle" aria-expanded={expanded === item} onClick={() => setExpanded(expanded === item ? null : item)}>{item}<span>{expanded === item ? '−' : '+'}</span></button>{expanded === item && <div className="mobile-subnav">{menus[item].map(([label, href]) => <Link key={label} href={href} onClick={close}>{label}<Arrow diagonal /></Link>)}</div>}</section>)}</div><div className="mobile-menu-bottom"><Link href="/contact" className="btn-talk" onClick={close}><span>Talk to us</span><i aria-hidden="true">→</i></Link><span>India (EN)</span></div></div>}
   </>;
 }
 
