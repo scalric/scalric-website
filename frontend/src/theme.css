@@ -2600,3 +2600,8 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
 .site-header .search-trigger{border:0;outline:0;box-shadow:none;background:transparent}
 .site-header .search-trigger:hover{background:#eef3ff;color:#1155d9}
 .site-header .search-trigger:focus,.site-header .search-trigger:focus-visible{outline:0;box-shadow:none}
+
+/* What We Do banner: nudge the blue copy box up about 5% of the banner height */
+.ah-whatwedo .ah-copy{position:relative;top:calc(clamp(600px,50vw,760px) * -.05)}
+/* What We Do banner: trim the bottom padding of the blue box */
+.ah-whatwedo .ah-copy{padding-bottom:clamp(8px,1vw,16px)}
