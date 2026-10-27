@@ -53,7 +53,7 @@ async function handle(request, response) {
   }
 
   if (request.method === 'GET' && url.pathname === '/api/roles') {
-    const { rows } = await database.query('SELECT slug, title, team, location, work_mode, description FROM roles WHERE published = 1 ORDER BY created_at DESC');
+    const { rows } = await database.query('SELECT slug, title, team, location, work_mode, description FROM roles WHERE published = true ORDER BY created_at DESC');
     return json(response, 200, { items: rows.map(({ work_mode: workMode, ...role }) => ({ ...role, workMode })) });
   }
 
@@ -90,7 +90,7 @@ async function handle(request, response) {
       check(validateMessage(values.message));
       if (!['business', 'partnership', 'impact', 'careers', 'other'].includes(values.inquiryType)) throw new Error('Choose what you are reaching out about.');
       if (typeof body.role === 'string' && body.role) {
-        const found = await database.query('SELECT title FROM roles WHERE slug = $1 AND published = 1', [body.role.slice(0, 80)]);
+        const found = await database.query('SELECT title FROM roles WHERE slug = $1 AND published = true', [body.role.slice(0, 80)]);
         if (!found.rows[0]) throw new Error('That role is no longer open.');
         values.role = found.rows[0].title;
         values.inquiryType = 'careers';

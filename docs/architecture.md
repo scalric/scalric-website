@@ -22,7 +22,7 @@
 - `frontend/src/components/Forms.jsx` owns contact and Impact form behavior; `frontend/src/lib/api.js` sends requests to the API.
 - `frontend/src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy and roles.
 - `backend/server.js` exposes health and form endpoints, applies field validation and a per-IP request limit.
-- `database/schema.sql` stores contact and Impact application records in a local SQLite file; `database/index.js` owns the connection, schema migrations, and shutdown.
+- `database/supabase-schema.sql` defines the Postgres tables (run in the Supabase SQL Editor); `database/index.js` owns the `pg` connection pool and shutdown.
 
 ## PRD event names
 

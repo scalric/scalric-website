@@ -4,7 +4,7 @@ Scalric’s responsive corporate website, built from the approved PRD structure 
 
 ## Run locally
 
-Use Node.js 22 or later (24 recommended). The database is a local SQLite file, so no Docker or database server is needed.
+Use Node.js 22 or later (24 recommended). The database is hosted on Supabase (Postgres). Create the tables once by pasting `database/supabase-schema.sql` into the Supabase SQL Editor, then set `DATABASE_URL` in `.env` to the Session pooler connection string.
 
 ```powershell
 npm install
@@ -37,7 +37,7 @@ frontend/
 backend/
   server.js             JSON API, validation and request throttling
 database/
-  schema.sql            SQLite schema for inquiry submissions
+  supabase-schema.sql   Postgres schema and starter roles, run in the Supabase SQL Editor
   index.js              Pooled connection, schema setup and shutdown
 docs/
   architecture.md       Route, component and data-flow map
@@ -49,7 +49,7 @@ docs/
 
 ## Backend and data
 
-`POST /api/contact` and `POST /api/impact/applications` validate and save form submissions to a local SQLite database (`database/scalric.sqlite`, override with `DATABASE_PATH`) using parameterized queries. Schema setup and column migrations run automatically when the API starts. The `/api/admin/*` routes require the admin session. The file is git-ignored; back it up before moving machines. The API does not send email or connect to a CRM, so configure an approved delivery and retention policy before production, and move to a hosted database before deploying to a serverless host such as Vercel.
+`POST /api/contact` and `POST /api/impact/applications` validate and save form submissions to Supabase Postgres (`DATABASE_URL`) using parameterized queries. Schema changes are applied by hand in the Supabase SQL Editor. The `/api/admin/*` routes require the admin session. The API does not send email or connect to a CRM, so configure an approved delivery and retention policy before production. Resume uploads are still written to local disk (`database/uploads/`) and must move to object storage before deploying to a serverless host such as Vercel.
 
 ## Content to confirm before launch
 

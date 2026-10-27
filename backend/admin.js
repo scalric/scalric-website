@@ -62,8 +62,8 @@ function loginLimited(request) {
   return entry.count > 8;
 }
 
-// SQLite stores UTC as 'YYYY-MM-DD HH:MM:SS'; send ISO strings so browsers parse them as UTC.
-const iso = ({ resume_file: resumeFile, ...row }) => ({ ...row, ...(resumeFile === undefined ? {} : { has_resume: Boolean(resumeFile) }), created_at: `${row.created_at.replace(' ', 'T')}Z`, updated_at: `${(row.updated_at || row.created_at).replace(' ', 'T')}Z` });
+// Postgres returns timestamptz as Date objects; send ISO strings.
+const iso = ({ resume_file: resumeFile, ...row }) => ({ ...row, ...(resumeFile === undefined ? {} : { has_resume: Boolean(resumeFile) }), created_at: new Date(row.created_at).toISOString(), updated_at: new Date(row.updated_at || row.created_at).toISOString() });
 
 function csv(rows) {
   const cell = (value) => {
@@ -85,7 +85,7 @@ function filters(collection, url, params) {
   const q = (url.searchParams.get('q') || '').trim().slice(0, 100);
   if (q) {
     params.push(`%${q.replace(/[\\%_]/g, '\\$&')}%`);
-    clauses.push(`(${collections[collection].search.map((column) => `${column} LIKE $${params.length} ESCAPE '\\'`).join(' OR ')})`);
+    clauses.push(`(${collections[collection].search.map((column) => `${column} ILIKE $${params.length} ESCAPE '\\'`).join(' OR ')})`);
   }
   return clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
 }
@@ -95,7 +95,7 @@ const slugify = (text) => {
   const slug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'role';
   return RESERVED_SLUGS.has(slug) ? `${slug}-role` : slug;
 };
-const roleView = (row) => ({ ...iso(row), published: row.published === 1 });
+const roleView = (row) => ({ ...iso(row), published: row.published === true });
 
 function roleFields(body, partial) {
   const out = {};
@@ -109,7 +109,7 @@ function roleFields(body, partial) {
     }
     out[column] = value.trim();
   }
-  if (body.published !== undefined) out.published = body.published === true ? 1 : 0;
+  if (body.published !== undefined) out.published = body.published === true;
   return out;
 }
 
@@ -131,7 +131,7 @@ async function handleRoles(request, response, route) {
       for (let n = 2; taken.has(slug); n += 1) slug = `${slugify(fields.title)}-${n}`;
       const { rows } = await database.query(
         'INSERT INTO roles (slug, title, team, location, work_mode, description, published) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-        [slug, fields.title, fields.team, fields.location, fields.work_mode, fields.description, fields.published || 0]);
+        [slug, fields.title, fields.team, fields.location, fields.work_mode, fields.description, fields.published ?? false]);
       return json(response, 201, roleView(rows[0]));
     }
     if (id && request.method === 'PATCH') {
@@ -139,7 +139,7 @@ async function handleRoles(request, response, route) {
       const columns = Object.keys(fields);
       if (!columns.length) return json(response, 400, { error: 'Nothing to update.' });
       const { rows } = await database.query(
-        `UPDATE roles SET ${columns.map((column, index) => `${column} = $${index + 1}`).join(', ')}, updated_at = datetime('now') WHERE id = $${columns.length + 1} RETURNING *`,
+        `UPDATE roles SET ${columns.map((column, index) => `${column} = $${index + 1}`).join(', ')}, updated_at = now() WHERE id = $${columns.length + 1} RETURNING *`,
         [...columns.map((column) => fields[column]), id]);
       return rows[0] ? json(response, 200, roleView(rows[0])) : json(response, 404, { error: 'Not found.' });
     }
@@ -185,7 +185,7 @@ export async function handleAdmin(request, response, url) {
       database.query(`SELECT inquiry_type AS type, COUNT(*) AS n, COUNT(*) FILTER (WHERE status = 'new') AS unread FROM contact_submissions GROUP BY inquiry_type`),
     ]);
     const tally = (rows) => Object.fromEntries(rows.map((row) => [row.status, row.n]));
-    const daily = await database.query(`SELECT date(created_at) AS day, COUNT(*) AS n FROM contact_submissions WHERE created_at >= datetime('now', '-13 days', 'start of day') GROUP BY day`);
+    const daily = await database.query(`SELECT to_char(created_at AT TIME ZONE 'UTC', 'YYYY-MM-DD') AS day, COUNT(*) AS n FROM contact_submissions WHERE (created_at AT TIME ZONE 'UTC') >= date_trunc('day', now() AT TIME ZONE 'UTC') - interval '13 days' GROUP BY day`);
     const recent = await database.query('SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT 6');
     const roles = await database.query('SELECT published, COUNT(*) AS n FROM roles GROUP BY published');
     const counts = Object.fromEntries(daily.rows.map((row) => [row.day, row.n]));
@@ -195,7 +195,7 @@ export async function handleAdmin(request, response, url) {
     });
     return json(response, 200, {
       contact: tally(contact.rows), contactByType: byType.rows, daily: series, recent: recent.rows.map(iso),
-      roles: { published: roles.rows.find((row) => row.published === 1)?.n || 0, draft: roles.rows.find((row) => row.published === 0)?.n || 0 },
+      roles: { published: roles.rows.find((row) => row.published === true)?.n || 0, draft: roles.rows.find((row) => row.published === false)?.n || 0 },
     });
   }
 
@@ -214,7 +214,7 @@ export async function handleAdmin(request, response, url) {
       return json(response, 200, { changed: rowCount });
     }
     if (body.action === 'status' && STATUSES.includes(body.status)) {
-      const { rowCount } = await database.query(`UPDATE contact_submissions SET status = $${ids.length + 1}, updated_at = datetime('now') WHERE id IN (${marks})`, [...ids, body.status]);
+      const { rowCount } = await database.query(`UPDATE contact_submissions SET status = $${ids.length + 1}, updated_at = now() WHERE id IN (${marks})`, [...ids, body.status]);
       return json(response, 200, { changed: rowCount });
     }
     return json(response, 400, { error: 'Unknown action.' });
@@ -279,7 +279,7 @@ export async function handleAdmin(request, response, url) {
     }
     if (!sets.length) return json(response, 400, { error: 'Nothing to update.' });
     params.push(tail);
-    const { rows } = await database.query(`UPDATE ${table} SET ${sets.join(', ')}, updated_at = datetime('now') WHERE id = $${params.length} RETURNING *`, params);
+    const { rows } = await database.query(`UPDATE ${table} SET ${sets.join(', ')}, updated_at = now() WHERE id = $${params.length} RETURNING *`, params);
     return rows[0] ? json(response, 200, iso(rows[0])) : json(response, 404, { error: 'Not found.' });
   }
 
