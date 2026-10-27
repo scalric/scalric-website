@@ -34,7 +34,7 @@ function Hero() {
   </section>;
 }
 
-const thinkImages = ['/assets/photos/home-insight-data.webp', '/assets/photos/home-insight-ai.webp', '/assets/photos/home-insight-agents.webp'];
+const thinkImages = ['/assets/photos/home-insight-data.webp', '/assets/photos/home-insight-ai.webp', '/assets/photos/home-insight-automation.webp'];
 
 function InsightsSection() {
   const track = (event, slug) => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event, slug } }));
