@@ -1,7 +1,7 @@
 // Form rules shared by the website (inline errors) and the API (the real enforcement), so both always agree.
 // Each validator returns an error message, or '' when the value is acceptable.
 
-export const RESUME_MAX_BYTES = 5 * 1024 * 1024;
+export const RESUME_MAX_BYTES = 1024 * 1024;
 export const RESUME_EXTENSIONS = ['pdf', 'doc', 'docx'];
 export const MAX_EXPERIENCE_ENTRIES = 6;
 

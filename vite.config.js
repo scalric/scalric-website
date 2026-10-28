@@ -5,7 +5,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 
 export default {
   root,
-  publicDir: resolve(root, 'frontend/public'),
+  publicDir: resolve(root, 'public'),
   optimizeDeps: {
     entries: [resolve(root, 'index.html')],
     include: ['react', 'react-dom/client'],

@@ -17,12 +17,11 @@
 
 ## Component and data map
 
-- `frontend/src/App.jsx` resolves routes and updates titles/descriptions.
-- `frontend/src/components/Header.jsx` owns the six-item navigation, desktop mega menus, mobile accordion navigation, search and persistent contact CTA.
-- `frontend/src/components/Forms.jsx` owns contact and Impact form behavior; `frontend/src/lib/api.js` sends requests to the API.
-- `frontend/src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy and roles.
-- `backend/server.js` exposes health and form endpoints, applies field validation and a per-IP request limit.
-- `database/supabase-schema.sql` defines the Postgres tables (run in the Supabase SQL Editor); `database/index.js` owns the `pg` connection pool and shutdown.
+- `src/App.jsx` resolves routes and updates titles/descriptions.
+- `src/components/Header.jsx` owns the six-item navigation, desktop mega menus, mobile accordion navigation, search and persistent contact CTA.
+- `src/components/Forms.jsx` owns contact and Impact form behavior; `src/lib/api.js` sends requests to the API.
+- `src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy and roles.
+- The API (health, forms, roles, admin) and the database schema are in the sibling project `scalric-website-backend`.
 
 ## PRD event names
 
@@ -31,4 +30,4 @@ The frontend emits `contact_form_submit`, `impact_teaser_click`, `impact_to_home
 ## Design and accessibility
 
 Single-family Manrope typography, white/green/charcoal palette, responsive layouts, focus-visible controls, keyboard-operable navigation, semantic form labels and reduced-motion support. The supplied 8-second video is used on desktop with a generated still poster; mobile uses a CSS abstract fallback to limit video loading.
-- `frontend/src/admin/` and `backend/admin.js` implement the `/admin` site (signed-cookie login, enquiry inbox, status, notes, CSV export).
+- `src/admin/` (with the backend's `/api/admin/*` routes) implements the `/admin` site (signed-cookie login, enquiry inbox, status, notes, CSV export).

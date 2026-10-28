@@ -4,7 +4,7 @@ import { Link } from './UI.jsx';
 import {
   MAX_EXPERIENCE_ENTRIES, RESUME_EXTENSIONS, RESUME_MAX_BYTES,
   validateEmail, validateExperienceEntry, validateMessage, validateName, validateOrganization, validatePhone, validateResumeFile, validateYears,
-} from '../../../shared/validators.js';
+} from '../lib/validate.js';
 
 const CONSENT_ERROR = 'Please tick the box so we can contact you about this.';
 const ANALYTICS = (detail) => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail }));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { sampleRoles } from '../../../database/sampleRoles.js';
+import { sampleRoles } from '../data/sampleRoles.js';
 
 let cache = null;
 

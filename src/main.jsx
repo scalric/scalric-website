@@ -1,12 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
-import './styles.css';
-import './premium.css';
-import './theme.css';
-import './impact.css';
-import './ngo.css';
-import './cta.css';
+import './styles/styles.css';
+import './styles/premium.css';
+import './styles/theme.css';
+import './styles/impact.css';
+import './styles/ngo.css';
+import './styles/cta.css';
 import './admin/admin.css';
 
 // Build marker: bump to force a new bundle URL when a deploy must not reuse a cached asset.

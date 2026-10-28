@@ -1,5 +1,5 @@
 // Generates topic-specific card illustrations (insights, industries, impact, capabilities).
-// Deterministic, dependency-free SVG written to frontend/public/assets/cards.
+// Deterministic, dependency-free SVG written to public/assets/cards.
 // Palette matches scripts/generate-art.mjs: white/mint base, Scalric green, blue and gold accents.
 // Re-run with: node scripts/generate-card-art.mjs [outDir]
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const out = process.argv[2]
   ? resolve(process.argv[2])
-  : resolve(dirname(fileURLToPath(import.meta.url)), '../frontend/public/assets/cards');
+  : resolve(dirname(fileURLToPath(import.meta.url)), '../public/assets/cards');
 mkdirSync(out, { recursive: true });
 
 const W = 800;

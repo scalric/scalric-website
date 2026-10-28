@@ -1,12 +1,12 @@
 // Generates the on-brand illustration set used across the site.
-// Output is deterministic (seeded), dependency-free SVG written to frontend/public/assets/art.
+// Output is deterministic (seeded), dependency-free SVG written to public/assets/art.
 // Palette: white base, Scalric green (primary), blue and gold (secondary accents).
 // Re-run with: node scripts/generate-art.mjs
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const out = resolve(dirname(fileURLToPath(import.meta.url)), '../frontend/public/assets/art');
+const out = resolve(dirname(fileURLToPath(import.meta.url)), '../public/assets/art');
 mkdirSync(out, { recursive: true });
 
 const W = 800;
