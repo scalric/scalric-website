@@ -1,0 +1,84 @@
+/* Laptop fit: every page banner fills exactly the visible area below the sticky header,
+   so it is fully visible without scrolling. Type and spacing scale with viewport height. */
+@media (min-width:861px){
+  :root{--hero-fit:calc(100svh - 108px)}
+
+  .home-hero.hero-city,.ah,.ind-banner,.split-hero,.life-hero,.imp-hero{min-height:0;height:var(--hero-fit);max-height:var(--hero-fit)}
+  .ah,.life-hero,.imp-hero{overflow:hidden}
+
+  /* Home */
+  .home-hero.hero-city .hero-content{padding-block:0 clamp(24px,5vh,56px)}
+  .home-hero.hero-city .hero-title{margin:clamp(12px,2.4vh,26px) 0 clamp(10px,2vh,22px);font-size:clamp(40px,min(7.4vw,11.5vh),112px)}
+
+  /* Page banners (What We Do, Insights, Company) */
+  .ah-inner{padding-block:clamp(20px,4.5vh,64px)}
+  .ah h1{margin:clamp(10px,2vh,20px) 0 clamp(10px,2vh,22px);font-size:clamp(34px,min(6.2vw,10.5vh),92px)}
+  .ah .ah-copy p{font-size:clamp(14px,min(1.4vw,2.6vh),19px);line-height:1.55}
+  .ah-actions{margin-top:clamp(14px,3vh,32px)}
+  .ah-chips{gap:clamp(8px,1.6vh,14px)}
+  .ah-chips a{padding:clamp(10px,1.9vh,17px) 22px}
+
+  /* Industries */
+  body main .ind-banner h1,.ind-banner h1{margin:clamp(10px,2vh,18px) 0 clamp(10px,2vh,20px);font-size:clamp(30px,min(4vw,7.4vh),64px)}
+  body main .ind-banner .ind-banner-copy p,body .ind-banner .ind-banner-copy p{font-size:clamp(14px,min(1.3vw,2.5vh),20px);line-height:1.5}
+  body .ind-banner .ind-slide h3{font-size:clamp(18px,min(2.2vw,4.2vh),36px)}
+  body .ind-banner .ind-slide p{font-size:clamp(12px,min(1vw,2vh),16px)}
+
+  /* Split banner */
+  .split-hero-panel{padding-block:clamp(24px,5vh,56px)}
+  .split-hero h1{margin-bottom:clamp(12px,2.6vh,26px);font-size:clamp(32px,min(4.4vw,8vh),66px)}
+  .split-hero p{font-size:clamp(14px,min(1.4vw,2.6vh),21px)}
+
+  /* Life at Scalric */
+  body .life-hero-box h1{font-size:clamp(30px,min(3.6vw,6.6vh),54px)}
+  body .life-hero-box p{font-size:clamp(14px,min(1.2vw,2.4vh),18px)}
+
+  /* Life at Scalric: text panel beside the slideshow so it never covers a face */
+  .life-hero{display:grid;align-items:stretch;grid-template-columns:minmax(320px,34%) minmax(0,1fr)}
+  .life-hero-bg{position:relative;inset:auto;grid-column:2;grid-row:1;min-height:0}
+  .life-hero-inner{grid-column:1;grid-row:1;display:flex;align-items:center;width:auto;margin:0;background:#1155d9}
+  .life-hero-box{width:100%;padding:clamp(24px,4vh,48px) clamp(28px,3.4vw,56px);background:transparent}
+  body main .life-hero-box h1,body main .life-hero-box p{color:#fff!important}
+
+  /* What We Do: the copy card must fit inside the shorter banner */
+  .ah-whatwedo{align-items:center}
+  .ah-whatwedo .ah-inner{padding-block:clamp(12px,2.5vh,28px)}
+  .ah-whatwedo .ah-copy{top:0;padding:clamp(14px,2.6vh,28px) clamp(24px,3vw,44px)}
+  .ah-whatwedo h1{font-size:clamp(28px,min(3.2vw,6.4vh),50px)}
+  .ah-whatwedo .ah-copy p{font-size:clamp(13px,2.2vh,17px);line-height:1.5}
+  .ah-whatwedo .ah-actions{gap:10px;margin-top:clamp(10px,2vh,24px)}
+  .ah-whatwedo .ah-actions>a{height:clamp(40px,6.4vh,58px);min-height:0;font-size:clamp(14px,2.1vh,16px)}
+}
+
+/* Insights banner: compact copy card in the bottom-left corner so it stays off the faces */
+.ah-insights{align-items:flex-end}
+.ah-insights .ah-inner{justify-content:flex-start;padding-bottom:clamp(16px,3vh,36px)}
+.ah-insights .ah-copy{max-width:min(500px,100%);margin-inline:0;text-align:left;padding:clamp(16px,2.6vh,26px) clamp(22px,2.4vw,34px)}
+.ah-insights .ah-eyebrow{justify-content:flex-start}
+.ah-insights h1{margin:clamp(8px,1.4vh,14px) 0 clamp(8px,1.4vh,12px);font-size:clamp(26px,min(2.9vw,5.4vh),44px)}
+.ah-insights .ah-copy p{margin-inline:0;font-size:clamp(13px,2.1vh,16px);line-height:1.5}
+body .ah-insights .ah-eyebrow{color:var(--talk,#ffb62e)!important}
+body .ah-team .ah-eyebrow,body .split-hero .ah-eyebrow{color:var(--talk,#ffb62e)!important}
+body main .life-hero-box h1{color:var(--talk,#ffba49)!important}
+
+/* What We Do: "Explore capabilities" turns light grey on hover */
+body .ah-whatwedo .ah-actions>a.button-green:hover,body .ah-whatwedo .ah-actions>a.button-green:focus-visible{background:#d9dde5!important;color:#0b1220!important;border-color:#d9dde5!important}
+body .ah-whatwedo .ah-actions>a.button-green{transition:background .2s,color .2s}
+body .opn-hero .eyebrow{color:var(--talk,#ffba49)!important}
+
+/* Insights topic chips: same button effects as the Impact "who we support" niche buttons
+   (grey outline, blue outline + text on hover, solid blue when selected). */
+.tc-mark{display:none}
+.tc{gap:8px}
+body .tc-chip{padding:10px 18px!important;border:1px solid #cfd6e4!important;border-radius:99px;background:#fff!important;color:#0b1220!important;font-size:14px;font-weight:600;animation:none;transition:background .25s,color .25s,border-color .25s}
+body .tc-chip:hover,body .tc-chip:active{background:#fff!important;transform:none;box-shadow:none;border-color:#1155d9!important;color:#1155d9!important}
+body .tc-chip[aria-pressed="true"],body .tc-chip[aria-pressed="true"]:hover{border-color:#1155d9!important;background:#1155d9!important;color:#fff!important}
+
+/* Article banners: tall enough that faces are not cropped out (the old fixed 360px strip cut heads off) */
+.article-hero-art{height:auto;aspect-ratio:2 / 1}
+@media (max-width:680px){.article-hero-art{height:auto;aspect-ratio:4 / 3}}
+
+/* "More articles" under Related perspectives on an article page */
+.more-insights{padding:clamp(24px,4vw,56px) 0 clamp(48px,6vw,88px)}
+.more-insights .topic-chips{margin:0 0 clamp(20px,3vw,34px)}
+.more-insights-empty{margin:0;color:#5b6170}

@@ -6,6 +6,7 @@ import { ArtImage, MiniBars } from '../components/Showcase.jsx';
 import WorkSteps from '../components/WorkSteps.jsx';
 import ContactBand from '../components/ContactBand.jsx';
 import PurposePanel from '../components/PurposePanel.jsx';
+import IndustriesTarget from '../components/IndustriesTarget.jsx';
 
 function Hero() {
   const videoRef = React.useRef(null);
@@ -34,7 +35,7 @@ function Hero() {
   </section>;
 }
 
-const thinkImages = ['/assets/cards/think-1.png', '/assets/cards/think-teal-fins.png', '/assets/cards/think-blue-stripes.png'];
+const thinkImages = ['/assets/photos/home-insight-data.webp', '/assets/photos/home-insight-ai.webp', '/assets/photos/home-insight-automation.webp'];
 
 function InsightsSection() {
   const track = (event, slug) => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event, slug } }));
@@ -50,4 +51,4 @@ function InsightsSection() {
 
 
 
-export default function HomePage() { return <><Hero /><main><WhyChoose /><InsightsSection /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }
+export default function HomePage() { return <><Hero /><main><WhyChoose /><InsightsSection /><IndustriesTarget /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }

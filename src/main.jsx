@@ -7,6 +7,10 @@ import './styles/theme.css';
 import './styles/impact.css';
 import './styles/ngo.css';
 import './styles/cta.css';
+import './banners-fit.css';
+import './industries-target.css';
+import './costly-mistakes.css';
+import './success-stories.css';
 import './admin/admin.css';
 
 // Build marker: bump to force a new bundle URL when a deploy must not reuse a cached asset.
