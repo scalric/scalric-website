@@ -2295,7 +2295,7 @@ body main .why-band .why-btn:hover{transform:translateY(-3px)}
 .why-band-media{overflow:hidden;aspect-ratio:16/10}
 .why-band-media img{width:100%;height:100%;object-fit:cover}
 @media (max-width:860px){.why-band-inner{grid-template-columns:1fr;width:calc(100% - 40px)}.why-band-media{order:-1;aspect-ratio:16/9}}
-@media (max-width:560px){.why-band-actions{flex-direction:column}.why-band .why-btn{max-width:none}}
+@media (max-width:560px){.why-band-actions{flex-direction:column;gap:14px}body main .why-band .why-btn{flex:none;width:100%;max-width:none;min-height:56px;font-size:16px}}
 .why-band{margin-top:5vw}
 
 
