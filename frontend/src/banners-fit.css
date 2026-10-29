@@ -73,3 +73,12 @@ body .opn-hero .eyebrow{color:var(--talk,#ffba49)!important}
 body .tc-chip{padding:10px 18px!important;border:1px solid #cfd6e4!important;border-radius:99px;background:#fff!important;color:#0b1220!important;font-size:14px;font-weight:600;animation:none;transition:background .25s,color .25s,border-color .25s}
 body .tc-chip:hover,body .tc-chip:active{background:#fff!important;transform:none;box-shadow:none;border-color:#1155d9!important;color:#1155d9!important}
 body .tc-chip[aria-pressed="true"],body .tc-chip[aria-pressed="true"]:hover{border-color:#1155d9!important;background:#1155d9!important;color:#fff!important}
+
+/* Article banners: tall enough that faces are not cropped out (the old fixed 360px strip cut heads off) */
+.article-hero-art{height:auto;aspect-ratio:2 / 1}
+@media (max-width:680px){.article-hero-art{height:auto;aspect-ratio:4 / 3}}
+
+/* "More articles" under Related perspectives on an article page */
+.more-insights{padding:clamp(24px,4vw,56px) 0 clamp(48px,6vw,88px)}
+.more-insights .topic-chips{margin:0 0 clamp(20px,3vw,34px)}
+.more-insights-empty{margin:0;color:#5b6170}

@@ -1,15 +1,15 @@
 import React from 'react';
-import { Reveal } from './UI.jsx';
+import { Arrow, Link, Reveal } from './UI.jsx';
 import { useSeen, useCountTo } from '../lib/motion.js';
 
 // Losses in millions of dollars.
 const mistakes = [
-  { company: 'Target Canada', note: '2015 · loss when it left Canada', cost: 5400 },
-  { company: 'Southwest Airlines', note: '2022 · holiday system breakdown', cost: 1200 },
-  { company: 'Knight Capital', note: '2012 · one morning of bad code', cost: 440 },
-  { company: 'Zillow Offers', note: '2021 · pricing model loss (Q3)', cost: 422 },
-  { company: 'Revlon', note: '2018 · orders it could not ship', cost: 64 },
-  { company: 'Hertz', note: '2018 · paid for a site it threw away', cost: 32 },
+  { company: 'Target Canada', slug: 'target-canada-exit', note: '2015 · loss when it left Canada', cost: 5400 },
+  { company: 'Southwest Airlines', slug: 'southwest-holiday-breakdown', note: '2022 · holiday system breakdown', cost: 1200 },
+  { company: 'Knight Capital', slug: 'knight-capital-one-morning', note: '2012 · one morning of bad code', cost: 440 },
+  { company: 'Zillow Offers', slug: 'zillow-offers-pricing-model', note: '2021 · pricing model loss (Q3)', cost: 422 },
+  { company: 'Revlon', slug: 'revlon-orders-it-could-not-ship', note: '2018 · orders it could not ship', cost: 64 },
+  { company: 'Hertz', slug: 'hertz-website-thrown-away', note: '2018 · paid for a site it threw away', cost: 32 },
 ];
 const biggest = Math.max(...mistakes.map((m) => m.cost));
 
@@ -19,11 +19,14 @@ function MistakeCard({ item, index }) {
   const [ref, seen] = useSeen();
   const amount = useCountTo(item.cost, seen, 1500 + index * 120);
   const width = Math.max(6, Math.sqrt(item.cost / biggest) * 100);
-  return <li ref={ref} className={`pw-card${seen ? ' is-in' : ''}`} style={{ '--i': index, '--w': `${width}%` }} tabIndex={0}>
-    <b aria-label={format(item.cost)}><span aria-hidden="true">{format(amount)}</span></b>
-    <strong>{item.company}</strong>
-    <span className="pw-note">{item.note}</span>
-    <i className="pw-bar" aria-hidden="true"><em /></i>
+  return <li ref={ref} className={`pw-card${seen ? ' is-in' : ''}`} style={{ '--i': index, '--w': `${width}%` }}>
+    <Link href={`/insights/${item.slug}`} className="pw-card-link" aria-label={`${item.company}, ${format(item.cost)}: read the insight`}>
+      <span className="pw-go" aria-hidden="true"><Arrow diagonal /></span>
+      <b aria-hidden="true"><span>{format(amount)}</span></b>
+      <strong>{item.company}</strong>
+      <span className="pw-note">{item.note}</span>
+      <i className="pw-bar" aria-hidden="true"><em /></i>
+    </Link>
   </li>;
 }
 

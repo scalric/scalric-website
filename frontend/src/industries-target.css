@@ -38,3 +38,11 @@ body main .it-stats .it-lede{max-width:34em;margin:12px 0 clamp(16px,2.2vw,26px)
   .it-stat{grid-column:2}
   .it-row-copy{grid-column:1/-1}
 }
+
+/* Rows and poster panels are links to the matching insight article */
+a.it-row,a.it-photo{text-decoration:none;color:inherit}
+.it-row{grid-template-columns:auto clamp(130px,12vw,190px) minmax(0,1fr) auto}
+.it-go{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#ffffff26;color:#fff;transition:background .25s,color .25s,transform .25s}
+.it-row:hover .it-go,.it-row:focus-visible .it-go,.it-row.is-active .it-go{background:var(--talk,#ffba49);color:#0b1220;transform:translate(2px,-2px)}
+a.it-photo{cursor:pointer}
+@media (max-width:520px){.it-row{grid-template-columns:auto minmax(0,1fr) auto}.it-go{grid-column:3;grid-row:1}}

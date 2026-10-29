@@ -97,3 +97,7 @@ body main .ss-lede{max-width:34em;margin:0 0 clamp(24px,3.4vw,40px);font-size:cl
 /* Company logos sit on a white tile so any logo colour stays readable on the dark list */
 .ss-avatar-logo{width:66px;height:50px;padding:7px 10px;border-radius:14px;background:#fff}
 .ss-avatar-logo img{display:block;width:100%;height:100%;object-fit:contain}
+
+/* Three detail tiles now that the "+ Next story" tile is gone */
+.ss-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:640px){.ss-tiles{grid-template-columns:1fr}}

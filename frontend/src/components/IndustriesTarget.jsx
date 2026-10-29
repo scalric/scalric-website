@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eyebrow, Reveal } from './UI.jsx';
+import { Arrow, Link, Reveal } from './UI.jsx';
 
 const icons = {
   dining: <path d="M5 3v8a2 2 0 0 0 2 2v8M9 3v8a2 2 0 0 1-2 2M17 21V3c-2 1-3 4-3 7s1 4 3 4" />,
@@ -11,11 +11,11 @@ const icons = {
 };
 
 const industries = [
-  { title: 'Healthcare & clinics', stat: '32%', label: 'of clinic calls go unanswered', fix: 'AI phone agent + reminders', video: '/assets/videos/impact-dental.mp4', poster: '/assets/photos/impact-dental.jpg', icon: 'care', tone: '#f08aa0' },
-  { title: 'Home services', stat: '50→80%', label: 'calls booked after adding an AI agent', fix: 'AI phone agent', video: '/assets/videos/impact-electrical.mp4', poster: '/assets/photos/impact-electrical.jpg', icon: 'home', tone: '#1155d9' },
-  { title: 'Restaurants & cafés', stat: '33%', label: 'of Starbucks US orders come through its app', fix: 'Ordering app + loyalty', video: '/assets/videos/impact-cafes.mp4', poster: '/assets/photos/impact-cafes.jpg', icon: 'dining', tone: '#ffba49' },
-  { title: 'Gyms & studios', stat: '62%', label: 'of bookings came through a branded app', fix: 'Booking app', video: '/assets/videos/impact-gyms.mp4', poster: '/assets/photos/impact-gyms.jpg', icon: 'sport', tone: '#2fb67c' },
-  { title: 'Salons & spas', stat: '80%', label: 'pick businesses that reply to every review', fix: 'Booking + review replies', video: '/assets/videos/impact-salons.mp4', poster: '/assets/photos/impact-salons.jpg', icon: 'beauty', tone: '#8a6cf0' },
+  { title: 'Healthcare & clinics', slug: 'unanswered-clinic-calls', stat: '32%', label: 'of clinic calls go unanswered', fix: 'AI phone agent + reminders', video: '/assets/videos/impact-dental.mp4', poster: '/assets/photos/impact-dental.jpg', icon: 'care', tone: '#f08aa0' },
+  { title: 'Home services', slug: 'booking-more-calls-in-home-services', stat: '50→80%', label: 'calls booked after adding an AI agent', fix: 'AI phone agent', video: '/assets/videos/impact-electrical.mp4', poster: '/assets/photos/impact-electrical.jpg', icon: 'home', tone: '#1155d9' },
+  { title: 'Restaurants & cafés', slug: 'the-app-behind-the-order', stat: '33%', label: 'of Starbucks US orders come through its app', fix: 'Ordering app + loyalty', video: '/assets/videos/impact-cafes.mp4', poster: '/assets/photos/impact-cafes.jpg', icon: 'dining', tone: '#ffba49' },
+  { title: 'Gyms & studios', slug: 'branded-apps-for-gyms-and-studios', stat: '62%', label: 'of bookings came through a branded app', fix: 'Booking app', video: '/assets/videos/impact-gyms.mp4', poster: '/assets/photos/impact-gyms.jpg', icon: 'sport', tone: '#2fb67c' },
+  { title: 'Salons & spas', slug: 'replying-to-every-review', stat: '80%', label: 'pick businesses that reply to every review', fix: 'Booking + review replies', video: '/assets/videos/impact-salons.mp4', poster: '/assets/photos/impact-salons.jpg', icon: 'beauty', tone: '#8a6cf0' },
 ];
 
 /** Plays a clip only while it is on screen, so five videos don't all decode at once. */
@@ -84,9 +84,9 @@ export default function IndustriesTarget() {
   const [active, setActive] = React.useState(1);
   return <section className="section it-section" id="industries-we-target" aria-labelledby="it-title"><div className="container it-wrap">
     <Reveal className="it-poster-wrap"><div className="it-poster" role="group" aria-label="Industry videos" style={{ aspectRatio: `${W} / ${H}` }}>
-      {industries.map((item, i) => <div key={item.title} className={`it-photo${active === i ? ' is-active' : ''}`} style={{ ...photoShapes[i].box, clipPath: photoShapes[i].clipPath }} onMouseEnter={() => setActive(i)}>
+      {industries.map((item, i) => <Link key={item.title} href={`/insights/${item.slug}`} aria-label={`${item.title}: read the insight`} className={`it-photo${active === i ? ' is-active' : ''}`} style={{ ...photoShapes[i].box, clipPath: photoShapes[i].clipPath }} onMouseEnter={() => setActive(i)}>
         <ArchVideo src={item.video} poster={item.poster} />
-      </div>)}
+      </Link>)}
       <div className="it-panel" style={{ ...panelShape.box, clipPath: panelShape.clipPath }} />
       <div className="it-title"><span>Industries we</span><strong>TARGET</strong></div>
     </div></Reveal>
@@ -94,11 +94,12 @@ export default function IndustriesTarget() {
       <h2 className="it-heading" id="it-title">Industries we<br />TARGET</h2>
       <p className="it-lede">Each industry comes with one real number that shows the problem, or the gain from fixing it.</p>
       <ul className="it-list">{industries.map((item, i) => <li key={item.title}>
-        <button type="button" className={`it-row${active === i ? ' is-active' : ''}`} style={{ '--tone': item.tone }} onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)}>
+        <Link href={`/insights/${item.slug}`} className={`it-row${active === i ? ' is-active' : ''}`} style={{ '--tone': item.tone }} onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)}>
           <span className="it-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{icons[item.icon]}</svg></span>
           <strong className="it-stat">{item.stat}</strong>
           <span className="it-row-copy"><b>{item.title}</b><span>{item.label}</span><small>{item.fix}</small></span>
-        </button>
+          <span className="it-go" aria-hidden="true"><Arrow diagonal /></span>
+        </Link>
       </li>)}</ul>
     </Reveal>
   </div></section>;

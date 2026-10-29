@@ -123,7 +123,6 @@ export default function SuccessStories() {
             <div className="ss-tile ss-tile-accent"><b>{story.afterLabel}</b><span>After</span></div>
             <div className="ss-tile"><b>{metricOf(story)}</b><span>{story.note.split(' · ')[1]}</span></div>
           </>}
-          <button type="button" className="ss-tile ss-tile-add" onClick={() => go(1)}><b>+</b><span>Next story</span></button>
         </div>
 
         <div className="ss-foot">
