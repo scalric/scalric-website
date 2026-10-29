@@ -11,6 +11,7 @@ import './banners-fit.css';
 import './industries-target.css';
 import './costly-mistakes.css';
 import './success-stories.css';
+import './styles/research.css';
 import './admin/admin.css';
 
 // Build marker: bump to force a new bundle URL when a deploy must not reuse a cached asset.

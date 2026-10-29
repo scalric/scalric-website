@@ -5,6 +5,7 @@ import WhyChoose from '../components/WhyChoose.jsx';
 import { ArtImage, MiniBars } from '../components/Showcase.jsx';
 import WorkSteps from '../components/WorkSteps.jsx';
 import ContactBand from '../components/ContactBand.jsx';
+import ResearchProof from '../components/ResearchProof.jsx';
 import PurposePanel from '../components/PurposePanel.jsx';
 import IndustriesTarget from '../components/IndustriesTarget.jsx';
 
@@ -51,4 +52,4 @@ function InsightsSection() {
 
 
 
-export default function HomePage() { return <><Hero /><main><WhyChoose /><InsightsSection /><IndustriesTarget /><WorkSteps /><PurposePanel /><ContactBand /></main></>; }
+export default function HomePage() { return <><Hero /><main><WhyChoose /><InsightsSection /><IndustriesTarget /><WorkSteps /><PurposePanel /><ResearchProof /><ContactBand /></main></>; }
