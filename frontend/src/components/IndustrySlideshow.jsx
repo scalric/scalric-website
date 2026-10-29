@@ -1,9 +1,9 @@
 import React from 'react';
 
 const slides = [
+  { src: '/assets/photos/industries-slide-3.jpg', title: 'A clear view of what matters.', note: 'We bring focus to the questions worth answering.' },
   { src: '/assets/photos/industries-slide-1.jpg', title: 'Every sector has its own rhythm.', note: 'We start by learning how your industry really works.' },
   { src: '/assets/photos/industries-slide-2.jpg', title: 'Learning from the people closest to it.', note: 'Good technology is shaped by the teams who use it.' },
-  { src: '/assets/photos/industries-slide-3.jpg', title: 'A clear view of what matters.', note: 'We bring focus to the questions worth answering.' },
 ];
 
 /** Looping slideshow: tall photo panels glide left one at a time, forever; pauses on hover or focus. */
