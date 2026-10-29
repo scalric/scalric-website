@@ -12,7 +12,7 @@ const icons = {
 
 const industries = [
   { title: 'Healthcare & clinics', slug: 'unanswered-clinic-calls', stat: '32%', label: 'of clinic calls go unanswered', fix: 'AI phone agent + reminders', video: '/assets/videos/impact-dental.mp4', poster: '/assets/photos/impact-dental.jpg', icon: 'care', tone: '#f08aa0' },
-  { title: 'Home services', slug: 'booking-more-calls-in-home-services', stat: '50→80%', label: 'calls booked after adding an AI agent', fix: 'AI phone agent', video: '/assets/videos/impact-electrical.mp4', poster: '/assets/photos/impact-electrical.jpg', icon: 'home', tone: '#1155d9' },
+  { title: 'Home services', slug: 'booking-more-calls-in-home-services', stat: '50→80%', label: 'calls booked after adding an AI agent', fix: 'AI phone agent', video: '/assets/videos/impact-electrical.mp4', poster: '/assets/photos/impact-electrical.jpg', icon: 'home', tone: '#ff7a45' },
   { title: 'Restaurants & cafés', slug: 'the-app-behind-the-order', stat: '33%', label: 'of Starbucks US orders come through its app', fix: 'Ordering app + loyalty', video: '/assets/videos/impact-cafes.mp4', poster: '/assets/photos/impact-cafes.jpg', icon: 'dining', tone: '#ffba49' },
   { title: 'Gyms & studios', slug: 'branded-apps-for-gyms-and-studios', stat: '62%', label: 'of bookings came through a branded app', fix: 'Booking app', video: '/assets/videos/impact-gyms.mp4', poster: '/assets/photos/impact-gyms.jpg', icon: 'sport', tone: '#2fb67c' },
   { title: 'Salons & spas', slug: 'replying-to-every-review', stat: '80%', label: 'pick businesses that reply to every review', fix: 'Booking + review replies', video: '/assets/videos/impact-salons.mp4', poster: '/assets/photos/impact-salons.jpg', icon: 'beauty', tone: '#8a6cf0' },

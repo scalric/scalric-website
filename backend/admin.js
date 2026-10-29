@@ -82,6 +82,7 @@ function filters(collection, url, params) {
   if (STATUSES.includes(status)) { params.push(status); clauses.push(`status = $${params.length}`); }
   const type = url.searchParams.get('type');
   if (collection === 'contact' && type && /^[a-z]{1,40}$/.test(type)) { params.push(type); clauses.push(`inquiry_type = $${params.length}`); }
+  if (collection === 'contact' && url.searchParams.get('exclude') === 'careers') clauses.push(`inquiry_type != 'careers'`);
   const q = (url.searchParams.get('q') || '').trim().slice(0, 100);
   if (q) {
     params.push(`%${q.replace(/[\\%_]/g, '\\$&')}%`);
@@ -181,7 +182,7 @@ export async function handleAdmin(request, response, url) {
 
   if (route === '/stats' && request.method === 'GET') {
     const [contact, byType] = await Promise.all([
-      database.query('SELECT status, COUNT(*) AS n FROM contact_submissions GROUP BY status'),
+      database.query(`SELECT status, COUNT(*) AS n FROM contact_submissions WHERE inquiry_type != 'careers' GROUP BY status`),
       database.query(`SELECT inquiry_type AS type, COUNT(*) AS n, COUNT(*) FILTER (WHERE status = 'new') AS unread FROM contact_submissions GROUP BY inquiry_type`),
     ]);
     const tally = (rows) => Object.fromEntries(rows.map((row) => [row.status, row.n]));

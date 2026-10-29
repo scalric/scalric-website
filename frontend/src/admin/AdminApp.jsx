@@ -112,7 +112,7 @@ function Overview({ stats, go, open }) {
       </section>
       <section className="adm-panel">
         <div className="adm-panel-head"><h2>By reason</h2></div>
-        <div className="adm-bars">{stats.contactByType.length ? stats.contactByType.map((row) => <div key={row.type} className="adm-bar-row">
+        <div className="adm-bars">{stats.contactByType.some((row) => row.type !== 'careers') ? stats.contactByType.filter((row) => row.type !== 'careers').map((row) => <div key={row.type} className="adm-bar-row">
           <span>{TYPE_LABELS[row.type] || row.type}</span>
           <div className="adm-bar"><i style={{ width: `${Math.max(4, (row.n / Math.max(...stats.contactByType.map((r) => r.n))) * 100)}%` }} /></div>
           <b>{row.n}</b>
@@ -164,7 +164,7 @@ function Detail({ item, onClose, onChanged }) {
 }
 
 function Inbox({ view, initialOpen, onSeen }) {
-  const [filters, setFilters] = React.useState({ q: '', status: '', type: view === 'careers' ? 'careers' : '', page: 1 });
+  const [filters, setFilters] = React.useState({ q: '', status: '', type: view === 'careers' ? 'careers' : '', exclude: view === 'contact' ? 'careers' : '', page: 1 });
   const [search, setSearch] = React.useState('');
   const [data, setData] = React.useState(null);
   const [error, setError] = React.useState('');
@@ -201,7 +201,7 @@ function Inbox({ view, initialOpen, onSeen }) {
     <div className="adm-toolbar">
       <input type="search" placeholder="Search name, email, message…" value={search} onChange={(event) => setSearch(event.target.value)} />
       <select value={filters.status} onChange={(event) => setFilters({ ...filters, status: event.target.value, page: 1 })} aria-label="Status"><option value="">All statuses</option>{STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}</select>
-      {view === 'contact' && <select value={filters.type} onChange={(event) => setFilters({ ...filters, type: event.target.value, page: 1 })} aria-label="Reason"><option value="">All reasons</option>{Object.entries(TYPE_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>}
+      {view === 'contact' && <select value={filters.type} onChange={(event) => setFilters({ ...filters, type: event.target.value, page: 1 })} aria-label="Reason"><option value="">All reasons</option>{Object.entries(TYPE_LABELS).filter(([k]) => k !== 'careers').map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>}
       <a className="adm-btn" href={`/api/admin/contact/export?${query.replace(/(^|&)page=\d+/, '')}`}>Export CSV</a>
     </div>
     {checked.size > 0 && <div className="adm-bulk" role="toolbar" aria-label="Bulk actions">
@@ -305,7 +305,7 @@ function Notifications({ stats, onOpen, onViewAll, onChanged }) {
   const [open, setOpen] = React.useState(false);
   const [busy, setBusy] = React.useState(false);
   const ref = React.useRef(null);
-  const total = stats?.contact.new || 0;
+  const total = (stats?.contact.new || 0) + (stats?.contactByType.find((row) => row.type === 'careers')?.unread || 0);
   const items = (stats?.recent || []).filter((item) => item.status === 'new');
 
   React.useEffect(() => {
@@ -357,6 +357,7 @@ export default function AdminApp() {
   const unread = { contact: stats?.contact.new || 0, careers: stats?.contactByType.find((row) => row.type === 'careers')?.unread || 0 };
   const title = NAV.find(([key]) => key === view)[1];
   const go = (key) => { setOpened(null); setView(key); };
+  const openItem = (item) => { setOpened(item); setView(item.inquiry_type === 'careers' ? 'careers' : 'contact'); };
   return <div className="adm-root adm-shell">
     <nav className="adm-side">
       <div className="adm-brand">Scalric <span>admin</span></div>
@@ -368,8 +369,8 @@ export default function AdminApp() {
       </div>
     </nav>
     <main className="adm-main">
-      <div className="adm-topbar"><h1>{title}</h1><Notifications stats={stats} onChanged={loadStats} onViewAll={() => go('contact')} onOpen={(item) => { setOpened(item); setView('contact'); }} /></div>
-      {view === 'overview' ? <Overview stats={stats} go={go} open={(item) => { setOpened(item); setView('contact'); }} />
+      <div className="adm-topbar"><h1>{title}</h1><Notifications stats={stats} onChanged={loadStats} onViewAll={() => go('contact')} onOpen={openItem} /></div>
+      {view === 'overview' ? <Overview stats={stats} go={go} open={openItem} />
         : view === 'roles' ? <Roles />
         : <Inbox key={`${view}-${opened?.id || ''}`} view={view} initialOpen={opened} onSeen={loadStats} />}
     </main>
