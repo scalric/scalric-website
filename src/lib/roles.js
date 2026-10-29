@@ -1,4 +1,5 @@
 import React from 'react';
+import { apiUrl } from './api.js';
 import { sampleRoles } from '../data/sampleRoles.js';
 
 let cache = null;
@@ -11,7 +12,7 @@ export function useRoles() {
   const [state, setState] = React.useState({ roles: cache || [], loaded: Boolean(cache) });
   React.useEffect(() => {
     let active = true;
-    fetch('/api/roles')
+    fetch(apiUrl('/api/roles'))
       .then((response) => (response.ok ? response.json() : { items: fallbackRoles }))
       .catch(() => ({ items: fallbackRoles }))
       .then((data) => { cache = data.items; if (active) setState({ roles: data.items, loaded: true }); });

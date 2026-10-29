@@ -1,12 +1,13 @@
 import React from 'react';
+import { apiUrl } from '../lib/api.js';
 
 const STATUSES = ['new', 'read', 'replied', 'archived'];
 const TYPE_LABELS = { business: 'Business inquiry', partnership: 'Partnership', impact: 'Impact program', careers: 'Careers', other: 'Something else' };
 const REFRESH_MS = 15_000;
 
 async function call(path, options = {}) {
-  const response = await fetch(`/api/admin${path}`, {
-    credentials: 'same-origin',
+  const response = await fetch(apiUrl(`/api/admin${path}`), {
+    credentials: 'include',
     ...options,
     headers: options.body ? { 'Content-Type': 'application/json' } : undefined,
     body: options.body ? JSON.stringify(options.body) : undefined,
@@ -144,7 +145,7 @@ function Detail({ item, onClose, onChanged }) {
       <div className="adm-drawer-head"><div><small>#{item.id} · {formatDate(item.created_at)}</small><h2>{item.name}</h2></div><button className="adm-icon" onClick={onClose} aria-label="Close">×</button></div>
       <dl className="adm-dl">{rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
       {history.length > 0 && <><h3>Work history</h3><ul className="adm-history">{history.map((job, index) => <li key={index}><b>{job.title}</b> · {job.company}<small>{job.from} → {job.current ? 'Present' : job.to}</small></li>)}</ul></>}
-      {item.has_resume && <a className="adm-btn adm-resume" href={`/api/admin/contact/${item.id}/resume`}>⬇ Download resume{item.resume_name ? ` (${item.resume_name})` : ''}</a>}
+      {item.has_resume && <a className="adm-btn adm-resume" href={apiUrl(`/api/admin/contact/${item.id}/resume`)}>⬇ Download resume{item.resume_name ? ` (${item.resume_name})` : ''}</a>}
       <h3>{item.role ? 'Why they are a fit' : 'Message'}</h3>
       <p className="adm-message">{item.message}</p>
       <a className="adm-btn adm-btn-primary" href={`mailto:${item.email}?subject=${encodeURIComponent('Re: your message to Scalric')}`} onClick={() => item.status === 'new' && patch({ status: 'replied' })}>Reply by email</a>
@@ -202,7 +203,7 @@ function Inbox({ view, initialOpen, onSeen }) {
       <input type="search" placeholder="Search name, email, message…" value={search} onChange={(event) => setSearch(event.target.value)} />
       <select value={filters.status} onChange={(event) => setFilters({ ...filters, status: event.target.value, page: 1 })} aria-label="Status"><option value="">All statuses</option>{STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}</select>
       {view === 'contact' && <select value={filters.type} onChange={(event) => setFilters({ ...filters, type: event.target.value, page: 1 })} aria-label="Reason"><option value="">All reasons</option>{Object.entries(TYPE_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>}
-      <a className="adm-btn" href={`/api/admin/contact/export?${query.replace(/(^|&)page=\d+/, '')}`}>Export CSV</a>
+      <a className="adm-btn" href={apiUrl(`/api/admin/contact/export?${query.replace(/(^|&)page=\d+/, '')}`)}>Export CSV</a>
     </div>
     {checked.size > 0 && <div className="adm-bulk" role="toolbar" aria-label="Bulk actions">
       <b>{checked.size} selected</b>

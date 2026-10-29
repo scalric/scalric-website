@@ -1,5 +1,10 @@
+// Backend origin (no trailing slash). Empty means same-origin /api (Vite proxy in dev).
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+
+export const apiUrl = (path) => `${API_BASE}${path}`;
+
 export async function submitForm(path, values) {
-  const response = await fetch(path, {
+  const response = await fetch(apiUrl(path), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values),
