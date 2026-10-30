@@ -1,5 +1,5 @@
 'use client';
-import { usePathname as useNextPathname, useSearchParams } from 'next/navigation';
+import { usePathname as useNextPathname } from 'next/navigation';
 
 /** Scrolls to an element id, retrying while lazy images and reveals above it settle and shift the layout. */
 export function scrollToAnchor(id) {
@@ -29,6 +29,3 @@ export function navigate(path) {
 }
 
 export const usePathname = useNextPathname;
-
-/** The current query string as URLSearchParams. */
-export const useSearch = useSearchParams;

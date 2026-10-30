@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { useSearch } from '../lib/router.js';
 import { useRoles } from '../lib/roles.js';
 import { Link, Eyebrow } from '../components/UI.jsx';
 
@@ -30,10 +29,9 @@ function writeParams(state) {
 
 const unique = (roles, key) => [...new Set(roles.map((role) => role[key]).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
-export default function OpeningsPage() {
-  const search = useSearch();
+export default function OpeningsPage({ search = '' }) {
   const { roles, loaded } = useRoles();
-  const [state, setState] = React.useState(() => readParams(search));
+  const [state, setState] = React.useState(() => readParams(new URLSearchParams(search)));
   const update = (changes) => setState((current) => ({ ...current, page: 1, ...changes }));
   React.useEffect(() => writeParams(state), [state]);
 
