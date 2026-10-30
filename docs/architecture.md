@@ -17,7 +17,7 @@
 
 ## Component and data map
 
-- `src/App.jsx` resolves routes and updates titles/descriptions.
+- `src/app/` holds the Next.js routes; each page sets its own title and description through `metadata`, and `src/components/SiteShell.jsx` wraps public pages with the header, footer and navigation behaviour.
 - `src/components/Header.jsx` owns the six-item navigation, desktop mega menus, mobile accordion navigation, search and persistent contact CTA.
 - `src/components/Forms.jsx` owns contact and Impact form behavior; `src/lib/api.js` sends requests to the API.
 - `src/data/siteContent.js` is the editable content model for capabilities, proposed industries, topic taxonomy and roles.

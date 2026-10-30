@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Link, Reveal } from '../components/UI.jsx';
 
@@ -35,7 +36,7 @@ const expect = [
 export default function LifePage() {
   return <main className="life">
     <section className="life-hero">
-      <div className="life-hero-bg" aria-hidden="true">{heroSlides.map((src, i) => <img key={src} className="life-slide" style={{ '--n': i }} src={src} alt="" decoding="async" fetchpriority={i === 0 ? 'high' : undefined} />)}</div>
+      <div className="life-hero-bg" aria-hidden="true">{heroSlides.map((src, i) => <img key={src} className="life-slide" style={{ '--n': i }} src={src} alt="" decoding="async" fetchPriority={i === 0 ? 'high' : undefined} />)}</div>
       <div className="life-hero-inner">
         <div className="life-hero-box">
           <h1>Life at Scalric</h1>

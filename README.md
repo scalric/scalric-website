@@ -1,6 +1,6 @@
 # Scalric corporate website
 
-Scalric’s responsive corporate website, built from the approved PRD structure with React and Vite. The previous recreation has been retired; its copied branding, content, media references and legacy behavior have been removed.
+Scalric’s responsive corporate website, built from the approved PRD structure with Next.js (App Router) and React. The previous recreation has been retired; its copied branding, content, media references and legacy behavior have been removed.
 
 ## Run locally
 
@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open the Vite address (normally `http://localhost:5173`). Vite proxies `/api` requests to `http://127.0.0.1:3001`, so start the backend in a second terminal.
+Open `http://127.0.0.1:3000`. Next rewrites `/api` requests to `http://127.0.0.1:3001` in development (set `API_ORIGIN` to point elsewhere; in production it defaults to the deployed backend), so start the backend in a second terminal. `npm run build` followed by `npm start` serves the production build.
 
 ## Admin site
 
@@ -20,19 +20,18 @@ Open `http://localhost:5173/admin` and sign in with `ADMIN_USERNAME` / `ADMIN_PA
 ## Project map
 
 ```text
-index.html             Vite entry
-vite.config.js, vercel.json
+next.config.mjs, jsconfig.json, vercel.json
 public/
   assets/              Wordmark, photos, generated art and cards, video posters
   media/               Hero videos
 src/
-  main.jsx, App.jsx    Entry and route resolver
+  app/                 Next.js routes: layout, (site)/ public pages, admin/
   components/          Header, mega menu, forms, shared UI, footer
-  pages/               Homepage and route-level page templates
+  views/               Homepage and route-level page templates
   admin/               The /admin site
   data/                Structured, replaceable content and taxonomy
   lib/                 Router, API client, roles, form validation (validate.js)
-  styles/              styles, premium, theme, impact, ngo, cta (loaded in that order from main.jsx)
+  styles/              styles, premium, theme, impact, ngo, cta (loaded in that order from app/layout.jsx)
 scripts/               generate-art.mjs, generate-card-art.mjs
 docs/
   architecture.md      Route, component and data-flow map

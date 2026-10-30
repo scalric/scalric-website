@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import SplitHero from '../components/SplitHero.jsx';
 import { Link, Arrow, Eyebrow, PageIntro, Reveal, TypedText } from '../components/UI.jsx';

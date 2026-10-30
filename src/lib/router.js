@@ -1,6 +1,5 @@
-import React from 'react';
-
-const routeEvent = new Event('scalric:navigate');
+'use client';
+import { usePathname as useNextPathname, useSearchParams } from 'next/navigation';
 
 /** Scrolls to an element id, retrying while lazy images and reveals above it settle and shift the layout. */
 export function scrollToAnchor(id) {
@@ -14,10 +13,14 @@ export function scrollToAnchor(id) {
   }, delay));
 }
 
+// The Next.js router instance, registered by SiteShell so plain functions (not just hooks) can navigate.
+let router = null;
+export function registerRouter(instance) { router = instance; }
+
 export function navigate(path) {
   const target = new URL(path, window.location.origin);
-  window.history.pushState({}, '', `${target.pathname}${target.search}${target.hash}`);
-  window.dispatchEvent(routeEvent);
+  const url = `${target.pathname}${target.search}${target.hash}`;
+  if (router) router.push(url, { scroll: false }); else window.location.assign(url);
   if (target.hash) {
     scrollToAnchor(target.hash.slice(1));
   } else {
@@ -25,16 +28,7 @@ export function navigate(path) {
   }
 }
 
-export function usePathname() {
-  const [pathname, setPathname] = React.useState(window.location.pathname);
-  React.useEffect(() => {
-    const update = () => setPathname(window.location.pathname);
-    window.addEventListener('popstate', update);
-    window.addEventListener('scalric:navigate', update);
-    return () => {
-      window.removeEventListener('popstate', update);
-      window.removeEventListener('scalric:navigate', update);
-    };
-  }, []);
-  return pathname;
-}
+export const usePathname = useNextPathname;
+
+/** The current query string as URLSearchParams. */
+export const useSearch = useSearchParams;

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { capabilities } from '../data/siteContent.js';
 import { Link, Arrow, Eyebrow, PageIntro, Reveal } from '../components/UI.jsx';

@@ -1,5 +1,5 @@
-// Backend origin (no trailing slash). Empty means same-origin /api (Vite proxy in dev).
-const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+// Backend origin (no trailing slash). Empty means same-origin /api (Next rewrite in dev).
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/+$/, '');
 
 export const apiUrl = (path) => `${API_BASE}${path}`;
 

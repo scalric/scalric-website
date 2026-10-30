@@ -1,12 +1,13 @@
+'use client';
 import React from 'react';
+import { useSearch } from '../lib/router.js';
 import { useRoles } from '../lib/roles.js';
 import { Link, Eyebrow } from '../components/UI.jsx';
 
 const PAGE_SIZES = [5, 10, 20];
 const FILTERS = [['location', 'Location', 'All locations'], ['team', 'Team', 'All teams'], ['workMode', 'Work mode', 'All work modes']];
 
-function readParams() {
-  const params = new URLSearchParams(window.location.search);
+function readParams(params) {
   const size = Number(params.get('size'));
   return {
     q: params.get('q') || '', location: params.get('location') || '', team: params.get('team') || '', workMode: params.get('mode') || '',
@@ -30,8 +31,9 @@ function writeParams(state) {
 const unique = (roles, key) => [...new Set(roles.map((role) => role[key]).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
 export default function OpeningsPage() {
+  const search = useSearch();
   const { roles, loaded } = useRoles();
-  const [state, setState] = React.useState(readParams);
+  const [state, setState] = React.useState(() => readParams(search));
   const update = (changes) => setState((current) => ({ ...current, page: 1, ...changes }));
   React.useEffect(() => writeParams(state), [state]);
 

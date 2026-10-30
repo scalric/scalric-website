@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { capabilities, insights, proofStats } from '../data/siteContent.js';
 import { Link, Arrow, Eyebrow, Reveal, CountUp, SplitHeading, Parallax } from '../components/UI.jsx';

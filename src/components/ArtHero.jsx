@@ -28,8 +28,8 @@ export default function ArtHero({ art = 'wave', eyebrow, title, text, children, 
   const list = chips || config.chips || [];
   return <section className={`ah ah-${art}${config.tone === 'light' ? ' ah-light' : ''}`}>
     <div className="ah-bg" aria-hidden="true">{config.slides
-      ? config.slides.map((src, i) => <img key={src} className="ah-slide" style={{ '--n': i }} src={src} alt="" fetchpriority={i === 0 ? 'high' : undefined} decoding="async" />)
-      : <img src={config.src} alt="" fetchpriority="high" decoding="async" />}</div>
+      ? config.slides.map((src, i) => <img key={src} className="ah-slide" style={{ '--n': i }} src={src} alt="" fetchPriority={i === 0 ? 'high' : undefined} decoding="async" />)
+      : <img src={config.src} alt="" fetchPriority="high" decoding="async" />}</div>
     <div className="ah-shade" aria-hidden="true" />
     <div className="container ah-inner">
       <div className="ah-copy">

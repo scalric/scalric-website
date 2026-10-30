@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { useRoles } from '../lib/roles.js';
 import { RoleApplyForm } from '../components/Forms.jsx';

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import ImpactSections from '../components/ImpactSections.jsx';
 import IndustrySlideshow from '../components/IndustrySlideshow.jsx';

@@ -8,3 +8,6 @@ dist/
 .env*
 !.env.example
 
+
+.next/
+next-env.d.ts
