@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
@@ -43,5 +43,5 @@ export default function SiteShell({ children }) {
     reportDepth();
     return () => window.removeEventListener('scroll', reportDepth);
   }, [pathname]);
-  return <div className="app-shell" id="top"><Header currentPath={pathname} /><Suspense fallback={null}>{children}</Suspense><Footer /></div>;
+  return <div className="app-shell" id="top"><Header currentPath={pathname} />{children}<Footer /></div>;
 }
