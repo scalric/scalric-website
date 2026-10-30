@@ -42,3 +42,6 @@
 /* Solid brand blue, no pattern */
 .imp-cta{background:#1155d9}
 .imp-cta-glass{display:none}
+
+/* sits flush on the footer: the white gap below the banner is gone */
+.imp .imp-cta{margin-bottom:0!important}
