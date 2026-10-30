@@ -1,5 +1,6 @@
 import React from 'react';
-import { capabilities, insights, proofStats } from '../data/siteContent.js';
+import { capabilities, proofStats } from '../data/siteContent.js';
+import { useInsights } from '../lib/posts.js';
 import { Link, Arrow, Eyebrow, Reveal, CountUp, SplitHeading, Parallax } from '../components/UI.jsx';
 import WhyChoose from '../components/WhyChoose.jsx';
 import { ArtImage, MiniBars } from '../components/Showcase.jsx';
@@ -39,6 +40,7 @@ function Hero() {
 const thinkImages = ['/assets/photos/home-insight-data.webp', '/assets/photos/home-insight-ai.webp', '/assets/photos/home-insight-automation.webp'];
 
 function InsightsSection() {
+  const { insights } = useInsights();
   const track = (event, slug) => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event, slug } }));
   return <section className="section think-section" id="insights"><div className="think-grid-lines" aria-hidden="true" /><div className="container">
     <Reveal className="think-head"><span className="think-eyebrow">THINKING AHEAD</span><h2>Ideas for what’s next</h2><Link href="/insights" className="think-all" onClick={() => track('view_all_insights_click')}>View all insights <Arrow diagonal /></Link></Reveal>

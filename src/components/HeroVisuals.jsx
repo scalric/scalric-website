@@ -1,5 +1,6 @@
 import React from 'react';
-import { proposedIndustries, insights, workingPrinciples } from '../data/siteContent.js';
+import { proposedIndustries, workingPrinciples } from '../data/siteContent.js';
+import { useInsights } from '../lib/posts.js';
 import { Link, Arrow } from './UI.jsx';
 
 /** Industries: six sector tiles that light up in sequence; hover to lift one. */
@@ -15,12 +16,12 @@ export function IndustriesVisual() {
 
 /** Insights: a stack of perspective cards that cycle; pauses while hovered. */
 export function InsightsVisual() {
-  const items = insights.slice(0, 3);
+  const items = useInsights().insights.slice(0, 3);
   const [front, setFront] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
   React.useEffect(() => {
     if (paused) return undefined;
-    const id = setInterval(() => setFront((f) => (f + 1) % items.length), 3200);
+    const id = setInterval(() => setFront((f) => (f + 1) % Math.max(items.length, 1)), 3200);
     return () => clearInterval(id);
   }, [paused, items.length]);
   return <div className="hv hv-insights" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>

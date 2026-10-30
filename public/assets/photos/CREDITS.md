@@ -5,11 +5,9 @@ Each source page was checked to show "Free Photo on Unsplash" before download.
 
 | File | Source |
 | --- | --- |
-| team-whiteboard.jpg | https://unsplash.com/photos/team-collaborating-around-a-whiteboard-during-a-meeting-rgKX4o2xSqI |
 | team-charts.jpg | https://unsplash.com/photos/team-collaborating-around-a-table-with-charts-3-gj1U72tiQ |
 | business-meeting.jpg | https://unsplash.com/photos/business-professionals-collaborating-in-a-modern-office-meeting-7Nu4atuZN1U |
 | community-cleanup.jpg | https://unsplash.com/photos/volunteers-cleaning-up-trash-in-a-forest-_WOHOgkLw2M |
-| code-screen.jpg | https://unsplash.com/photos/laptop-screen-displaying-code-with-colorful-background-xHS2Gbjw4OI |
 | glass-tower-triangle.jpg | https://unsplash.com/photos/modern-architecture-with-a-triangular-glass-building-2HIFbbo8LLw |
 | glass-skyscraper.jpg | https://unsplash.com/photos/modern-skyscraper-with-glass-windows-against-sky-iDJbHSy6CWc |
 
@@ -17,8 +15,6 @@ Each source page was checked to show "Free Photo on Unsplash" before download.
 
 | File | Source |
 | --- | --- |
-| insight-data.jpg | https://unsplash.com/photos/a-sleek-modern-desk-setup-with-multiple-screens-IO3_vOUwjVs |
-| insight-ai.jpg | https://unsplash.com/photos/a-close-up-of-a-computer-screen-with-a-blurry-background-MMUzS5Qzuus |
 | insight-process.jpg | https://unsplash.com/photos/colorful-sticky-notes-scattered-on-a-white-board-OBOoohXBrD8 |
 | ind-finance.jpg | https://unsplash.com/photos/a-city-street-filled-with-lots-of-tall-buildings-PGP52saoqH0 |
 | ind-healthcare.jpg | https://unsplash.com/photos/doctor-wearing-a-stethoscope-sits-at-a-desk-JJEOuvnY1Tw |
@@ -34,14 +30,11 @@ Also reused on the impact page: business-meeting.jpg, team-charts.jpg, community
 
 | File | Source |
 | --- | --- |
-| tech-network.jpg | Procedurally generated for Scalric (Python/Pillow): a particle sweep with a connected node network, in the site's green and blue palette. Inspired by the composition of a dark particle hero (analysed from the Gemini About page); no footage or frames were copied. |
 
 ## Provided by the client (licence to confirm before launch)
 
 | File | Source |
 | --- | --- |
-| ai-lightbulb.webp | Image supplied by Scalric for the AI capability card. Source and licence not recorded; confirm before launch. |
-| consulting-boardroom.webp | Image supplied by Scalric for the Consulting capability card. Source and licence not recorded; confirm before launch. |
 
 ## Provided by the client for the home Insights cards (licence to confirm before launch)
 
@@ -49,7 +42,6 @@ Also reused on the impact page: business-meeting.jpg, team-charts.jpg, community
 | --- | --- |
 | home-insight-data.webp | Image supplied by Scalric (data dashboard). Source and licence not recorded. |
 | home-insight-ai.webp | Image supplied by Scalric (AI chip). Source and licence not recorded. |
-| home-insight-agents.webp | Image supplied by Scalric (agent network). Source and licence not recorded. |
 
 ## Provided by the client for the What We Do detail sections (licence to confirm before launch)
 
@@ -58,7 +50,6 @@ Also reused on the impact page: business-meeting.jpg, team-charts.jpg, community
 | detail-saas-cloud.webp | Image supplied by Scalric (SaaS). Source and licence not recorded. |
 | detail-ai-chip.webp | Image supplied by Scalric (AI). Source and licence not recorded. |
 | detail-data-code.webp | Image supplied by Scalric (data). Source and licence not recorded. |
-| detail-consulting-platform.png | Image supplied by Scalric (consulting). Source and licence not recorded. |
 
 ## Provided by the client for the Industries cards (licence to confirm before launch)
 

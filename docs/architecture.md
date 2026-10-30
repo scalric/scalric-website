@@ -30,4 +30,4 @@ The frontend emits `contact_form_submit`, `impact_teaser_click`, `impact_to_home
 ## Design and accessibility
 
 Single-family Manrope typography, white/green/charcoal palette, responsive layouts, focus-visible controls, keyboard-operable navigation, semantic form labels and reduced-motion support. The supplied 8-second video is used on desktop with a generated still poster; mobile uses a CSS abstract fallback to limit video loading.
-- `src/admin/` (with the backend's `/api/admin/*` routes) implements the `/admin` site (signed-cookie login, enquiry inbox, status, notes, CSV export).
+- The admin site lives in the separate `scalric-website-admin` project and uses the backend's `/api/admin/*` routes.

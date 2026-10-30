@@ -1,5 +1,5 @@
 import React from 'react';
-import { insights } from '../data/siteContent.js';
+import { useInsights } from '../lib/posts.js';
 import { Link, useInView } from './UI.jsx';
 
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -55,6 +55,7 @@ export function Gauge({ percent, from, down = false }) {
 
 /** "Read: <article title>" link to the insight that covers a figure; renders nothing without a slug. */
 export function ReadLink({ slug, from }) {
+  const { insights } = useInsights();
   const article = insights.find((item) => item.slug === slug);
   if (!article) return null;
   const track = () => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'research_read_click', slug, from } }));

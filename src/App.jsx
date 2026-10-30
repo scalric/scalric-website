@@ -9,7 +9,6 @@ import CompanyPage from './pages/CompanyPage.jsx';
 import { RoleDetailPage } from './pages/CompanyCareersPages.jsx';
 import OpeningsPage from './pages/OpeningsPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
-import AdminApp from './admin/AdminApp.jsx';
 import LifePage from './pages/LifePage.jsx';
 import { usePathname, scrollToAnchor } from './lib/router.js';
 import { autoReveal } from './lib/autoReveal.js';
@@ -82,5 +81,5 @@ function SiteApp({ pathname }) {
 
 export default function App() {
   const pathname = usePathname();
-  return pathname === '/admin' || pathname.startsWith('/admin/') ? <AdminApp/> : <SiteApp pathname={pathname}/>;
+  return <SiteApp pathname={pathname}/>;
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { navigate } from '../lib/router.js';
-import { capabilities, insights, proposedIndustries } from '../data/siteContent.js';
+import { capabilities, proposedIndustries } from '../data/siteContent.js';
+import { useInsights } from '../lib/posts.js';
 
 const pageEntries = [
   ['What We Do', '/what-we-do', 'Technology and consulting services built around your outcome.', 'Page'],
@@ -13,14 +14,15 @@ const pageEntries = [
   ['Contact', '/contact', 'Talk to the Scalric team.', 'Page'],
 ];
 
-const index = [
+const staticIndex = [
   ...pageEntries,
   ...capabilities.map((item) => [item.title, item.href, item.text, 'What we do']),
   ...proposedIndustries.map((item) => [item.title, '/industries', item.text, 'Industry']),
-  ...insights.map((item) => [item.title, `/insights/${item.slug}`, `${item.category}. ${item.dek}`, 'Insight']),
-].map(([title, href, text, kind]) => ({ title, href, text, kind, haystack: `${title} ${text} ${kind}`.toLowerCase() }));
+];
+const entry = ([title, href, text, kind]) => ({ title, href, text, kind, haystack: `${title} ${text} ${kind}`.toLowerCase() });
+const insightEntries = (insights) => insights.map((item) => entry([item.title, `/insights/${item.slug}`, `${item.category}. ${item.dek}`, 'Insight']));
 
-function runSearch(query) {
+function runSearch(query, index) {
   const words = query.toLowerCase().split(/\s+/).filter(Boolean);
   if (!words.length) return [];
   return index
@@ -37,7 +39,9 @@ export default function SiteSearch() {
   const [query, setQuery] = React.useState('');
   const [active, setActive] = React.useState(0);
   const inputRef = React.useRef(null);
-  const results = React.useMemo(() => runSearch(query), [query]);
+  const { insights } = useInsights();
+  const index = React.useMemo(() => [...staticIndex.map(entry), ...insightEntries(insights)], [insights]);
+  const results = React.useMemo(() => runSearch(query, index), [query, index]);
 
   const close = React.useCallback(() => { setOpen(false); setQuery(''); setActive(0); }, []);
   const go = (entry) => { close(); navigate(entry.href); };

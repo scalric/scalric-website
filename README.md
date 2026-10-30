@@ -15,7 +15,7 @@ Open the Vite address (normally `http://localhost:5173`). Vite proxies `/api` re
 
 ## Admin site
 
-Open `http://localhost:5173/admin` and sign in with `ADMIN_USERNAME` / `ADMIN_PASSWORD` from `.env`. It lists everything submitted through the contact form ("Talk to us", "Start a conversation" and the Careers page links all use it, with Careers tagged as the *Careers* reason). For each entry you can search and filter, open the full message, reply by email, set a status (new, read, replied, archived), keep internal notes, delete, and export to CSV. Sessions last 8 hours and are stored in a signed HttpOnly cookie; set `ADMIN_SESSION_SECRET` to keep sessions valid across API restarts. If `ADMIN_PASSWORD` is empty the admin is disabled.
+The admin UI now lives in the separate `scalric-admin` project (`../scalric-website-admin`, dev port 5174). It uses the same backend's `/api/admin/*` routes; see that project's README.
 
 ## Project map
 
@@ -29,7 +29,6 @@ src/
   main.jsx, App.jsx    Entry and route resolver
   components/          Header, mega menu, forms, shared UI, footer
   pages/               Homepage and route-level page templates
-  admin/               The /admin site
   data/                Structured, replaceable content and taxonomy
   lib/                 Router, API client, roles, form validation (validate.js)
   styles/              styles, premium, theme, impact, ngo, cta (loaded in that order from main.jsx)
@@ -46,7 +45,7 @@ docs/
 
 ## Backend and data
 
-Forms post to `POST /api/contact` and `POST /api/impact/applications`, careers roles come from `GET /api/roles`, and `/admin` uses `/api/admin/*`. All of it is served by `scalric-website-backend`, which stores data in Supabase (Data API) and resumes in a Storage bucket.
+Forms post to `POST /api/contact` and `POST /api/impact/applications`, careers roles come from `GET /api/roles`. All of it is served by `scalric-website-backend`, which stores data in Supabase (Data API) and resumes in a Storage bucket.
 
 ## Content to confirm before launch
 
