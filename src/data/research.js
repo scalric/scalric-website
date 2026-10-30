@@ -32,9 +32,6 @@ export const numberGroups = [
   ['all', 'All 18'], ['mkt', 'Marketing'], ['dev', 'Development'], ['ai', 'AI & automation'], ['risk', 'Security'],
 ];
 
-// Row indexes shown before "Show all": two per group.
-export const featuredNumbers = [0, 2, 7, 8, 11, 13, 16, 17];
-
 // [group, topic, value, text, source key, source label + year]
 export const researchNumbers = [
   ['dev', 'Website speed', '+8.4%', 'more retail sales for each 0.1s faster mobile site', 'mmm', 'Deloitte for Google · 2019'],
@@ -75,3 +72,21 @@ export const buyerMarkets = [
   ['Rules to know', 'DPDP Act 2023', 'HIPAA (health), TCPA (calls)', 'UK GDPR, PECR', 'PIPEDA, CASL, Quebec Law 25'],
   ['Proof to show', 'redBus, Nykaa, Bombay Shaving Co', 'Riley Plumbing, Clio data', 'Vodafone, Rakuten, Baymard', 'Oxygen Yoga, Air Canada lesson'],
 ];
+
+// How each number in researchNumbers is drawn, keyed by row index: share = filled gauge, ba = before → after, down = shrinking gauge.
+export const numberViz = {
+  2: { kind: 'share', v: 70 }, 4: { kind: 'share', v: 18 }, 8: { kind: 'share', v: 97 }, 9: { kind: 'ba', from: 6, v: 45 },
+  10: { kind: 'share', v: 47 }, 11: { kind: 'share', v: 85 }, 12: { kind: 'share', v: 80 }, 13: { kind: 'share', v: 37 },
+  14: { kind: 'down', v: 25 }, 16: { kind: 'share', v: 88 },
+};
+
+// Small businesses by country, in millions: India registered MSMEs (Dec 2025), US (2025), UK (2025), Canada (Dec 2024).
+export const marketSizes = [['India', 73], ['United States', 36.2], ['United Kingdom', 5.68], ['Canada', 1.08]];
+
+// Overview tile per group on "All 18": the row index of its headline number, and a one-line takeaway.
+export const numberSummaries = {
+  mkt: [8, 'People check you out before they call, and more of them now start with AI search.'],
+  dev: [0, 'A faster site and a smoother checkout turn the visitors you already have into sales.'],
+  ai: [11, 'Answering every call and message, at any hour, is where AI pays back first.'],
+  risk: [17, 'Small firms are targets, and one breach costs far more than prevention.'],
+};

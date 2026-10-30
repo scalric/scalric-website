@@ -8,3 +8,8 @@ dist/
 .env*
 !.env.example
 
+
+# Locally installed Claude skills
+.agents/
+.claude/
+skills-lock.json
