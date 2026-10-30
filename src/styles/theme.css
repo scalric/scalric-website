@@ -1624,7 +1624,7 @@ body .ft-cta-btn:hover,body .ft-cta-btn:focus-visible,body .ft-cta-btn:active{ba
 /* Copy typography: one font, line height and colour for body text on light sections.
    Header, footer and text on dark or image sections keep their own colours. */
 :root{--copy:#454a55;--copy-lh:1.7}
-body main :is(p,dd):not(:is(.ah,.home-hero,.wwd-hero,.split-hero-blue,.split-hero-navy,.page-hero-dark,.think-section,.why-hero,.why-stat,.imp-hero,.imp-statement,.imp-showcase-track,.imp-ngo-box,.imp-cta,.impact-stage,.bento-photo,.stat-tile,.cb-btn,.button) *){font-family:Manrope,Arial,sans-serif!important;line-height:var(--copy-lh)!important;color:var(--copy)!important;font-weight:400!important}
+body main :is(p,dd):not(:is(.ah,.home-hero,.wwd-hero,.split-hero-blue,.split-hero-navy,.page-hero-dark,.think-section,.why-hero,.why-stat,.imp-hero,.imp-statement,.imp-showcase-track,.imp-ngo-box,.imp-cta,.impact-stage,.bento-photo,.stat-tile,.cb-btn,.button,.ss-panel,.ss-section) *){font-family:Manrope,Arial,sans-serif!important;line-height:var(--copy-lh)!important;color:var(--copy)!important;font-weight:400!important}
 body main :is(.home-hero,.wwd-hero,.split-hero-blue,.split-hero-navy,.think-section,.why-hero,.imp-hero,.imp-ngo-box,.imp-showcase-track,.imp-statement) :is(p,dd){line-height:var(--copy-lh)}
 
 /* Footer */

@@ -26,7 +26,6 @@ function Hero() {
   };
   return <section className="home-hero hero-city" id="top" aria-labelledby="hero-title">
     {enabled && <video ref={videoRef} className="hero-city-video" src={mobile ? '/media/hero-mobile-new.mp4' : '/media/hero-home.mp4'} autoPlay muted loop playsInline preload="auto" aria-hidden="true" tabIndex={-1} key={mobile ? 'm' : 'd'} poster={mobile ? '/assets/hero-mobile-new-poster.jpg' : '/assets/hero-home-poster.jpg'} onCanPlay={(event) => { const video = event.currentTarget; video.muted = true; if (video.paused && playing) video.play().catch(() => setPlaying(false)); }} />}
-    <div className="hero-city-shade" aria-hidden="true" />
     <div className="container hero-content">
       <Eyebrow>TECHNOLOGY · CONSULTING · INNOVATION</Eyebrow>
       <SplitHeading as="h1" lines={['Engineering', 'the difference']} accent={1} className="hero-title" startDelay={2} />

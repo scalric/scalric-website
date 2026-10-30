@@ -1,140 +1,110 @@
+'use client';
 import React from 'react';
 import { Reveal } from './UI.jsx';
-import { useCountTo } from '../lib/motion.js';
 
-// Gains are percentages; `low`/`high` give a range when the source quotes one.
-const gains = [
-  { name: 'Bombay Shaving Co', note: 'sales rate, new store platform', low: 150 },
-  { name: 'redBus', note: 'mobile sales, faster pages', low: 80, high: 100 },
-  { name: 'Rakuten 24', note: 'money per visitor, speed only', low: 53 },
-  { name: 'Rakuten 24', note: 'sales rate, speed only', low: 33 },
-  { name: 'Nykaa', note: 'visitors from smaller cities', low: 28 },
-  { name: 'Vodafone Italy', note: 'sales after faster pages', low: 8 },
-].map((item) => ({ ...item, type: 'gain', size: item.high || item.low, label: `+${item.low}${item.high ? `–${item.high}` : ''}%` }));
-
-// Rates before and after the fix, on a 0-100% scale. Ranges are drawn at their midpoint and labelled as given.
-const shifts = [
-  { name: 'Ispahani Tea', note: 'Sales rate · WhatsApp shop', beforeLabel: '5–10%', afterLabel: '40–50%', n: 37, sign: '+' },
-  { name: 'Riley Plumbing', note: 'Calls booked · AI phone agent', beforeLabel: '<50%', afterLabel: '80%', n: 30, sign: '+' },
-  { name: '6 US health systems', note: 'Doctor burnout · AI note-taker', beforeLabel: '52%', afterLabel: '39%', n: 13, sign: '−' },
-  { name: '21 clinic studies', note: 'Missed visits · text reminders', beforeLabel: '21%', afterLabel: '15%', n: 6, sign: '−' },
-].map((item) => ({ ...item, type: 'shift', label: `${item.sign}${item.n} pts` }));
-
-const stories = [...gains, ...shifts];
-const biggest = 150;
-const tabs = [
-  { key: 'all', label: 'All stories', title: 'Success stories', pick: () => true },
-  { key: 'gain', label: 'Gains', title: 'Faster pages and better stores lifted results 8% to 150%', pick: (s) => s.type === 'gain' },
-  { key: 'shift', label: 'Before & after', title: 'Every fix moved its number the right way', pick: (s) => s.type === 'shift' },
+// One entry per company. Logos are read from /assets/logos/<slug>.svg (or .png); until a file exists the company name is shown instead.
+const stories = [
+  { name: 'Bombay Shaving Co', logo: true, title: 'Sales rate up', accent: '+150%', text: 'A new store platform lifted Bombay Shaving Co’s sales rate by 150%.', metric: 'Sales rate', fix: 'New store platform' },
+  { name: 'redBus', logo: true, title: 'Mobile sales up', accent: '+80–100%', text: 'Faster pages lifted redBus mobile sales by 80–100%.', metric: 'Mobile sales', fix: 'Faster pages' },
+  { name: 'Rakuten 24', logo: true, title: 'Money per visitor up', accent: '+53%', text: 'Speed alone lifted money per visitor by 53% and sales rate by 33%.', metric: 'Money per visitor, sales rate', fix: 'Speed only' },
+  { name: 'Nykaa', logo: true, title: 'Visitors from smaller cities', accent: '+28%', text: 'Nykaa grew its visitors from smaller cities by 28%.', metric: 'Visitors from smaller cities', fix: 'A small, specific fix' },
+  { name: 'Vodafone Italy', logo: true, title: 'Sales after faster pages', accent: '+8%', text: 'Vodafone Italy saw sales rise 8% once its pages got faster.', metric: 'Sales', fix: 'Faster pages' },
+  { name: 'Ispahani Tea', logo: true, title: 'Sales rate', accent: '5–10% to 40–50%', text: 'Ispahani Tea’s sales rate climbed from 5–10% to 40–50%.', metric: 'Sales rate', fix: 'WhatsApp shop' },
+  { name: 'Riley Plumbing', logo: true, title: 'Calls booked', accent: 'under 50% to 80%', text: 'Riley Plumbing now books 80% of its calls, up from under 50%.', metric: 'Calls booked', fix: 'AI phone agent' },
 ];
-const tones = ['#2a72f0', '#ffba49', '#2fb67c', '#f08aa0', '#8a6cf0', '#26b5d6', '#f08a4b', '#5b8def', '#e0607e', '#3cc4a0'];
+
+const PER_PAGE = 3;
 const slug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-// Companies whose logo file is expected at /assets/logos/<slug>.svg (or .png); the rest show their initials.
-const hasLogo = new Set(['Bombay Shaving Co', 'redBus', 'Rakuten 24', 'Nykaa', 'Vodafone Italy', 'Ispahani Tea', 'Riley Plumbing']);
-const initials = (name) => name.split(/\s+/).filter((w) => /^[A-Za-z]/.test(w)).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
-const metricOf = (story) => (story.type === 'gain' ? story.note.split(', ')[0] : story.note.split(' · ')[0]);
 
-/** The company logo when its file exists, otherwise a coloured circle with initials. */
-function Avatar({ story, tone }) {
-  const [attempt, setAttempt] = React.useState(0);
-  const sources = hasLogo.has(story.name) ? [`/assets/logos/${slug(story.name)}.svg`, `/assets/logos/${slug(story.name)}.png`] : [];
-  if (attempt < sources.length) {
-    return <span className="ss-avatar ss-avatar-logo" aria-hidden="true"><img src={sources[attempt]} alt="" loading="lazy" decoding="async" onError={() => setAttempt(attempt + 1)} /></span>;
-  }
-  return <span className="ss-avatar" style={{ '--tone': tone }} aria-hidden="true">{initials(story.name)}</span>;
+function Chevron({ flip = false }) {
+  return <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style={flip ? { transform: 'scaleX(-1)' } : undefined}><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
-/** Counts the figure up each time a different story is picked. */
-function Figure({ story }) {
-  const value = Math.round(useCountTo(story.type === 'gain' ? story.low : story.n, true, 1100));
-  const high = Math.round(useCountTo(story.high || 0, true, 1100));
-  if (story.type === 'gain') return <>+{value}{story.high ? `–${high}` : ''}%</>;
-  return <>{story.sign}{value} pts</>;
+/** The company logo once its file has been found, otherwise the company name set as a wordmark. Near-square artwork (research cards) gets a taller box than wide wordmarks. */
+function Logo({ story }) {
+  const [found, setFound] = React.useState(null);
+  React.useEffect(() => {
+    if (!story.logo) return undefined;
+    let cancelled = false;
+    const options = [`/assets/logos/${slug(story.name)}.svg`, `/assets/logos/${slug(story.name)}.png`];
+    const probe = (index) => {
+      if (index >= options.length) return;
+      const image = new Image();
+      image.onload = () => { if (!cancelled) setFound({ src: options[index], card: image.naturalWidth / image.naturalHeight < 2.2 }); };
+      image.onerror = () => probe(index + 1);
+      image.src = options[index];
+    };
+    probe(0);
+    return () => { cancelled = true; };
+  }, [story.name, story.logo]);
+  return <span className={`ss-logo-box${found?.card ? ' is-card' : ''}`}>{found ? <img className="ss-logo" src={found.src} alt={story.name} decoding="async" /> : <span className="ss-wordmark">{story.name}</span>}</span>;
 }
 
-/** "Success stories" dashboard: a list of results on the left, the selected story's details on the right. */
+/** The info shown in the white panel for one company. */
+function PanelBody({ story, layer }) {
+  return <div className={`ss-panel-in ${layer}`}>
+    <p className="ss-panel-company">{story.name}</p>
+    <h3>{story.title} <span>{story.accent}</span></h3>
+    <p className="ss-panel-text" lang="en">{story.text}</p>
+    <ul className="ss-panel-facts">
+      <li><small>Measured</small><b>{story.metric}</b></li>
+      <li><small>The fix</small><b>{story.fix}</b></li>
+    </ul>
+  </div>;
+}
+
+/** "Success stories": three company logos form a circle with an info panel beside them; picking a logo shows that company's result. */
 export default function SuccessStories() {
-  const [tab, setTab] = React.useState('all');
   const [selected, setSelected] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
-  const current = tabs.find((t) => t.key === tab);
-  const list = stories.filter(current.pick);
-  const position = Math.min(selected, list.length - 1);
-  const story = list[position];
-  const listRef = React.useRef(null);
-  const go = React.useCallback((step) => setSelected((value) => (value + step + list.length) % list.length), [list.length]);
+  const story = stories[selected];
+  // `leaving` is the story sliding out of the panel while the new one slides in; it is cleared once the slide has finished.
+  const [view, setView] = React.useState({ current: selected, leaving: null });
+  if (view.current !== selected) setView({ current: selected, leaving: view.current });
+  React.useEffect(() => {
+    if (view.leaving === null) return undefined;
+    const timer = window.setTimeout(() => setView((value) => ({ ...value, leaving: null })), 420);
+    return () => window.clearTimeout(timer);
+  }, [view]);
+  const page = Math.floor(selected / PER_PAGE);
+  // The last page shows the final three, so a page never has empty quadrants.
+  const first = Math.min(page * PER_PAGE, stories.length - PER_PAGE);
+  const tiles = stories.slice(first, first + PER_PAGE);
+  const go = React.useCallback((step) => setSelected((value) => (value + step + stories.length) % stories.length), []);
 
-  // The selection moves on by itself until the visitor interacts with the panel.
+  // The selection moves on by itself until the visitor interacts with the poster.
   React.useEffect(() => {
     if (paused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return undefined;
-    const timer = window.setInterval(() => go(1), 4500);
+    const timer = window.setInterval(() => go(1), 5200);
     return () => window.clearInterval(timer);
   }, [paused, go]);
 
-  // Keep the picked row in view inside the list without scrolling the whole page.
-  React.useEffect(() => {
-    const box = listRef.current;
-    const row = box?.querySelector('.ss-item.is-on');
-    if (box && row) box.scrollTo({ top: row.offsetTop - box.clientHeight / 2 + row.offsetHeight / 2, behavior: 'smooth' });
-  }, [position, tab]);
-
-  const choose = (key) => { setTab(key); setSelected(0); };
-  const bar = story.type === 'gain' ? Math.max(6, (story.size / biggest) * 100) : 0;
-
-  return <section className="section ss-section" id="success-stories" aria-labelledby="ss-title"><div className="container">
-    <Reveal className="ss-head">
-      <h2 id="ss-title">Success stories:<br />what worked</h2>
-      <p className="ss-lede">Small, specific fixes created large, measured results.</p>
-    </Reveal>
-
-    <Reveal><div className="ss-board" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
-      <div className="ss-tabs" role="tablist" aria-label="Story type">
-        {tabs.map((t) => <button key={t.key} type="button" role="tab" aria-selected={tab === t.key} className={tab === t.key ? 'is-on' : ''} onClick={() => choose(t.key)}>
-          {t.label}<span>{stories.filter(t.pick).length}</span>
-        </button>)}
+  return <section className="section ss-section" id="success-stories" aria-labelledby="ss-title"><div className="container ss-layout">
+    <div className="ss-intro">
+      <Reveal>
+        <h2 id="ss-title">Success stories:<br />what worked</h2>
+        <p className="ss-lede">Small, specific fixes created large, measured results.</p>
+      </Reveal>
+      <div className="ss-controls">
+        <div className="ss-arrows">
+          <button type="button" className="ss-round" aria-label="Previous story" onClick={() => go(-1)}><Chevron flip /></button>
+          <button type="button" className="ss-round" aria-label="Next story" onClick={() => go(1)}><Chevron /></button>
+        </div>
+        <span className="ss-count" aria-live="polite">{String(selected + 1).padStart(2, '0')} <i>/</i> {String(stories.length).padStart(2, '0')}</span>
+        <div className="ss-dots" role="group" aria-label="Choose a story">
+          {stories.map((item, i) => <button key={item.name} type="button" className={i === selected ? 'is-on' : ''} aria-label={item.name} aria-pressed={i === selected} onClick={() => setSelected(i)} />)}
+        </div>
       </div>
+    </div>
 
-      <div className="ss-list">
-        <h3 className="ss-list-title">{current.title}</h3>
-        <ul ref={listRef}>{list.map((item, i) => <li key={item.name + item.note}>
-          <button type="button" aria-pressed={i === position} className={`ss-item${i === position ? ' is-on' : ''}`} onClick={() => setSelected(i)}>
-            <Avatar story={item} tone={tones[stories.indexOf(item) % tones.length]} />
-            <span className="ss-item-copy"><b>{item.name}</b><small>{item.type === 'gain' ? item.note : metricOf(item)}</small></span>
-            <span className="ss-pill">{item.type === 'gain' ? 'Gain' : 'Shift'}</span>
-            <strong className="ss-item-value">{item.label}</strong>
-          </button>
-        </li>)}</ul>
-      </div>
+    <Reveal><div className="ss-poster" role="group" aria-label="Company results" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+      {tiles.map((item, i) => <button key={item.name} type="button" className={`ss-tile ss-tile-${i + 1}${item.name === story.name ? ' is-on' : ''}`} aria-pressed={item.name === story.name} onClick={() => setSelected(stories.indexOf(item))}>
+        <Logo story={item} />
+      </button>)}
 
-      <div className="ss-detail" key={story.name + story.note}>
-        <div className="ss-detail-head">
-          <div><small>Story</small><h3>{story.name}</h3></div>
-          <div><small>Type</small><b>{story.type === 'gain' ? 'Measured gain' : 'Before & after'}</b></div>
-          <div className="ss-big"><small>Result</small><b><Figure story={story} /></b></div>
-        </div>
-
-        <div className="ss-tiles">
-          {story.type === 'gain' ? <>
-            <div className="ss-tile"><b><Figure story={story} /></b><span>Improvement</span></div>
-            <div className="ss-tile ss-tile-wide"><b>{metricOf(story)}</b><span>{story.note.includes(', ') ? story.note.split(', ').slice(1).join(', ') : 'what moved'}</span></div>
-            <div className="ss-tile"><i className="ss-meter" style={{ '--w': `${bar}%` }}><em /></i><span>Size against the biggest gain</span></div>
-          </> : <>
-            <div className="ss-tile"><b>{story.beforeLabel}</b><span>Before</span></div>
-            <div className="ss-tile ss-tile-accent"><b>{story.afterLabel}</b><span>After</span></div>
-            <div className="ss-tile"><b>{metricOf(story)}</b><span>{story.note.split(' · ')[1]}</span></div>
-          </>}
-        </div>
-
-        <div className="ss-foot">
-          <div><small>Story</small><b>{position + 1} of {list.length}</b></div>
-          <div><small>Result</small><b>{story.label}</b></div>
-          <div><small>Metric</small><b>{metricOf(story)}</b></div>
-          <div className="ss-foot-actions">
-            <button type="button" className="ss-round" aria-label="Previous story" onClick={() => go(-1)}>‹</button>
-            <button type="button" className="ss-round" aria-label="Next story" onClick={() => go(1)}>›</button>
-            <button type="button" className="ss-next" onClick={() => go(1)}>Next story</button>
-          </div>
-        </div>
+      <div className="ss-panel" aria-live="polite">
+        {view.leaving !== null && <PanelBody key={`out-${view.leaving}`} story={stories[view.leaving]} layer="is-out" />}
+        <PanelBody key={`in-${story.name}`} story={story} layer={view.leaving !== null ? 'is-swap' : ''} />
       </div>
     </div></Reveal>
   </div></section>;

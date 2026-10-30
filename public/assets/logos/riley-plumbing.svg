@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="260" viewBox="0 0 1100 260" role="img" aria-labelledby="title desc">
+<title id="title">William J. Riley Plumbing &amp; Heating</title>
+<desc id="desc">Illustrative recreation of the visible William J. Riley Plumbing and Heating branding, with a red plumbing wrench and black wordmark.</desc>
+<rect width="1100" height="260" fill="#fff"/>
+<g transform="translate(28 22) rotate(-25 92 108)" fill="none" stroke="#d9272e" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M78 28 C54 9 23 17 13 42 C5 62 15 84 34 94 L45 105 L45 197 Q45 215 63 215 L80 215 Q98 215 98 197 L98 105 L110 93 C129 82 138 60 129 41 C120 18 91 9 69 26"/>
+ <path d="M60 31 L60 68 M92 31 L92 68"/>
+</g>
+<g fill="#171717" font-family="Arial, Helvetica, sans-serif">
+ <text x="190" y="112" font-size="76" font-weight="700" letter-spacing="-2">William J. Riley</text>
+ <path d="M190 132 H1050" stroke="#171717" stroke-width="5"/>
+ <text x="195" y="198" font-size="49" font-weight="600" letter-spacing="4">PLUMBING &amp; HEATING</text>
+</g>
+</svg>

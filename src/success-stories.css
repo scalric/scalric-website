@@ -1,103 +1,65 @@
-/* "Success stories" dashboard on the Insights page: results list on the left, selected story on the right */
-.ss-section{background:#f5f8ff;border-bottom:1px solid #1155d91f;padding-block:clamp(48px,6vw,88px)}
-.ss-head h2{margin:0 0 14px;font-size:clamp(34px,4.4vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.035em;color:var(--talk,#ffba49)}
-body main .ss-lede{max-width:34em;margin:0 0 clamp(24px,3.4vw,40px);font-size:clamp(16px,1.35vw,20px);line-height:1.6;color:#454a55}
+/* "Success stories" on the Insights page: three company logos form a circle, an info panel fills the fourth corner */
+.ss-section{background:#1155d9;padding-block:clamp(48px,6vw,96px)}
+.ss-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,88px);align-items:center}
+.ss-intro{display:grid;gap:clamp(28px,4vw,52px);align-content:center}
+.ss-intro h2{margin:0 0 16px;font-size:clamp(38px,5vw,80px);font-weight:500;line-height:1.05;letter-spacing:-.035em;color:var(--talk,#ffba49)}
+body main .ss-lede{max-width:28em;margin:0;font-size:clamp(16px,1.4vw,21px);line-height:1.6;color:#e3ecff}
 
-.ss-board{position:relative;display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.5fr);gap:14px;padding:clamp(14px,1.6vw,22px);padding-top:clamp(70px,6vw,84px);border-radius:26px;background:#0d1226;color:#fff;box-shadow:0 40px 70px -40px #0d1226cc}
+.ss-controls{display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px}
+.ss-arrows{display:flex;gap:10px}
+.ss-round{display:grid;place-items:center;width:52px;height:52px;border:1.5px solid #ffffffb3;border-radius:50%;background:transparent;color:#fff;cursor:pointer;transition:background .25s,color .25s,transform .25s}
+.ss-round:hover{background:#fff;color:#1155d9;transform:translateY(-2px)}
+.ss-count{font-size:15px;font-weight:600;letter-spacing:.06em;color:#fff;font-variant-numeric:tabular-nums}
+.ss-count i{font-style:normal;color:#9db6ee}
+.ss-dots{display:flex;flex-wrap:wrap;gap:8px}
+.ss-dots button{width:10px;height:10px;padding:0;border:0;border-radius:99px;background:#ffffff59;cursor:pointer;transition:width .3s,background .3s}
+.ss-dots button:hover{background:#ffffffa6}
+.ss-dots button.is-on{width:28px;background:var(--talk,#ffba49)}
 
-.ss-tabs{position:absolute;top:0;left:50%;display:flex;gap:6px;padding:7px;border-radius:0 0 22px 22px;background:#f5f8ff;transform:translateX(-50%)}
-.ss-tabs button{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:0;border-radius:99px;background:transparent;color:#2b3350;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:background .25s,color .25s}
-.ss-tabs button span{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:99px;background:#e3e9f8;color:#2b3350;font-size:12px}
-.ss-tabs button:hover:not(.is-on){background:#e6edfc}
-.ss-tabs button.is-on{background:linear-gradient(135deg,#3b82ff,#1155d9);color:#fff;box-shadow:0 10px 20px -10px #1155d9}
-.ss-tabs button.is-on span{background:#fff;color:#1155d9}
+/* The poster: a 2 x 2 grid. Three logo quadrants round their outer corners into one circle; the info panel is the fourth cell. */
+.ss-poster{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(100%,760px);margin-inline:auto;isolation:isolate}
+.ss-tile{position:relative;aspect-ratio:1;padding:0;border:0;overflow:hidden;background:#fff;cursor:pointer;font:inherit;transition:background .35s,box-shadow .35s;--cx:50%;--cy:50%}
+.ss-tile-1{border-top-left-radius:100%;--cx:57.6%;--cy:57.6%}
+.ss-tile-2{border-top-right-radius:100%;--cx:42.4%;--cy:57.6%}
+.ss-tile-3{border-bottom-left-radius:100%;--cx:57.6%;--cy:42.4%}
+.ss-logo-box{position:absolute;left:var(--cx);top:var(--cy);display:grid;place-items:center;width:84%;height:46%;transform:translate(-50%,-50%);transition:transform .35s}
+.ss-logo-box.is-card{width:76%;height:50%}
+.ss-logo-box .ss-logo{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+.ss-wordmark{font-size:clamp(17px,2vw,28px);font-weight:700;line-height:1.15;letter-spacing:-.02em;text-align:center;color:#0d1226}
+.ss-tile:focus-visible{outline:3px solid #fff;outline-offset:-8px}
 
-.ss-list{padding:6px 4px 4px}
-.ss-list-title{margin:0 0 14px 6px;font-size:clamp(15px,1.3vw,19px);font-weight:600;line-height:1.3;color:#fff}
-.ss-list ul{position:relative;display:grid;gap:8px;max-height:clamp(340px,50vh,470px);margin:0;padding:0 6px 0 0;overflow-y:auto;list-style:none;scrollbar-width:thin;scrollbar-color:#2f6df0 transparent}
-.ss-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:12px;width:100%;padding:9px 14px;border:0;border-radius:16px;background:#181d36;color:#fff;text-align:left;font:inherit;cursor:pointer;transition:background .25s,transform .25s,box-shadow .25s}
-.ss-item:hover:not(.is-on){background:#222848;transform:translateX(4px)}
-.ss-item.is-on{background:linear-gradient(120deg,#2f6df0,#1155d9);box-shadow:0 18px 30px -18px #1155d9}
-.ss-avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--tone);color:#0b1220;font-size:14px;font-weight:700}
-.ss-item-copy{display:grid;gap:2px;min-width:0}
-.ss-item-copy b{overflow:hidden;font-size:15px;font-weight:600;text-overflow:ellipsis;white-space:nowrap;color:#fff}
-.ss-item-copy small{overflow:hidden;font-size:12px;text-overflow:ellipsis;white-space:nowrap;color:#aab3d4}
-.ss-item.is-on .ss-item-copy small{color:#dbe6ff}
-.ss-pill{padding:5px 12px;border-radius:99px;background:#2a3157;font-size:12px;font-weight:600;color:#dfe5ff}
-.ss-item.is-on .ss-pill{background:#fff;color:#1155d9}
-.ss-item-value{min-width:70px;text-align:right;font-size:15px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.ss-panel{position:relative;container-type:inline-size;aspect-ratio:1;background:#fff;color:#0d1226;overflow:hidden}
+.ss-panel-in{position:relative;display:flex;flex-direction:column;justify-content:center;gap:3.2cqw;height:100%;padding:11cqw;background:#fff}
+.ss-panel-in.is-out{position:absolute;inset:0;z-index:1;animation:ss-out .36s cubic-bezier(.7,0,.84,0) both}
+.ss-panel-in.is-swap{z-index:2;animation:ss-in .38s cubic-bezier(.16,1,.3,1) both}
+.ss-panel .ss-panel-company{margin:0;font-size:clamp(8px,2.4cqw,11px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1155d9}
+.ss-panel h3{margin:0;font-size:clamp(15px,5.6cqw,26px);font-weight:700;line-height:1.15;letter-spacing:-.01em;text-transform:uppercase;color:#0d1226}
+.ss-panel h3 span{color:#1155d9}
+.ss-panel .ss-panel-text{margin:0;font-size:clamp(11px,3.3cqw,14px);line-height:1.5;text-align:justify;text-justify:inter-word;hyphens:auto;color:#454a55}
+.ss-panel-facts{display:flex;flex-wrap:wrap;gap:1.8cqw;margin:0;padding:0;list-style:none}
+.ss-panel-facts li{display:grid;gap:1px;padding:1.6cqw 2.8cqw;border:1px solid #1155d933;border-radius:8px;background:#f1f6ff}
+.ss-panel-facts small{font-size:clamp(7px,2cqw,9px);letter-spacing:.06em;text-transform:uppercase;color:#5a6a8a}
+.ss-panel-facts b{font-size:clamp(10px,2.7cqw,12px);font-weight:600;color:#0d1226}
 
-.ss-detail{display:grid;gap:14px;align-content:space-between;padding:clamp(18px,2vw,28px);border-radius:22px;background:linear-gradient(150deg,#3b82ff 0%,#1155d9 55%,#0e3fae 100%);animation:ss-swap .55s var(--ease-out) both}
-@keyframes ss-swap{from{opacity:0;transform:translateY(14px) scale(.985)}}
-.ss-detail small{display:block;margin-bottom:6px;font-size:12px;color:#dbe6ff}
-.ss-detail-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:18px;align-items:start}
-.ss-detail-head h3{margin:0;font-size:clamp(22px,2.2vw,32px);font-weight:600;letter-spacing:-.02em;color:#fff}
-.ss-detail-head b{font-size:clamp(15px,1.3vw,18px);font-weight:600;color:#fff}
-.ss-detail-head .ss-big b{font-size:clamp(34px,4vw,60px);font-weight:500;line-height:1;letter-spacing:-.03em;color:var(--talk,#ffba49);font-variant-numeric:tabular-nums}
+/* Top-to-bottom slide: the new info drops in from above (with a thin yellow leading edge) while the old one slides down and out */
+@keyframes ss-in{from{transform:translateY(-100%);box-shadow:0 5px 0 var(--talk,#ffba49)}75%{box-shadow:0 5px 0 var(--talk,#ffba49)}to{transform:none;box-shadow:0 0 0 transparent}}
+@keyframes ss-out{to{transform:translateY(100%)}}
+@media (prefers-reduced-motion:reduce){.ss-panel-in.is-out{display:none}.ss-panel-in.is-swap{animation:none}}
+@media (max-width:980px){.ss-layout{grid-template-columns:1fr}.ss-intro{gap:24px}}
 
-.ss-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.ss-tile{display:grid;align-content:space-between;gap:12px;min-height:clamp(110px,10vw,140px);padding:16px;border:0;border-radius:18px;background:#ffffff24;color:#fff;text-align:left;font:inherit}
-.ss-tile b{font-size:clamp(18px,1.9vw,28px);font-weight:600;line-height:1.1;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
-.ss-tile span{font-size:13px;color:#dbe6ff}
-.ss-tile-wide b{font-size:clamp(16px,1.5vw,22px)}
-.ss-tile-accent{background:#ffffff40}
-.ss-tile-add{place-items:center;align-content:center;gap:6px;border:1.5px dashed #ffffff8c;background:transparent;cursor:pointer;transition:background .25s,transform .25s}
-.ss-tile-add b{font-size:30px;font-weight:300}
-.ss-tile-add:hover{background:#ffffff1f;transform:translateY(-3px)}
-.ss-meter{display:block;align-self:center;height:10px;background:#ffffff33;border-radius:99px;overflow:hidden}
-.ss-meter em{display:block;height:100%;width:0;border-radius:99px;background:var(--talk,#ffba49);animation:ss-fill 1.1s .15s var(--ease-out) forwards}
-@keyframes ss-fill{to{width:var(--w)}}
-
-.ss-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:18px;align-items:end;padding-top:16px;border-top:1px solid #ffffff3d}
-.ss-foot b{font-size:clamp(15px,1.3vw,19px);font-weight:600;color:#fff}
-.ss-foot-actions{display:flex;align-items:center;gap:10px}
-.ss-round{display:grid;place-items:center;width:42px;height:42px;border:1.5px solid #ffffff8c;border-radius:50%;background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .25s,color .25s}
-.ss-round:hover{background:#fff;color:#1155d9}
-.ss-next{padding:0 22px;height:44px;border:0;border-radius:99px;background:#fff;color:#0b1220;font:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:background .25s,transform .25s}
-.ss-next:hover{background:var(--talk,#ffba49);transform:translateY(-2px)}
-
-@media (prefers-reduced-motion:reduce){.ss-detail{animation:none}.ss-meter em{animation:none;width:var(--w)}}
-@media (max-width:1100px){.ss-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:900px){.ss-board{grid-template-columns:1fr}.ss-detail-head{grid-template-columns:1fr 1fr}.ss-big{grid-column:1/-1}.ss-foot{grid-template-columns:1fr 1fr}.ss-foot-actions{grid-column:1/-1}}
-@media (max-width:560px){.ss-tabs{width:calc(100% - 24px);justify-content:center}.ss-tabs button{padding:9px 12px;font-size:13px}.ss-item{grid-template-columns:auto minmax(0,1fr) auto}.ss-pill{display:none}}
-
-/* Larger dashboard: wider board, roomier rows and bigger type */
-.ss-section .container{width:min(1560px,calc(100% - 64px))}
-.ss-head h2{font-size:clamp(40px,5.4vw,84px)}
-.ss-board{grid-template-columns:minmax(380px,.85fr) minmax(0,1.5fr);gap:18px;padding:clamp(18px,2vw,30px);padding-top:clamp(84px,7vw,104px);border-radius:32px}
-.ss-tabs{padding:9px;border-radius:0 0 26px 26px}
-.ss-tabs button{padding:13px 24px;font-size:16px}
-.ss-tabs button span{min-width:28px;height:28px;font-size:13px}
-.ss-list-title{margin:0 0 18px 8px;font-size:clamp(18px,1.7vw,26px)}
-.ss-list ul{gap:10px;max-height:clamp(480px,66vh,680px)}
-.ss-item{gap:16px;padding:14px 20px;border-radius:20px}
-.ss-avatar{width:50px;height:50px;font-size:17px}
-.ss-item-copy b{font-size:clamp(16px,1.35vw,20px)}
-.ss-item-copy small{font-size:clamp(13px,1.05vw,15px)}
-.ss-pill{padding:6px 14px;font-size:13px}
-.ss-item-value{min-width:92px;font-size:clamp(16px,1.4vw,21px)}
-.ss-detail{gap:22px;padding:clamp(24px,2.8vw,44px);border-radius:28px}
-.ss-detail small{margin-bottom:8px;font-size:14px}
-.ss-detail-head h3{font-size:clamp(28px,3vw,46px)}
-.ss-detail-head b{font-size:clamp(17px,1.5vw,22px)}
-.ss-detail-head .ss-big b{font-size:clamp(46px,5.8vw,96px)}
-.ss-tiles{gap:16px}
-.ss-tile{min-height:clamp(150px,15vw,230px);padding:22px;border-radius:24px}
-.ss-tile b{font-size:clamp(24px,2.6vw,40px)}
-.ss-tile-wide b{font-size:clamp(20px,2vw,30px)}
-.ss-tile span{font-size:clamp(14px,1.1vw,16px)}
-.ss-meter{height:14px}
-.ss-tile-add b{font-size:44px}
-.ss-foot{gap:24px;padding-top:22px}
-.ss-foot b{font-size:clamp(18px,1.6vw,24px)}
-.ss-round{width:52px;height:52px;font-size:26px}
-.ss-next{height:54px;padding:0 30px;font-size:17px}
-@media (max-width:900px){.ss-board{grid-template-columns:1fr}.ss-list ul{max-height:420px}}
-
-/* Company logos sit on a white tile so any logo colour stays readable on the dark list */
-.ss-avatar-logo{width:66px;height:50px;padding:7px 10px;border-radius:14px;background:#fff}
-.ss-avatar-logo img{display:block;width:100%;height:100%;object-fit:contain}
-
-/* Three detail tiles now that the "+ Next story" tile is gone */
-.ss-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media (max-width:640px){.ss-tiles{grid-template-columns:1fr}}
+/* Laptop and desktop: the whole section (heading, controls and the full circle) fits in one screen under the 107px header, so nothing needs scrolling.
+   The poster is square, so its width is the screen height minus the header and a small even margin; the section is only as tall as the poster, with no extra space below. */
+@media (min-width:981px){
+  .ss-section{--ss-pad:12px;display:grid;align-items:center;padding-block:var(--ss-pad);box-sizing:border-box;scroll-margin-top:107px}
+  .ss-poster{width:min(100%,940px,max(340px,calc((100svh - 107px - 2 * var(--ss-pad)) * 1.05)))}
+  .ss-intro h2{font-size:clamp(34px,min(5vw,9.5vh),80px)}
+}
+@media (max-width:640px){
+  .ss-poster{grid-template-columns:repeat(3,1fr);gap:8px}
+  .ss-tile{border-radius:16px!important;--cx:50%!important;--cy:50%!important}
+  .ss-logo-box{width:88%;height:52%}
+  .ss-logo-box.is-card{width:90%;height:72%}
+  .ss-wordmark{font-size:13px}
+  .ss-panel{grid-column:1/-1;aspect-ratio:auto;border-radius:16px}
+  .ss-panel-in{padding:26px;gap:12px}
+}
