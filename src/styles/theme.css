@@ -870,7 +870,7 @@ h1,h2,h3{color:var(--ink)}
 .hero-city-toggle{position:absolute;z-index:3;right:max(28px,calc((100% - 1320px)/2));bottom:34px;width:42px;height:42px;border-radius:50%;font-size:11px;cursor:pointer}
 @media(max-width:1000px){.hero-city .hero-content{width:calc(100% - 64px)}}
 @media(max-width:680px){
-  .home-hero.hero-city{min-height:max(620px,calc(100svh - 60px));background-image:url('/assets/hero-home-poster-mobile.jpg')}
+  .home-hero.hero-city{min-height:max(620px,calc(100svh - 60px));background-image:url('/assets/hero-mobile-new-poster.jpg')}
   .hero-city-video{object-position:center}
   .hero-city-shade{background:linear-gradient(0deg,#050a18f5 0%,#050a18d9 38%,#050a1873 70%,#050a1859 100%)}
   .hero-city .hero-content{width:calc(100% - 40px);padding-bottom:84px}
