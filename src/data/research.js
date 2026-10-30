@@ -90,3 +90,13 @@ export const numberSummaries = {
   ai: [11, 'Answering every call and message, at any hour, is where AI pays back first.'],
   risk: [17, 'Small firms are targets, and one breach costs far more than prevention.'],
 };
+
+// Article each number links to, only where an existing insight genuinely covers it. Keyed by row index in researchNumbers.
+export const numberReads = {
+  5: 'automation-and-the-customer-journey', 8: 'replying-to-every-review', 11: 'booking-more-calls-in-home-services',
+  12: 'ai-with-purpose', 13: 'choosing-the-first-ai-use-case', 14: 'unanswered-clinic-calls',
+};
+
+// Same idea for the home proof band (keyed by the headline value) and for each buyer, in buyerPersonas order.
+export const kpiReads = { '85%': 'booking-more-calls-in-home-services', '$7.6B': 'target-canada-exit', '37%': 'choosing-the-first-ai-use-case' };
+export const personaReads = ['unanswered-clinic-calls', null, 'booking-more-calls-in-home-services', 'choosing-the-first-ai-use-case'];

@@ -1,7 +1,7 @@
 import React from 'react';
-import { buyerCountries, buyerMarkets, buyerPersonas } from '../data/research.js';
+import { buyerCountries, buyerMarkets, buyerPersonas, personaReads } from '../data/research.js';
 import { Eyebrow, Link, Reveal } from './UI.jsx';
-import { Count, Ring } from './ResearchViz.jsx';
+import { Count, ReadLink, Ring } from './ResearchViz.jsx';
 
 // Persona market labels use short codes; buyerCountries uses full names.
 const fullName = { India: 'India', US: 'United States', UK: 'United Kingdom', Canada: 'Canada' };
@@ -47,6 +47,7 @@ export default function BuyerSection() {
         <div className="rs-detail-top" key={persona}>
           <q>{quote}</q>
           <div className="rs-persona-stat"><Ring percent={parseFloat(stat)} size={72}><strong><Count value={stat} /></strong></Ring><small>{label}</small></div>
+          <ReadLink slug={personaReads[persona]} from="buyer" />
           <Link className="rs-offer" href="/contact"><span><em>First offer</em>{offer}</span><i aria-hidden="true">→</i></Link>
         </div>
         <div className="rs-detail-markets">

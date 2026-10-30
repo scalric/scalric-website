@@ -1,5 +1,6 @@
 import React from 'react';
-import { useInView } from './UI.jsx';
+import { insights } from '../data/siteContent.js';
+import { Link, useInView } from './UI.jsx';
 
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
@@ -50,4 +51,12 @@ export function Gauge({ percent, from, down = false }) {
     <div><span>Now</span><i className="rs-bar rs-bar-hi" style={{ width: seen ? `${percent}%` : 0 }} /><em>{percent}%</em></div>
   </div>;
   return <div ref={ref} className={`rs-gauge${down ? ' rs-down' : ''}`}><i className="rs-bar" style={{ width: seen ? `${percent}%` : 0 }} /></div>;
+}
+
+/** "Read: <article title>" link to the insight that covers a figure; renders nothing without a slug. */
+export function ReadLink({ slug, from }) {
+  const article = insights.find((item) => item.slug === slug);
+  if (!article) return null;
+  const track = () => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'research_read_click', slug, from } }));
+  return <Link href={`/insights/${slug}`} className="rs-read" onClick={track} title={article.title}><span>Read: {article.title}</span><i aria-hidden="true">→</i></Link>;
 }

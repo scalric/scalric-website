@@ -1,7 +1,7 @@
 import React from 'react';
-import { marketSizes, researchKpis, researchSources } from '../data/research.js';
+import { kpiReads, marketSizes, researchKpis, researchSources } from '../data/research.js';
 import { Eyebrow, Reveal } from './UI.jsx';
-import { Count } from './ResearchViz.jsx';
+import { Count, ReadLink } from './ResearchViz.jsx';
 
 /** Home proof band: one headline market size with a country split, then five sourced numbers beside it. */
 export default function ResearchProof() {
@@ -24,7 +24,7 @@ export default function ResearchProof() {
         <a href={researchSources[lead[2]]} target="_blank" rel="noopener noreferrer">{lead[3]} ↗</a>
       </Reveal>
       <div className="rs-kpis">{rest.map(([value, text, key, source], i) => <Reveal key={value} delay={i * 70}>
-        <div className="rs-kpi"><b><Count value={value} /></b><span>{text}</span><a href={researchSources[key]} target="_blank" rel="noopener noreferrer">{source} ↗</a></div>
+        <div className="rs-kpi"><b><Count value={value} /></b><span>{text}</span><ReadLink slug={kpiReads[value]} from="proof" /><a href={researchSources[key]} target="_blank" rel="noopener noreferrer">{source} ↗</a></div>
       </Reveal>)}</div>
     </div>
     <p className="rs-note">Industry results from public research and filings, not Scalric’s own results. October 2026.</p>
