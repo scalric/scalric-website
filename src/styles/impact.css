@@ -156,3 +156,6 @@
 body main .imp-panel p.imp-panel-quote,body main .imp-panel p.imp-panel-person,body main .imp-panel p.imp-panel-person b,body main .imp-panel p.imp-panel-person span{color:#000!important}
 body main .imp-panel p.imp-panel-quote,body main .imp-panel p.imp-panel-person,body main .imp-panel p.imp-panel-person b,body main .imp-panel p.imp-panel-person span{color:#fff!important}
 .imp-cta{margin-bottom:clamp(48px,6vw,96px)}
+
+/* How it works: keep faces in frame when the square photos are cropped to 4:3 */
+.imp-step-photo img{object-position:50% 30%}

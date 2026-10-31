@@ -143,9 +143,9 @@ function StoryPanels() {
 }
 
 const steps = [
-  ['01', 'Listen closely', 'Understand the people, goals and constraints behind the challenge', '/assets/photos/impact-listen.png'],
-  ['02', 'Build together', 'Shape an appropriate technology response with the organisation', '/assets/photos/impact-build.png'],
-  ['03', 'Learn and improve', 'Review what is working and identify what should happen next', '/assets/photos/impact-learn.png'],
+  ['01', 'Listen closely', 'Understand the people, goals and constraints behind the challenge', '/assets/photos/impact-listen-new.jpg'],
+  ['02', 'Build together', 'Shape an appropriate technology response with the organisation', '/assets/photos/impact-build-new.jpg'],
+  ['03', 'Learn and improve', 'Review what is working and identify what should happen next', '/assets/photos/impact-learn-new.jpg'],
 ];
 
 export default function ImpactSections({ children }) {
