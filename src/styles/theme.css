@@ -2612,7 +2612,12 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
   linear-gradient(0deg,#050f2499 0%,#050f2400 35%)}
 @media(max-width:680px){.home-hero.hero-city::before{background:linear-gradient(0deg,#050f24eb 0%,#050f24bf 45%,#050f2473 75%,#050f2459 100%)}}
 
-/* Company page process: replace the stock card art with the "How we work" photos */
-.process-track>:nth-child(3n+1){--art:url('/assets/photos/step-understand.jpg')}
-.process-track>:nth-child(3n+2){--art:url('/assets/photos/step-build.jpg')}
-.process-track>:nth-child(3n){--art:url('/assets/photos/step-deliver.jpg')}
+/* Company page process: one photo per step, in order */
+.process-track>:nth-child(1){--art:url('/assets/photos/process-1.jpg');--art-y:38%}
+.process-track>:nth-child(2){--art:url('/assets/photos/process-2.jpg');--art-y:30%}
+.process-track>:nth-child(3){--art:url('/assets/photos/process-3.jpg');--art-y:2%}
+.process-track>:nth-child(4){--art:url('/assets/photos/process-4.jpg');--art-y:15%}
+.process-track>:nth-child(5){--art:url('/assets/photos/process-5.jpg');--art-y:17%}
+.process-track>:nth-child(6){--art:url('/assets/photos/process-6.jpg');--art-y:9%}
+/* The strip is short, so pin each photo's vertical position on its faces */
+.process-section .process-step::after{background-position:50% var(--art-y,50%)!important}
