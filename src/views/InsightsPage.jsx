@@ -27,9 +27,10 @@ function MoreInsights({ slug, category }) {
   const picks = relatedBySlug[slug] || [];
   const rank = (item) => { const at = picks.indexOf(item.slug); return at === -1 ? picks.length : at; };
   const pool = insights.filter(item => item.slug !== slug).sort((x, y) => rank(x) - rank(y));
-  // Prefer the article's own topic; when it has fewer than three others, draw from every topic.
-  const sameTopic = pool.filter(item => item.category === category);
-  const shown = (sameTopic.length >= 3 ? sameTopic : pool).slice(0, 3);
+  // Three articles from three different topics, none from this article's own topic. Hand-picked reading comes first.
+  const seen = new Set([category]);
+  const shown = [];
+  pool.forEach((item) => { if (shown.length < 3 && !seen.has(item.category)) { seen.add(item.category); shown.push(item); } });
   return <section className="section more-insights insights-list-section" aria-labelledby="keep-exploring"><div className="container">
     <div className="section-heading"><div><h2 id="keep-exploring">Keep exploring</h2></div><Link href="/insights" className="text-link" onClick={() => window.dispatchEvent(new CustomEvent('scalric:analytics', { detail: { event: 'view_all_insights_click' } }))}>View all insights <Arrow diagonal /></Link></div>
     <div className="insight-cards">{shown.map((item, i) => <InsightCard key={item.slug} article={item} index={i} />)}</div>
