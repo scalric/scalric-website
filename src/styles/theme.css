@@ -2631,3 +2631,6 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
 .ct-form .ct-send{justify-content:center!important;gap:12px!important;min-width:min(240px,100%)!important;max-width:100%;padding:17px 34px!important;border-radius:0!important;font-size:15px!important;font-weight:600;letter-spacing:.01em;justify-self:end!important;align-self:flex-end!important;margin-left:auto!important;box-shadow:0 14px 30px -18px #ffba49d9}
 .ct-form .ct-send i{font-size:17px!important}
 @media (max-width:560px){.ct-form .ct-send{width:100%!important;max-width:100%}}
+
+/* logo link: no focus box around the wordmark */
+.site-header .brand:focus,.site-header .brand:focus-visible,.site-header .brand:active{outline:0!important;box-shadow:none!important}
