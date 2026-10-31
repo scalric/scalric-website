@@ -63,3 +63,6 @@ body main .ss-lede{max-width:28em;margin:0;font-size:clamp(16px,1.4vw,21px);line
   .ss-panel{grid-column:1/-1;aspect-ratio:auto;border-radius:16px}
   .ss-panel-in{padding:26px;gap:12px}
 }
+
+/* Gap between the Insights hero and the Success stories section */
+.ss-section{margin-top:5vw}

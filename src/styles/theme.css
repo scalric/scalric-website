@@ -2605,3 +2605,14 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
 .ah-whatwedo .ah-copy{position:relative;top:calc(clamp(600px,50vw,760px) * -.05)}
 /* What We Do banner: trim the bottom padding of the blue box */
 .ah-whatwedo .ah-copy{padding-bottom:clamp(8px,1vw,16px)}
+
+/* Home hero: navy fade on the text side that clears toward the right, matching the reference design */
+.home-hero.hero-city::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(90deg,#050f24eb 0%,#07142bcc 28%,#0a1a3a73 52%,#0a1a3a1a 75%,#0a1a3a00 100%),
+  linear-gradient(0deg,#050f2499 0%,#050f2400 35%)}
+@media(max-width:680px){.home-hero.hero-city::before{background:linear-gradient(0deg,#050f24eb 0%,#050f24bf 45%,#050f2473 75%,#050f2459 100%)}}
+
+/* Company page process: replace the stock card art with the "How we work" photos */
+.process-track>:nth-child(3n+1){--art:url('/assets/photos/step-understand.jpg')}
+.process-track>:nth-child(3n+2){--art:url('/assets/photos/step-build.jpg')}
+.process-track>:nth-child(3n){--art:url('/assets/photos/step-deliver.jpg')}

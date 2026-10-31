@@ -10,12 +10,11 @@ import { Link, Arrow, Eyebrow, PageIntro, Reveal, TypedText } from '../component
 
 // Where each photo is anchored when it is cropped, so the people in it keep their faces in frame.
 const heroFocus = {
-  '/assets/photos/data-analytics.webp': '50% 0%',
-  '/assets/photos/team-whiteboard.jpg': '50% 32%',
-  '/assets/photos/impact-dental.jpg': '50% 36%',
-  '/assets/photos/impact-electrical.jpg': '50% 36%',
-  '/assets/photos/impact-gyms.jpg': '50% 36%',
-  '/assets/photos/consulting-boardroom.webp': '50% 42%',
+  '/assets/photos/insight-automation.jpg': '30% 30%',
+  '/assets/photos/insight-ai-team.jpg': '45% 25%',
+  '/assets/photos/insight-data-team.jpg': '40% 22%',
+  '/assets/photos/insight-cloud.jpg': '55% 25%',
+  '/assets/photos/insight-saas.jpg': '72% 35%',
 };
 const focusOf = (src) => ({ objectPosition: heroFocus[src] || '50% 50%' });
 

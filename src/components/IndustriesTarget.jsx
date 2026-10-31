@@ -11,28 +11,12 @@ const icons = {
 };
 
 const industries = [
-  { title: 'Healthcare & clinics', slug: 'unanswered-clinic-calls', stat: '32%', label: 'of clinic calls go unanswered', fix: 'AI phone agent + reminders', video: '/assets/videos/impact-dental.mp4', poster: '/assets/photos/impact-dental.jpg', icon: 'care', tone: '#f08aa0' },
-  { title: 'Home services', slug: 'booking-more-calls-in-home-services', stat: '50→80%', label: 'calls booked after adding an AI agent', fix: 'AI phone agent', video: '/assets/videos/impact-electrical.mp4', poster: '/assets/photos/impact-electrical.jpg', icon: 'home', tone: '#ff7a45' },
-  { title: 'Restaurants & cafés', slug: 'the-app-behind-the-order', stat: '33%', label: 'of Starbucks US orders come through its app', fix: 'Ordering app + loyalty', video: '/assets/videos/impact-cafes.mp4', poster: '/assets/photos/impact-cafes.jpg', icon: 'dining', tone: '#ffba49' },
-  { title: 'Gyms & studios', slug: 'branded-apps-for-gyms-and-studios', stat: '62%', label: 'of bookings came through a branded app', fix: 'Booking app', video: '/assets/videos/impact-gyms.mp4', poster: '/assets/photos/impact-gyms.jpg', icon: 'sport', tone: '#2fb67c' },
-  { title: 'Salons & spas', slug: 'replying-to-every-review', stat: '80%', label: 'pick businesses that reply to every review', fix: 'Booking + review replies', video: '/assets/videos/impact-salons.mp4', poster: '/assets/photos/impact-salons.jpg', icon: 'beauty', tone: '#8a6cf0' },
+  { title: 'Healthcare & clinics', slug: 'unanswered-clinic-calls', stat: '32%', label: 'of clinic calls go unanswered', fix: 'AI phone agent + reminders', image: '/assets/photos/industry-healthcare.jpg', icon: 'care', tone: '#f08aa0' },
+  { title: 'Home services', slug: 'booking-more-calls-in-home-services', stat: '50→80%', label: 'calls booked after adding an AI agent', fix: 'AI phone agent', image: '/assets/photos/industry-home-services.jpg', icon: 'home', tone: '#ff7a45' },
+  { title: 'Restaurants & cafés', slug: 'the-app-behind-the-order', stat: '33%', label: 'of Starbucks US orders come through its app', fix: 'Ordering app + loyalty', image: '/assets/photos/industry-restaurants.jpg', icon: 'dining', tone: '#ffba49' },
+  { title: 'Gyms & studios', slug: 'branded-apps-for-gyms-and-studios', stat: '62%', label: 'of bookings came through a branded app', fix: 'Booking app', image: '/assets/photos/industry-gyms.jpg', icon: 'sport', tone: '#2fb67c' },
+  { title: 'Salons & spas', slug: 'replying-to-every-review', stat: '80%', label: 'pick businesses that reply to every review', fix: 'Booking + review replies', image: '/assets/photos/industry-salons.jpg', icon: 'beauty', tone: '#8a6cf0' },
 ];
-
-/** Plays a clip only while it is on screen, so five videos don't all decode at once. */
-function ArchVideo({ src, poster }) {
-  const ref = React.useRef(null);
-  const [near, setNear] = React.useState(false);
-  React.useEffect(() => {
-    const video = ref.current;
-    if (!video || !('IntersectionObserver' in window)) { setNear(true); return undefined; }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setNear(true); video.play?.().catch(() => {}); } else video.pause?.();
-    }, { rootMargin: '0px 200px' });
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
-  return <video ref={ref} src={near ? src : undefined} poster={poster} autoPlay muted loop playsInline preload="none" aria-hidden="true" />;
-}
 
 // Poster layout, traced from the reference poster (a 495 x 708 canvas, every edge at 45 degrees): a blue arrow panel
 // carries the title, and five video panels sit around it. Each polygon gets its own box
@@ -83,9 +67,9 @@ const photoShapes = photos.map((poly) => shape(poly));
 export default function IndustriesTarget() {
   const [active, setActive] = React.useState(1);
   return <section className="section it-section" id="industries-we-target" aria-labelledby="it-title"><div className="container it-wrap">
-    <Reveal className="it-poster-wrap"><div className="it-poster" role="group" aria-label="Industry videos" style={{ aspectRatio: `${W} / ${H}` }}>
+    <Reveal className="it-poster-wrap"><div className="it-poster" role="group" aria-label="Industry photos" style={{ aspectRatio: `${W} / ${H}` }}>
       {industries.map((item, i) => <Link key={item.title} href={`/insights/${item.slug}`} aria-label={`${item.title}: read the insight`} className={`it-photo${active === i ? ' is-active' : ''}`} style={{ ...photoShapes[i].box, clipPath: photoShapes[i].clipPath }} onMouseEnter={() => setActive(i)}>
-        <ArchVideo src={item.video} poster={item.poster} />
+        <img src={item.image} alt="" loading="lazy" />
       </Link>)}
       <div className="it-panel" style={{ ...panelShape.box, clipPath: panelShape.clipPath }} />
       <div className="it-title"><span>Industries we</span><strong>TARGET</strong></div>
