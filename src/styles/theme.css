@@ -2626,3 +2626,8 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
 .mobile-nav-row{display:flex;align-items:center}
 .mobile-nav-row .mobile-nav-toggle{flex:1;color:var(--ink);text-decoration:none}
 .mobile-nav-expand{display:grid;place-items:center;flex:none;width:48px;height:48px;border:0;background:none;font-size:22px;font-weight:600;color:var(--ink);cursor:pointer}
+
+/* Contact form: the send button is a square-cornered rectangle like the fields, sized to the form and aligned to the right */
+.ct-form .ct-send{justify-content:center!important;gap:12px!important;min-width:min(240px,100%)!important;max-width:100%;padding:17px 34px!important;border-radius:0!important;font-size:15px!important;font-weight:600;letter-spacing:.01em;justify-self:end!important;align-self:flex-end!important;margin-left:auto!important;box-shadow:0 14px 30px -18px #ffba49d9}
+.ct-form .ct-send i{font-size:17px!important}
+@media (max-width:560px){.ct-form .ct-send{width:100%!important;max-width:100%}}
