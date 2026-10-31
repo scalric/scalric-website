@@ -67,10 +67,13 @@ body main .ss-lede{max-width:28em;margin:0;font-size:clamp(16px,1.4vw,21px);line
 /* Gap between the Insights hero and the Success stories section */
 .ss-section{margin-top:5vw}
 
-/* Hover / keyboard focus: the quarter-circle grows from the circle's centre point, above its neighbours */
-.ss-tile{transform-origin:100% 100%;transition:background .35s,box-shadow .35s,transform .45s cubic-bezier(.16,1,.3,1)}
+/* Slideshow: the circle of the company on show gets a thin yellow line around its whole shape, set off by a small blue gap */
+.ss-tile.is-on{box-shadow:0 0 0 3px #1155d9,0 0 0 5px var(--talk,#ffba49)}
+
+/* Hover / keyboard focus: the quarter-circle grows a little from the circle's centre point, above its neighbours */
+.ss-tile{transform-origin:100% 100%;transition:background .35s,box-shadow .35s,transform .4s cubic-bezier(.16,1,.3,1)}
 .ss-tile-2{transform-origin:0 100%}
 .ss-tile-3{transform-origin:100% 0}
-.ss-tile:hover,.ss-tile:focus-visible{z-index:3;transform:scale(1.05);box-shadow:0 14px 34px -16px #050f2480}
-@media (max-width:700px){.ss-tile,.ss-tile-2,.ss-tile-3{transform-origin:50% 50%}.ss-tile:hover,.ss-tile:focus-visible{transform:scale(1.04)}}
-@media (prefers-reduced-motion:reduce){.ss-tile{transition:background .35s,box-shadow .35s}.ss-tile:hover,.ss-tile:focus-visible{transform:none}}
+.ss-tile:hover,.ss-tile:focus-visible,.ss-tile.is-on{z-index:3;transform:scale(1.05)}
+@media (max-width:700px){.ss-tile,.ss-tile-2,.ss-tile-3{transform-origin:50% 50%}.ss-tile:hover,.ss-tile:focus-visible,.ss-tile.is-on{transform:scale(1.04)}}
+@media (prefers-reduced-motion:reduce){.ss-tile{transition:background .35s,box-shadow .35s}.ss-tile:hover,.ss-tile:focus-visible,.ss-tile.is-on{transform:none}}

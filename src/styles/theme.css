@@ -2621,3 +2621,8 @@ body main .life-cta p,body main .life-cta h2{color:#fff!important}
 .process-track>:nth-child(6){--art:url('/assets/photos/process-6.jpg');--art-y:9%}
 /* The strip is short, so pin each photo's vertical position on its faces */
 .process-section .process-step::after{background-position:50% var(--art-y,50%)!important}
+
+/* Mobile menu: the name is a link to the page, the +/- button opens that section's options */
+.mobile-nav-row{display:flex;align-items:center}
+.mobile-nav-row .mobile-nav-toggle{flex:1;color:var(--ink);text-decoration:none}
+.mobile-nav-expand{display:grid;place-items:center;flex:none;width:48px;height:48px;border:0;background:none;font-size:22px;font-weight:600;color:var(--ink);cursor:pointer}

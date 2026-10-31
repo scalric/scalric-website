@@ -72,10 +72,10 @@ export default function SuccessStories() {
   const tiles = stories.slice(first, first + PER_PAGE);
   const go = React.useCallback((step) => setSelected((value) => (value + step + stories.length) % stories.length), []);
 
-  // The selection moves on by itself until the visitor interacts with the poster.
+  // The selection moves on by itself; hovering does not stop it, only keyboard focus does.
   React.useEffect(() => {
     if (paused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return undefined;
-    const timer = window.setInterval(() => go(1), 5200);
+    const timer = window.setInterval(() => go(1), 3000);
     return () => window.clearInterval(timer);
   }, [paused, go]);
 
@@ -97,7 +97,7 @@ export default function SuccessStories() {
       </div>
     </div>
 
-    <Reveal><div className="ss-poster" role="group" aria-label="Company results" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+    <Reveal><div className="ss-poster" role="group" aria-label="Company results" onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
       {tiles.map((item, i) => <button key={item.name} type="button" className={`ss-tile ss-tile-${i + 1}${item.name === story.name ? ' is-on' : ''}`} aria-pressed={item.name === story.name} onClick={() => setSelected(stories.indexOf(item))}>
         <Logo story={item} />
       </button>)}
